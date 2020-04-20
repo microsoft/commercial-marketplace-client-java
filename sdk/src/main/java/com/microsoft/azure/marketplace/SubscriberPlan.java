@@ -14,12 +14,61 @@ package com.microsoft.azure.marketplace;
 
 import java.util.Objects;
 import java.util.Arrays;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.IOException;
 /**
  * SubscriberPlan
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2020-04-18T12:09:05.863-07:00[America/Los_Angeles]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2020-04-19T20:04:00.284-07:00[America/Los_Angeles]")
 public class SubscriberPlan {
+  @SerializedName("planId")
+  private String planId = null;
+
+  @SerializedName("quantity")
+  private Long quantity = null;
+
+  public SubscriberPlan planId(String planId) {
+    this.planId = planId;
+    return this;
+  }
+
+   /**
+   * Get planId
+   * @return planId
+  **/
+  @Schema(description = "")
+  public String getPlanId() {
+    return planId;
+  }
+
+  public void setPlanId(String planId) {
+    this.planId = planId;
+  }
+
+  public SubscriberPlan quantity(Long quantity) {
+    this.quantity = quantity;
+    return this;
+  }
+
+   /**
+   * Get quantity
+   * @return quantity
+  **/
+  @Schema(description = "")
+  public Long getQuantity() {
+    return quantity;
+  }
+
+  public void setQuantity(Long quantity) {
+    this.quantity = quantity;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -29,12 +78,14 @@ public class SubscriberPlan {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    return true;
+    SubscriberPlan subscriberPlan = (SubscriberPlan) o;
+    return Objects.equals(this.planId, subscriberPlan.planId) &&
+        Objects.equals(this.quantity, subscriberPlan.quantity);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash();
+    return Objects.hash(planId, quantity);
   }
 
 
@@ -43,6 +94,8 @@ public class SubscriberPlan {
     StringBuilder sb = new StringBuilder();
     sb.append("class SubscriberPlan {\n");
     
+    sb.append("    planId: ").append(toIndentedString(planId)).append("\n");
+    sb.append("    quantity: ").append(toIndentedString(quantity)).append("\n");
     sb.append("}");
     return sb.toString();
   }

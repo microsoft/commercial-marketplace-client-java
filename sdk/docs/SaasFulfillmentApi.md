@@ -17,7 +17,7 @@ Method | HTTP request | Description
 
 <a name="activateSubscription"></a>
 # **activateSubscription**
-> activateSubscription(body, contentType, authorization, apiVersion, subscriptionId, xMsRequestid, xMsCorrelationid)
+> activateSubscription(body, contentType, apiVersion, subscriptionId, xMsRequestid, xMsCorrelationid)
 
 Activate a subscription
 
@@ -41,13 +41,12 @@ OAuth2.setAccessToken("YOUR ACCESS TOKEN");
 SaasFulfillmentApi apiInstance = new SaasFulfillmentApi();
 SubscriberPlan body = new SubscriberPlan(); // SubscriberPlan | 
 String contentType = "contentType_example"; // String | application/json
-String authorization = "authorization_example"; // String | Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token.
 ApiVersion apiVersion = new ApiVersion(); // ApiVersion | Version of the API.
 UUID subscriptionId = new UUID(); // UUID | 
 UUID xMsRequestid = new UUID(); // UUID | A unique string value for tracking the request from the client, preferably a GUID. If this value isn't provided, one will be generated and provided in the response headers.
 UUID xMsCorrelationid = new UUID(); // UUID | A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn't provided, one will be generated and provided in the response headers.
 try {
-    apiInstance.activateSubscription(body, contentType, authorization, apiVersion, subscriptionId, xMsRequestid, xMsCorrelationid);
+    apiInstance.activateSubscription(body, contentType, apiVersion, subscriptionId, xMsRequestid, xMsCorrelationid);
 } catch (ApiException e) {
     System.err.println("Exception when calling SaasFulfillmentApi#activateSubscription");
     e.printStackTrace();
@@ -60,7 +59,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **body** | [**SubscriberPlan**](SubscriberPlan.md)|  |
  **contentType** | **String**| application/json | [enum: application/json]
- **authorization** | **String**| Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. |
  **apiVersion** | [**ApiVersion**](.md)| Version of the API. |
  **subscriptionId** | [**UUID**](.md)|  |
  **xMsRequestid** | [**UUID**](.md)| A unique string value for tracking the request from the client, preferably a GUID. If this value isn&#x27;t provided, one will be generated and provided in the response headers. | [optional]
@@ -81,7 +79,7 @@ null (empty response body)
 
 <a name="deleteSubscription"></a>
 # **deleteSubscription**
-> deleteSubscription(subscriptionId, apiVersion, contentType, authorization, xMsRequestid, xMsCorrelationid)
+> deleteSubscription(subscriptionId, apiVersion, contentType, xMsRequestid, xMsCorrelationid)
 
 Delete a subscription
 
@@ -106,11 +104,10 @@ SaasFulfillmentApi apiInstance = new SaasFulfillmentApi();
 UUID subscriptionId = new UUID(); // UUID | 
 ApiVersion apiVersion = new ApiVersion(); // ApiVersion | Version of the API.
 String contentType = "contentType_example"; // String | application/json
-String authorization = "authorization_example"; // String | Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token.
 UUID xMsRequestid = new UUID(); // UUID | A unique string value for tracking the request from the client, preferably a GUID. If this value isn't provided, one will be generated and provided in the response headers.
 UUID xMsCorrelationid = new UUID(); // UUID | A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn't provided, one will be generated and provided in the response headers.
 try {
-    apiInstance.deleteSubscription(subscriptionId, apiVersion, contentType, authorization, xMsRequestid, xMsCorrelationid);
+    apiInstance.deleteSubscription(subscriptionId, apiVersion, contentType, xMsRequestid, xMsCorrelationid);
 } catch (ApiException e) {
     System.err.println("Exception when calling SaasFulfillmentApi#deleteSubscription");
     e.printStackTrace();
@@ -124,7 +121,6 @@ Name | Type | Description  | Notes
  **subscriptionId** | [**UUID**](.md)|  |
  **apiVersion** | [**ApiVersion**](.md)| Version of the API. |
  **contentType** | **String**| application/json | [enum: application/json]
- **authorization** | **String**| Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. |
  **xMsRequestid** | [**UUID**](.md)| A unique string value for tracking the request from the client, preferably a GUID. If this value isn&#x27;t provided, one will be generated and provided in the response headers. | [optional]
  **xMsCorrelationid** | [**UUID**](.md)| A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn&#x27;t provided, one will be generated and provided in the response headers. | [optional]
 
@@ -143,7 +139,7 @@ null (empty response body)
 
 <a name="getOperationStatus"></a>
 # **getOperationStatus**
-> OperationType getOperationStatus(subscriptionId, operationId, apiVersion, contentType, authorization, xMsRequestid, xMsCorrelationid)
+> OperationType getOperationStatus(subscriptionId, operationId, apiVersion, contentType, xMsRequestid, xMsCorrelationid)
 
 Get operation status
 
@@ -169,11 +165,10 @@ UUID subscriptionId = new UUID(); // UUID |
 UUID operationId = new UUID(); // UUID | 
 ApiVersion apiVersion = new ApiVersion(); // ApiVersion | Version of the API.
 String contentType = "contentType_example"; // String | application/json
-String authorization = "authorization_example"; // String | Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token.
 UUID xMsRequestid = new UUID(); // UUID | A unique string value for tracking the request from the client, preferably a GUID. If this value isn't provided, one will be generated and provided in the response headers.
 UUID xMsCorrelationid = new UUID(); // UUID | A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn't provided, one will be generated and provided in the response headers.
 try {
-    OperationType result = apiInstance.getOperationStatus(subscriptionId, operationId, apiVersion, contentType, authorization, xMsRequestid, xMsCorrelationid);
+    OperationType result = apiInstance.getOperationStatus(subscriptionId, operationId, apiVersion, contentType, xMsRequestid, xMsCorrelationid);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling SaasFulfillmentApi#getOperationStatus");
@@ -189,7 +184,6 @@ Name | Type | Description  | Notes
  **operationId** | [**UUID**](.md)|  |
  **apiVersion** | [**ApiVersion**](.md)| Version of the API. |
  **contentType** | **String**| application/json | [enum: application/json]
- **authorization** | **String**| Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. |
  **xMsRequestid** | [**UUID**](.md)| A unique string value for tracking the request from the client, preferably a GUID. If this value isn&#x27;t provided, one will be generated and provided in the response headers. | [optional]
  **xMsCorrelationid** | [**UUID**](.md)| A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn&#x27;t provided, one will be generated and provided in the response headers. | [optional]
 
@@ -208,7 +202,7 @@ Name | Type | Description  | Notes
 
 <a name="getSubscription"></a>
 # **getSubscription**
-> Subscription getSubscription(subscriptionId, apiVersion, contentType, authorization, xMsRequestid, xMsCorrelationid)
+> Subscription getSubscription(subscriptionId, apiVersion, contentType, xMsRequestid, xMsCorrelationid)
 
 Get subscription
 
@@ -233,11 +227,10 @@ SaasFulfillmentApi apiInstance = new SaasFulfillmentApi();
 UUID subscriptionId = new UUID(); // UUID | 
 ApiVersion apiVersion = new ApiVersion(); // ApiVersion | Version of the API.
 String contentType = "contentType_example"; // String | application/json
-String authorization = "authorization_example"; // String | Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token.
 UUID xMsRequestid = new UUID(); // UUID | A unique string value for tracking the request from the client, preferably a GUID. If this value isn't provided, one will be generated and provided in the response headers.
 UUID xMsCorrelationid = new UUID(); // UUID | A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn't provided, one will be generated and provided in the response headers.
 try {
-    Subscription result = apiInstance.getSubscription(subscriptionId, apiVersion, contentType, authorization, xMsRequestid, xMsCorrelationid);
+    Subscription result = apiInstance.getSubscription(subscriptionId, apiVersion, contentType, xMsRequestid, xMsCorrelationid);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling SaasFulfillmentApi#getSubscription");
@@ -252,7 +245,6 @@ Name | Type | Description  | Notes
  **subscriptionId** | [**UUID**](.md)|  |
  **apiVersion** | [**ApiVersion**](.md)| Version of the API. |
  **contentType** | **String**| application/json | [enum: application/json]
- **authorization** | **String**| Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. |
  **xMsRequestid** | [**UUID**](.md)| A unique string value for tracking the request from the client, preferably a GUID. If this value isn&#x27;t provided, one will be generated and provided in the response headers. | [optional]
  **xMsCorrelationid** | [**UUID**](.md)| A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn&#x27;t provided, one will be generated and provided in the response headers. | [optional]
 
@@ -271,7 +263,7 @@ Name | Type | Description  | Notes
 
 <a name="listAvailablePlans"></a>
 # **listAvailablePlans**
-> PlansResponse listAvailablePlans(subscriptionId, apiVersion, contentType, authorization, xMsRequestid, xMsCorrelationid)
+> PlansResponse listAvailablePlans(subscriptionId, apiVersion, contentType, xMsRequestid, xMsCorrelationid)
 
 List available plans
 
@@ -296,11 +288,10 @@ SaasFulfillmentApi apiInstance = new SaasFulfillmentApi();
 UUID subscriptionId = new UUID(); // UUID | 
 ApiVersion apiVersion = new ApiVersion(); // ApiVersion | Version of the API.
 String contentType = "contentType_example"; // String | application/json
-String authorization = "authorization_example"; // String | Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token.
 UUID xMsRequestid = new UUID(); // UUID | A unique string value for tracking the request from the client, preferably a GUID. If this value isn't provided, one will be generated and provided in the response headers.
 UUID xMsCorrelationid = new UUID(); // UUID | A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn't provided, one will be generated and provided in the response headers.
 try {
-    PlansResponse result = apiInstance.listAvailablePlans(subscriptionId, apiVersion, contentType, authorization, xMsRequestid, xMsCorrelationid);
+    PlansResponse result = apiInstance.listAvailablePlans(subscriptionId, apiVersion, contentType, xMsRequestid, xMsCorrelationid);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling SaasFulfillmentApi#listAvailablePlans");
@@ -315,7 +306,6 @@ Name | Type | Description  | Notes
  **subscriptionId** | [**UUID**](.md)|  |
  **apiVersion** | [**ApiVersion**](.md)| Version of the API. |
  **contentType** | **String**| application/json | [enum: application/json]
- **authorization** | **String**| Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. |
  **xMsRequestid** | [**UUID**](.md)| A unique string value for tracking the request from the client, preferably a GUID. If this value isn&#x27;t provided, one will be generated and provided in the response headers. | [optional]
  **xMsCorrelationid** | [**UUID**](.md)| A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn&#x27;t provided, one will be generated and provided in the response headers. | [optional]
 
@@ -334,7 +324,7 @@ Name | Type | Description  | Notes
 
 <a name="listOperations"></a>
 # **listOperations**
-> OperationList listOperations(subscriptionId, apiVersion, contentType, authorization, xMsRequestid, xMsCorrelationid)
+> OperationList listOperations(subscriptionId, apiVersion, contentType, xMsRequestid, xMsCorrelationid)
 
 List outstanding operations
 
@@ -359,11 +349,10 @@ SaasFulfillmentApi apiInstance = new SaasFulfillmentApi();
 UUID subscriptionId = new UUID(); // UUID | 
 ApiVersion apiVersion = new ApiVersion(); // ApiVersion | Version of the API.
 String contentType = "contentType_example"; // String | application/json
-String authorization = "authorization_example"; // String | Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token.
 UUID xMsRequestid = new UUID(); // UUID | A unique string value for tracking the request from the client, preferably a GUID. If this value isn't provided, one will be generated and provided in the response headers.
 UUID xMsCorrelationid = new UUID(); // UUID | A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn't provided, one will be generated and provided in the response headers.
 try {
-    OperationList result = apiInstance.listOperations(subscriptionId, apiVersion, contentType, authorization, xMsRequestid, xMsCorrelationid);
+    OperationList result = apiInstance.listOperations(subscriptionId, apiVersion, contentType, xMsRequestid, xMsCorrelationid);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling SaasFulfillmentApi#listOperations");
@@ -378,7 +367,6 @@ Name | Type | Description  | Notes
  **subscriptionId** | [**UUID**](.md)|  |
  **apiVersion** | [**ApiVersion**](.md)| Version of the API. |
  **contentType** | **String**| application/json | [enum: application/json]
- **authorization** | **String**| Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. |
  **xMsRequestid** | [**UUID**](.md)| A unique string value for tracking the request from the client, preferably a GUID. If this value isn&#x27;t provided, one will be generated and provided in the response headers. | [optional]
  **xMsCorrelationid** | [**UUID**](.md)| A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn&#x27;t provided, one will be generated and provided in the response headers. | [optional]
 
@@ -397,7 +385,7 @@ Name | Type | Description  | Notes
 
 <a name="listSubscriptions"></a>
 # **listSubscriptions**
-> SubscriptionsResponse listSubscriptions(apiVersion, contentType, authorization, xMsRequestid, xMsCorrelationid)
+> SubscriptionsResponse listSubscriptions(apiVersion, contentType, continuationToken, xMsRequestid, xMsCorrelationid)
 
 List subscriptions
 
@@ -421,11 +409,11 @@ OAuth2.setAccessToken("YOUR ACCESS TOKEN");
 SaasFulfillmentApi apiInstance = new SaasFulfillmentApi();
 ApiVersion apiVersion = new ApiVersion(); // ApiVersion | Version of the API.
 String contentType = "contentType_example"; // String | application/json
-String authorization = "authorization_example"; // String | Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token.
+String continuationToken = "continuationToken_example"; // String | Optional value, only used for ListSubscriptions.
 UUID xMsRequestid = new UUID(); // UUID | A unique string value for tracking the request from the client, preferably a GUID. If this value isn't provided, one will be generated and provided in the response headers.
 UUID xMsCorrelationid = new UUID(); // UUID | A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn't provided, one will be generated and provided in the response headers.
 try {
-    SubscriptionsResponse result = apiInstance.listSubscriptions(apiVersion, contentType, authorization, xMsRequestid, xMsCorrelationid);
+    SubscriptionsResponse result = apiInstance.listSubscriptions(apiVersion, contentType, continuationToken, xMsRequestid, xMsCorrelationid);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling SaasFulfillmentApi#listSubscriptions");
@@ -439,7 +427,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **apiVersion** | [**ApiVersion**](.md)| Version of the API. |
  **contentType** | **String**| application/json | [enum: application/json]
- **authorization** | **String**| Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. |
+ **continuationToken** | **String**| Optional value, only used for ListSubscriptions. | [optional]
  **xMsRequestid** | [**UUID**](.md)| A unique string value for tracking the request from the client, preferably a GUID. If this value isn&#x27;t provided, one will be generated and provided in the response headers. | [optional]
  **xMsCorrelationid** | [**UUID**](.md)| A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn&#x27;t provided, one will be generated and provided in the response headers. | [optional]
 
@@ -458,7 +446,7 @@ Name | Type | Description  | Notes
 
 <a name="patchSubscription"></a>
 # **patchSubscription**
-> patchSubscription(body, contentType, authorization, apiVersion, subscriptionId, xMsRequestid, xMsCorrelationid)
+> patchSubscription(body, contentType, apiVersion, subscriptionId, xMsRequestid, xMsCorrelationid)
 
 Patch a subscription
 
@@ -480,15 +468,14 @@ OAuth OAuth2 = (OAuth) defaultClient.getAuthentication("OAuth2");
 OAuth2.setAccessToken("YOUR ACCESS TOKEN");
 
 SaasFulfillmentApi apiInstance = new SaasFulfillmentApi();
-Body body = new Body(); // Body | 
+SubscriberPlan body = new SubscriberPlan(); // SubscriberPlan | 
 String contentType = "contentType_example"; // String | application/json
-String authorization = "authorization_example"; // String | Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token.
 ApiVersion apiVersion = new ApiVersion(); // ApiVersion | Version of the API.
 UUID subscriptionId = new UUID(); // UUID | 
 UUID xMsRequestid = new UUID(); // UUID | A unique string value for tracking the request from the client, preferably a GUID. If this value isn't provided, one will be generated and provided in the response headers.
 UUID xMsCorrelationid = new UUID(); // UUID | A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn't provided, one will be generated and provided in the response headers.
 try {
-    apiInstance.patchSubscription(body, contentType, authorization, apiVersion, subscriptionId, xMsRequestid, xMsCorrelationid);
+    apiInstance.patchSubscription(body, contentType, apiVersion, subscriptionId, xMsRequestid, xMsCorrelationid);
 } catch (ApiException e) {
     System.err.println("Exception when calling SaasFulfillmentApi#patchSubscription");
     e.printStackTrace();
@@ -499,9 +486,8 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**Body**](Body.md)|  |
+ **body** | [**SubscriberPlan**](SubscriberPlan.md)|  |
  **contentType** | **String**| application/json | [enum: application/json]
- **authorization** | **String**| Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. |
  **apiVersion** | [**ApiVersion**](.md)| Version of the API. |
  **subscriptionId** | [**UUID**](.md)|  |
  **xMsRequestid** | [**UUID**](.md)| A unique string value for tracking the request from the client, preferably a GUID. If this value isn&#x27;t provided, one will be generated and provided in the response headers. | [optional]
@@ -522,7 +508,7 @@ null (empty response body)
 
 <a name="resolve"></a>
 # **resolve**
-> SubscriptionSummary resolve(apiVersion, contentType, authorization, xMsRequestid, xMsCorrelationid, xMsMarketplaceToken)
+> SubscriptionSummary resolve(apiVersion, contentType, xMsMarketplaceToken, xMsRequestid, xMsCorrelationid)
 
 Resolve a subscription
 
@@ -546,12 +532,11 @@ OAuth2.setAccessToken("YOUR ACCESS TOKEN");
 SaasFulfillmentApi apiInstance = new SaasFulfillmentApi();
 ApiVersion apiVersion = new ApiVersion(); // ApiVersion | Version of the API.
 String contentType = "contentType_example"; // String | application/json
-String authorization = "authorization_example"; // String | Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token.
+String xMsMarketplaceToken = "xMsMarketplaceToken_example"; // String | The token query parameter in the URL when the user is redirected to the SaaS partner's website from Azure (for example,  https://contoso.com/signup?token=..). Note, The URL decodes the token value from the browser before using it.
 UUID xMsRequestid = new UUID(); // UUID | A unique string value for tracking the request from the client, preferably a GUID. If this value isn't provided, one will be generated and provided in the response headers.
 UUID xMsCorrelationid = new UUID(); // UUID | A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn't provided, one will be generated and provided in the response headers.
-UUID xMsMarketplaceToken = new UUID(); // UUID | The token query parameter in the URL when the user is redirected to the SaaS partner's website from Azure (for example,  https://contoso.com/signup?token=..). Note, The URL decodes the token value from the browser before using it.
 try {
-    SubscriptionSummary result = apiInstance.resolve(apiVersion, contentType, authorization, xMsRequestid, xMsCorrelationid, xMsMarketplaceToken);
+    SubscriptionSummary result = apiInstance.resolve(apiVersion, contentType, xMsMarketplaceToken, xMsRequestid, xMsCorrelationid);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling SaasFulfillmentApi#resolve");
@@ -565,10 +550,9 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **apiVersion** | [**ApiVersion**](.md)| Version of the API. |
  **contentType** | **String**| application/json | [enum: application/json]
- **authorization** | **String**| Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. |
+ **xMsMarketplaceToken** | **String**| The token query parameter in the URL when the user is redirected to the SaaS partner&#x27;s website from Azure (for example,  https://contoso.com/signup?token&#x3D;..). Note, The URL decodes the token value from the browser before using it. |
  **xMsRequestid** | [**UUID**](.md)| A unique string value for tracking the request from the client, preferably a GUID. If this value isn&#x27;t provided, one will be generated and provided in the response headers. | [optional]
  **xMsCorrelationid** | [**UUID**](.md)| A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn&#x27;t provided, one will be generated and provided in the response headers. | [optional]
- **xMsMarketplaceToken** | [**UUID**](.md)| The token query parameter in the URL when the user is redirected to the SaaS partner&#x27;s website from Azure (for example,  https://contoso.com/signup?token&#x3D;..). Note, The URL decodes the token value from the browser before using it. | [optional]
 
 ### Return type
 
@@ -585,7 +569,7 @@ Name | Type | Description  | Notes
 
 <a name="updateOperationStatus"></a>
 # **updateOperationStatus**
-> updateOperationStatus(body, contentType, authorization, apiVersion, subscriptionId, operationId, xMsRequestid, xMsCorrelationid)
+> updateOperationStatus(body, contentType, apiVersion, subscriptionId, operationId, xMsRequestid, xMsCorrelationid)
 
 Update the status of an operation
 
@@ -607,16 +591,15 @@ OAuth OAuth2 = (OAuth) defaultClient.getAuthentication("OAuth2");
 OAuth2.setAccessToken("YOUR ACCESS TOKEN");
 
 SaasFulfillmentApi apiInstance = new SaasFulfillmentApi();
-Body1 body = new Body1(); // Body1 | 
+UpdateOperation body = new UpdateOperation(); // UpdateOperation | 
 String contentType = "contentType_example"; // String | application/json
-String authorization = "authorization_example"; // String | Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token.
 ApiVersion apiVersion = new ApiVersion(); // ApiVersion | Version of the API.
 UUID subscriptionId = new UUID(); // UUID | 
 UUID operationId = new UUID(); // UUID | 
 UUID xMsRequestid = new UUID(); // UUID | A unique string value for tracking the request from the client, preferably a GUID. If this value isn't provided, one will be generated and provided in the response headers.
 UUID xMsCorrelationid = new UUID(); // UUID | A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn't provided, one will be generated and provided in the response headers.
 try {
-    apiInstance.updateOperationStatus(body, contentType, authorization, apiVersion, subscriptionId, operationId, xMsRequestid, xMsCorrelationid);
+    apiInstance.updateOperationStatus(body, contentType, apiVersion, subscriptionId, operationId, xMsRequestid, xMsCorrelationid);
 } catch (ApiException e) {
     System.err.println("Exception when calling SaasFulfillmentApi#updateOperationStatus");
     e.printStackTrace();
@@ -627,9 +610,8 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**Body1**](Body1.md)|  |
+ **body** | [**UpdateOperation**](UpdateOperation.md)|  |
  **contentType** | **String**| application/json | [enum: application/json]
- **authorization** | **String**| Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. |
  **apiVersion** | [**ApiVersion**](.md)| Version of the API. |
  **subscriptionId** | [**UUID**](.md)|  |
  **operationId** | [**UUID**](.md)|  |

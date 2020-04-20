@@ -11,5 +11,5 @@ Name | Type | Description | Notes
 **planId** | **String** |  |  [optional]
 **quantity** | **Integer** |  |  [optional]
 **action** | **String** |  |  [optional]
-**timeStamp** | **String** |  |  [optional]
+**timeStamp** | [**OffsetDateTime**](OffsetDateTime.md) |  |  [optional]
 **status** | **String** |  |  [optional]

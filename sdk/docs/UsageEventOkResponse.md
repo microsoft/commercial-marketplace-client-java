@@ -5,11 +5,11 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **usageEventId** | [**UUID**](UUID.md) | Unique identifier associated with the usage event |  [optional]
 **status** | [**StatusEnum**](#StatusEnum) | Status of the operation. |  [optional]
-**messageTime** | **String** | Time this message was created in UTC |  [optional]
+**messageTime** | [**OffsetDateTime**](OffsetDateTime.md) | Time this message was created in UTC |  [optional]
 **resourceId** | [**UUID**](UUID.md) | Identifier of the resource against which usage is emitted |  [optional]
 **quantity** | **Long** | Number of units consumed |  [optional]
 **dimension** | **String** | Dimension identifier |  [optional]
-**effectiveStartTime** | **String** | Time in UTC when the usage event occurred |  [optional]
+**effectiveStartTime** | [**OffsetDateTime**](OffsetDateTime.md) | Time in UTC when the usage event occurred |  [optional]
 **planId** | **String** | Plan associated with the purchased offer |  [optional]
 **error** | [**Error**](Error.md) |  |  [optional]
 

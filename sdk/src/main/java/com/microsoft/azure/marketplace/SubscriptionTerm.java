@@ -21,20 +21,20 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
-import org.threeten.bp.LocalDate;
+import org.threeten.bp.OffsetDateTime;
 /**
  * SubscriptionTerm
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2020-04-18T12:09:05.863-07:00[America/Los_Angeles]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2020-04-19T20:04:00.284-07:00[America/Los_Angeles]")
 public class SubscriptionTerm {
   @SerializedName("startDate")
-  private LocalDate startDate = null;
+  private OffsetDateTime startDate = null;
 
   @SerializedName("endDate")
-  private LocalDate endDate = null;
+  private OffsetDateTime endDate = null;
 
-  public SubscriptionTerm startDate(LocalDate startDate) {
+  public SubscriptionTerm startDate(OffsetDateTime startDate) {
     this.startDate = startDate;
     return this;
   }
@@ -44,15 +44,15 @@ public class SubscriptionTerm {
    * @return startDate
   **/
   @Schema(description = "")
-  public LocalDate getStartDate() {
+  public OffsetDateTime getStartDate() {
     return startDate;
   }
 
-  public void setStartDate(LocalDate startDate) {
+  public void setStartDate(OffsetDateTime startDate) {
     this.startDate = startDate;
   }
 
-  public SubscriptionTerm endDate(LocalDate endDate) {
+  public SubscriptionTerm endDate(OffsetDateTime endDate) {
     this.endDate = endDate;
     return this;
   }
@@ -62,11 +62,11 @@ public class SubscriptionTerm {
    * @return endDate
   **/
   @Schema(description = "")
-  public LocalDate getEndDate() {
+  public OffsetDateTime getEndDate() {
     return endDate;
   }
 
-  public void setEndDate(LocalDate endDate) {
+  public void setEndDate(OffsetDateTime endDate) {
     this.endDate = endDate;
   }
 

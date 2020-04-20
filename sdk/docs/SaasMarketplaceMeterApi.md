@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 <a name="postBatchUsageEvent"></a>
 # **postBatchUsageEvent**
-> UsageEventOkResponse postBatchUsageEvent(body, authorization, apiVersion, xMsRequestid, xMsCorrelationid)
+> UsageEventOkResponse postBatchUsageEvent(body, apiVersion, xMsRequestid, xMsCorrelationid)
 
 Posts a set of usage events to the marketplace metering service API.
 
@@ -32,12 +32,11 @@ OAuth2.setAccessToken("YOUR ACCESS TOKEN");
 
 SaasMarketplaceMeterApi apiInstance = new SaasMarketplaceMeterApi();
 List<UsageEvent> body = Arrays.asList(new UsageEvent()); // List<UsageEvent> | 
-String authorization = "authorization_example"; // String | Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token.
 ApiVersion apiVersion = new ApiVersion(); // ApiVersion | Version of the API.
 UUID xMsRequestid = new UUID(); // UUID | A unique string value for tracking the request from the client, preferably a GUID. If this value isn't provided, one will be generated and provided in the response headers.
 UUID xMsCorrelationid = new UUID(); // UUID | A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn't provided, one will be generated and provided in the response headers.
 try {
-    UsageEventOkResponse result = apiInstance.postBatchUsageEvent(body, authorization, apiVersion, xMsRequestid, xMsCorrelationid);
+    UsageEventOkResponse result = apiInstance.postBatchUsageEvent(body, apiVersion, xMsRequestid, xMsCorrelationid);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling SaasMarketplaceMeterApi#postBatchUsageEvent");
@@ -50,7 +49,6 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **body** | [**List&lt;UsageEvent&gt;**](UsageEvent.md)|  |
- **authorization** | **String**| Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. |
  **apiVersion** | [**ApiVersion**](.md)| Version of the API. |
  **xMsRequestid** | [**UUID**](.md)| A unique string value for tracking the request from the client, preferably a GUID. If this value isn&#x27;t provided, one will be generated and provided in the response headers. | [optional]
  **xMsCorrelationid** | [**UUID**](.md)| A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn&#x27;t provided, one will be generated and provided in the response headers. | [optional]
@@ -70,7 +68,7 @@ Name | Type | Description  | Notes
 
 <a name="postUsageEvent"></a>
 # **postUsageEvent**
-> UsageEventOkResponse postUsageEvent(body, authorization, apiVersion, xMsRequestid, xMsCorrelationid)
+> UsageEventOkResponse postUsageEvent(body, apiVersion, xMsRequestid, xMsCorrelationid)
 
 Posts a single usage event to the marketplace metering service API.
 
@@ -93,12 +91,11 @@ OAuth2.setAccessToken("YOUR ACCESS TOKEN");
 
 SaasMarketplaceMeterApi apiInstance = new SaasMarketplaceMeterApi();
 List<UsageEvent> body = Arrays.asList(new UsageEvent()); // List<UsageEvent> | 
-String authorization = "authorization_example"; // String | Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token.
 ApiVersion apiVersion = new ApiVersion(); // ApiVersion | Version of the API.
 UUID xMsRequestid = new UUID(); // UUID | A unique string value for tracking the request from the client, preferably a GUID. If this value isn't provided, one will be generated and provided in the response headers.
 UUID xMsCorrelationid = new UUID(); // UUID | A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn't provided, one will be generated and provided in the response headers.
 try {
-    UsageEventOkResponse result = apiInstance.postUsageEvent(body, authorization, apiVersion, xMsRequestid, xMsCorrelationid);
+    UsageEventOkResponse result = apiInstance.postUsageEvent(body, apiVersion, xMsRequestid, xMsCorrelationid);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling SaasMarketplaceMeterApi#postUsageEvent");
@@ -111,7 +108,6 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **body** | [**List&lt;UsageEvent&gt;**](UsageEvent.md)|  |
- **authorization** | **String**| Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. |
  **apiVersion** | [**ApiVersion**](.md)| Version of the API. |
  **xMsRequestid** | [**UUID**](.md)| A unique string value for tracking the request from the client, preferably a GUID. If this value isn&#x27;t provided, one will be generated and provided in the response headers. | [optional]
  **xMsCorrelationid** | [**UUID**](.md)| A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn&#x27;t provided, one will be generated and provided in the response headers. | [optional]

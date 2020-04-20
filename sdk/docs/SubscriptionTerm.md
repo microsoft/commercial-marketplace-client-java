@@ -3,5 +3,5 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**startDate** | [**LocalDate**](LocalDate.md) |  |  [optional]
-**endDate** | [**LocalDate**](LocalDate.md) |  |  [optional]
+**startDate** | [**OffsetDateTime**](OffsetDateTime.md) |  |  [optional]
+**endDate** | [**OffsetDateTime**](OffsetDateTime.md) |  |  [optional]

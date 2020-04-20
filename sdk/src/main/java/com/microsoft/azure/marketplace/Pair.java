@@ -12,7 +12,7 @@
 
 package com.microsoft.azure.marketplace;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2020-04-18T12:09:05.863-07:00[America/Los_Angeles]")public class Pair {
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2020-04-19T20:04:00.284-07:00[America/Los_Angeles]")public class Pair {
     private String name = "";
     private String value = "";
 

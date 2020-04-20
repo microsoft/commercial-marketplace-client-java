@@ -60,7 +60,6 @@ public class SaasMarketplaceMeterApi {
     /**
      * Build call for postBatchUsageEvent
      * @param body  (required)
-     * @param authorization Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. (required)
      * @param apiVersion Version of the API. (required)
      * @param xMsRequestid A unique string value for tracking the request from the client, preferably a GUID. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @param xMsCorrelationid A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
@@ -69,7 +68,7 @@ public class SaasMarketplaceMeterApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call postBatchUsageEventCall(List<UsageEvent> body, String authorization, ApiVersion apiVersion, UUID xMsRequestid, UUID xMsCorrelationid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call postBatchUsageEventCall(List<UsageEvent> body, ApiVersion apiVersion, UUID xMsRequestid, UUID xMsCorrelationid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = body;
         
         // create path and map variables
@@ -78,15 +77,13 @@ public class SaasMarketplaceMeterApi {
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         if (apiVersion != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("ApiVersion", apiVersion));
+        localVarQueryParams.addAll(apiClient.parameterToPair("api-version", apiVersion));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         if (xMsRequestid != null)
         localVarHeaderParams.put("x-ms-requestid", apiClient.parameterToString(xMsRequestid));
         if (xMsCorrelationid != null)
         localVarHeaderParams.put("x-ms-correlationid", apiClient.parameterToString(xMsCorrelationid));
-        if (authorization != null)
-        localVarHeaderParams.put("Authorization", apiClient.parameterToString(authorization));
 
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
@@ -119,21 +116,17 @@ public class SaasMarketplaceMeterApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call postBatchUsageEventValidateBeforeCall(List<UsageEvent> body, String authorization, ApiVersion apiVersion, UUID xMsRequestid, UUID xMsCorrelationid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call postBatchUsageEventValidateBeforeCall(List<UsageEvent> body, ApiVersion apiVersion, UUID xMsRequestid, UUID xMsCorrelationid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         // verify the required parameter 'body' is set
         if (body == null) {
             throw new ApiException("Missing the required parameter 'body' when calling postBatchUsageEvent(Async)");
-        }
-        // verify the required parameter 'authorization' is set
-        if (authorization == null) {
-            throw new ApiException("Missing the required parameter 'authorization' when calling postBatchUsageEvent(Async)");
         }
         // verify the required parameter 'apiVersion' is set
         if (apiVersion == null) {
             throw new ApiException("Missing the required parameter 'apiVersion' when calling postBatchUsageEvent(Async)");
         }
         
-        com.squareup.okhttp.Call call = postBatchUsageEventCall(body, authorization, apiVersion, xMsRequestid, xMsCorrelationid, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = postBatchUsageEventCall(body, apiVersion, xMsRequestid, xMsCorrelationid, progressListener, progressRequestListener);
         return call;
 
         
@@ -146,15 +139,14 @@ public class SaasMarketplaceMeterApi {
      * Posts a set of usage events to the marketplace metering service API.
      * The batch usage event API allows you to emit usage events for more than one purchased entity at once. The batch usage event request references the metering services dimension defined by the publisher when publishing the offer.
      * @param body  (required)
-     * @param authorization Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. (required)
      * @param apiVersion Version of the API. (required)
      * @param xMsRequestid A unique string value for tracking the request from the client, preferably a GUID. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @param xMsCorrelationid A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @return UsageEventOkResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public UsageEventOkResponse postBatchUsageEvent(List<UsageEvent> body, String authorization, ApiVersion apiVersion, UUID xMsRequestid, UUID xMsCorrelationid) throws ApiException {
-        ApiResponse<UsageEventOkResponse> resp = postBatchUsageEventWithHttpInfo(body, authorization, apiVersion, xMsRequestid, xMsCorrelationid);
+    public UsageEventOkResponse postBatchUsageEvent(List<UsageEvent> body, ApiVersion apiVersion, UUID xMsRequestid, UUID xMsCorrelationid) throws ApiException {
+        ApiResponse<UsageEventOkResponse> resp = postBatchUsageEventWithHttpInfo(body, apiVersion, xMsRequestid, xMsCorrelationid);
         return resp.getData();
     }
 
@@ -162,15 +154,14 @@ public class SaasMarketplaceMeterApi {
      * Posts a set of usage events to the marketplace metering service API.
      * The batch usage event API allows you to emit usage events for more than one purchased entity at once. The batch usage event request references the metering services dimension defined by the publisher when publishing the offer.
      * @param body  (required)
-     * @param authorization Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. (required)
      * @param apiVersion Version of the API. (required)
      * @param xMsRequestid A unique string value for tracking the request from the client, preferably a GUID. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @param xMsCorrelationid A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @return ApiResponse&lt;UsageEventOkResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<UsageEventOkResponse> postBatchUsageEventWithHttpInfo(List<UsageEvent> body, String authorization, ApiVersion apiVersion, UUID xMsRequestid, UUID xMsCorrelationid) throws ApiException {
-        com.squareup.okhttp.Call call = postBatchUsageEventValidateBeforeCall(body, authorization, apiVersion, xMsRequestid, xMsCorrelationid, null, null);
+    public ApiResponse<UsageEventOkResponse> postBatchUsageEventWithHttpInfo(List<UsageEvent> body, ApiVersion apiVersion, UUID xMsRequestid, UUID xMsCorrelationid) throws ApiException {
+        com.squareup.okhttp.Call call = postBatchUsageEventValidateBeforeCall(body, apiVersion, xMsRequestid, xMsCorrelationid, null, null);
         Type localVarReturnType = new TypeToken<UsageEventOkResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -179,7 +170,6 @@ public class SaasMarketplaceMeterApi {
      * Posts a set of usage events to the marketplace metering service API. (asynchronously)
      * The batch usage event API allows you to emit usage events for more than one purchased entity at once. The batch usage event request references the metering services dimension defined by the publisher when publishing the offer.
      * @param body  (required)
-     * @param authorization Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. (required)
      * @param apiVersion Version of the API. (required)
      * @param xMsRequestid A unique string value for tracking the request from the client, preferably a GUID. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @param xMsCorrelationid A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
@@ -187,7 +177,7 @@ public class SaasMarketplaceMeterApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call postBatchUsageEventAsync(List<UsageEvent> body, String authorization, ApiVersion apiVersion, UUID xMsRequestid, UUID xMsCorrelationid, final ApiCallback<UsageEventOkResponse> callback) throws ApiException {
+    public com.squareup.okhttp.Call postBatchUsageEventAsync(List<UsageEvent> body, ApiVersion apiVersion, UUID xMsRequestid, UUID xMsCorrelationid, final ApiCallback<UsageEventOkResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -208,7 +198,7 @@ public class SaasMarketplaceMeterApi {
             };
         }
 
-        com.squareup.okhttp.Call call = postBatchUsageEventValidateBeforeCall(body, authorization, apiVersion, xMsRequestid, xMsCorrelationid, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = postBatchUsageEventValidateBeforeCall(body, apiVersion, xMsRequestid, xMsCorrelationid, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<UsageEventOkResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -216,7 +206,6 @@ public class SaasMarketplaceMeterApi {
     /**
      * Build call for postUsageEvent
      * @param body  (required)
-     * @param authorization Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. (required)
      * @param apiVersion Version of the API. (required)
      * @param xMsRequestid A unique string value for tracking the request from the client, preferably a GUID. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @param xMsCorrelationid A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
@@ -225,7 +214,7 @@ public class SaasMarketplaceMeterApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call postUsageEventCall(List<UsageEvent> body, String authorization, ApiVersion apiVersion, UUID xMsRequestid, UUID xMsCorrelationid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call postUsageEventCall(List<UsageEvent> body, ApiVersion apiVersion, UUID xMsRequestid, UUID xMsCorrelationid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = body;
         
         // create path and map variables
@@ -234,15 +223,13 @@ public class SaasMarketplaceMeterApi {
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         if (apiVersion != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("ApiVersion", apiVersion));
+        localVarQueryParams.addAll(apiClient.parameterToPair("api-version", apiVersion));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         if (xMsRequestid != null)
         localVarHeaderParams.put("x-ms-requestid", apiClient.parameterToString(xMsRequestid));
         if (xMsCorrelationid != null)
         localVarHeaderParams.put("x-ms-correlationid", apiClient.parameterToString(xMsCorrelationid));
-        if (authorization != null)
-        localVarHeaderParams.put("Authorization", apiClient.parameterToString(authorization));
 
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
@@ -275,21 +262,17 @@ public class SaasMarketplaceMeterApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call postUsageEventValidateBeforeCall(List<UsageEvent> body, String authorization, ApiVersion apiVersion, UUID xMsRequestid, UUID xMsCorrelationid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call postUsageEventValidateBeforeCall(List<UsageEvent> body, ApiVersion apiVersion, UUID xMsRequestid, UUID xMsCorrelationid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         // verify the required parameter 'body' is set
         if (body == null) {
             throw new ApiException("Missing the required parameter 'body' when calling postUsageEvent(Async)");
-        }
-        // verify the required parameter 'authorization' is set
-        if (authorization == null) {
-            throw new ApiException("Missing the required parameter 'authorization' when calling postUsageEvent(Async)");
         }
         // verify the required parameter 'apiVersion' is set
         if (apiVersion == null) {
             throw new ApiException("Missing the required parameter 'apiVersion' when calling postUsageEvent(Async)");
         }
         
-        com.squareup.okhttp.Call call = postUsageEventCall(body, authorization, apiVersion, xMsRequestid, xMsCorrelationid, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = postUsageEventCall(body, apiVersion, xMsRequestid, xMsCorrelationid, progressListener, progressRequestListener);
         return call;
 
         
@@ -302,15 +285,14 @@ public class SaasMarketplaceMeterApi {
      * Posts a single usage event to the marketplace metering service API.
      * Posts a single usage event to the marketplace metering service API.
      * @param body  (required)
-     * @param authorization Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. (required)
      * @param apiVersion Version of the API. (required)
      * @param xMsRequestid A unique string value for tracking the request from the client, preferably a GUID. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @param xMsCorrelationid A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @return UsageEventOkResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public UsageEventOkResponse postUsageEvent(List<UsageEvent> body, String authorization, ApiVersion apiVersion, UUID xMsRequestid, UUID xMsCorrelationid) throws ApiException {
-        ApiResponse<UsageEventOkResponse> resp = postUsageEventWithHttpInfo(body, authorization, apiVersion, xMsRequestid, xMsCorrelationid);
+    public UsageEventOkResponse postUsageEvent(List<UsageEvent> body, ApiVersion apiVersion, UUID xMsRequestid, UUID xMsCorrelationid) throws ApiException {
+        ApiResponse<UsageEventOkResponse> resp = postUsageEventWithHttpInfo(body, apiVersion, xMsRequestid, xMsCorrelationid);
         return resp.getData();
     }
 
@@ -318,15 +300,14 @@ public class SaasMarketplaceMeterApi {
      * Posts a single usage event to the marketplace metering service API.
      * Posts a single usage event to the marketplace metering service API.
      * @param body  (required)
-     * @param authorization Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. (required)
      * @param apiVersion Version of the API. (required)
      * @param xMsRequestid A unique string value for tracking the request from the client, preferably a GUID. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @param xMsCorrelationid A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @return ApiResponse&lt;UsageEventOkResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<UsageEventOkResponse> postUsageEventWithHttpInfo(List<UsageEvent> body, String authorization, ApiVersion apiVersion, UUID xMsRequestid, UUID xMsCorrelationid) throws ApiException {
-        com.squareup.okhttp.Call call = postUsageEventValidateBeforeCall(body, authorization, apiVersion, xMsRequestid, xMsCorrelationid, null, null);
+    public ApiResponse<UsageEventOkResponse> postUsageEventWithHttpInfo(List<UsageEvent> body, ApiVersion apiVersion, UUID xMsRequestid, UUID xMsCorrelationid) throws ApiException {
+        com.squareup.okhttp.Call call = postUsageEventValidateBeforeCall(body, apiVersion, xMsRequestid, xMsCorrelationid, null, null);
         Type localVarReturnType = new TypeToken<UsageEventOkResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -335,7 +316,6 @@ public class SaasMarketplaceMeterApi {
      * Posts a single usage event to the marketplace metering service API. (asynchronously)
      * Posts a single usage event to the marketplace metering service API.
      * @param body  (required)
-     * @param authorization Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. (required)
      * @param apiVersion Version of the API. (required)
      * @param xMsRequestid A unique string value for tracking the request from the client, preferably a GUID. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @param xMsCorrelationid A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
@@ -343,7 +323,7 @@ public class SaasMarketplaceMeterApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call postUsageEventAsync(List<UsageEvent> body, String authorization, ApiVersion apiVersion, UUID xMsRequestid, UUID xMsCorrelationid, final ApiCallback<UsageEventOkResponse> callback) throws ApiException {
+    public com.squareup.okhttp.Call postUsageEventAsync(List<UsageEvent> body, ApiVersion apiVersion, UUID xMsRequestid, UUID xMsCorrelationid, final ApiCallback<UsageEventOkResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -364,7 +344,7 @@ public class SaasMarketplaceMeterApi {
             };
         }
 
-        com.squareup.okhttp.Call call = postUsageEventValidateBeforeCall(body, authorization, apiVersion, xMsRequestid, xMsCorrelationid, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = postUsageEventValidateBeforeCall(body, apiVersion, xMsRequestid, xMsCorrelationid, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<UsageEventOkResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;

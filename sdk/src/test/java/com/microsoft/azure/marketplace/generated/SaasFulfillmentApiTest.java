@@ -14,8 +14,6 @@ package com.microsoft.azure.marketplace.generated;
 
 import com.microsoft.azure.marketplace.ApiException;
 import com.microsoft.azure.marketplace.ApiVersion;
-import com.microsoft.azure.marketplace.Body;
-import com.microsoft.azure.marketplace.Body1;
 import com.microsoft.azure.marketplace.Error;
 import com.microsoft.azure.marketplace.OperationList;
 import com.microsoft.azure.marketplace.OperationType;
@@ -25,6 +23,7 @@ import com.microsoft.azure.marketplace.Subscription;
 import com.microsoft.azure.marketplace.SubscriptionSummary;
 import com.microsoft.azure.marketplace.SubscriptionsResponse;
 import java.util.UUID;
+import com.microsoft.azure.marketplace.UpdateOperation;
 import org.junit.Test;
 import org.junit.Ignore;
 
@@ -53,12 +52,11 @@ public class SaasFulfillmentApiTest {
     public void activateSubscriptionTest() throws ApiException {
         SubscriberPlan body = null;
         String contentType = null;
-        String authorization = null;
         ApiVersion apiVersion = null;
         UUID subscriptionId = null;
         UUID xMsRequestid = null;
         UUID xMsCorrelationid = null;
-        api.activateSubscription(body, contentType, authorization, apiVersion, subscriptionId, xMsRequestid, xMsCorrelationid);
+        api.activateSubscription(body, contentType, apiVersion, subscriptionId, xMsRequestid, xMsCorrelationid);
 
         // TODO: test validations
     }
@@ -75,10 +73,9 @@ public class SaasFulfillmentApiTest {
         UUID subscriptionId = null;
         ApiVersion apiVersion = null;
         String contentType = null;
-        String authorization = null;
         UUID xMsRequestid = null;
         UUID xMsCorrelationid = null;
-        api.deleteSubscription(subscriptionId, apiVersion, contentType, authorization, xMsRequestid, xMsCorrelationid);
+        api.deleteSubscription(subscriptionId, apiVersion, contentType, xMsRequestid, xMsCorrelationid);
 
         // TODO: test validations
     }
@@ -96,10 +93,9 @@ public class SaasFulfillmentApiTest {
         UUID operationId = null;
         ApiVersion apiVersion = null;
         String contentType = null;
-        String authorization = null;
         UUID xMsRequestid = null;
         UUID xMsCorrelationid = null;
-        OperationType response = api.getOperationStatus(subscriptionId, operationId, apiVersion, contentType, authorization, xMsRequestid, xMsCorrelationid);
+        OperationType response = api.getOperationStatus(subscriptionId, operationId, apiVersion, contentType, xMsRequestid, xMsCorrelationid);
 
         // TODO: test validations
     }
@@ -116,10 +112,9 @@ public class SaasFulfillmentApiTest {
         UUID subscriptionId = null;
         ApiVersion apiVersion = null;
         String contentType = null;
-        String authorization = null;
         UUID xMsRequestid = null;
         UUID xMsCorrelationid = null;
-        Subscription response = api.getSubscription(subscriptionId, apiVersion, contentType, authorization, xMsRequestid, xMsCorrelationid);
+        Subscription response = api.getSubscription(subscriptionId, apiVersion, contentType, xMsRequestid, xMsCorrelationid);
 
         // TODO: test validations
     }
@@ -136,10 +131,9 @@ public class SaasFulfillmentApiTest {
         UUID subscriptionId = null;
         ApiVersion apiVersion = null;
         String contentType = null;
-        String authorization = null;
         UUID xMsRequestid = null;
         UUID xMsCorrelationid = null;
-        PlansResponse response = api.listAvailablePlans(subscriptionId, apiVersion, contentType, authorization, xMsRequestid, xMsCorrelationid);
+        PlansResponse response = api.listAvailablePlans(subscriptionId, apiVersion, contentType, xMsRequestid, xMsCorrelationid);
 
         // TODO: test validations
     }
@@ -156,10 +150,9 @@ public class SaasFulfillmentApiTest {
         UUID subscriptionId = null;
         ApiVersion apiVersion = null;
         String contentType = null;
-        String authorization = null;
         UUID xMsRequestid = null;
         UUID xMsCorrelationid = null;
-        OperationList response = api.listOperations(subscriptionId, apiVersion, contentType, authorization, xMsRequestid, xMsCorrelationid);
+        OperationList response = api.listOperations(subscriptionId, apiVersion, contentType, xMsRequestid, xMsCorrelationid);
 
         // TODO: test validations
     }
@@ -175,10 +168,10 @@ public class SaasFulfillmentApiTest {
     public void listSubscriptionsTest() throws ApiException {
         ApiVersion apiVersion = null;
         String contentType = null;
-        String authorization = null;
+        String continuationToken = null;
         UUID xMsRequestid = null;
         UUID xMsCorrelationid = null;
-        SubscriptionsResponse response = api.listSubscriptions(apiVersion, contentType, authorization, xMsRequestid, xMsCorrelationid);
+        SubscriptionsResponse response = api.listSubscriptions(apiVersion, contentType, continuationToken, xMsRequestid, xMsCorrelationid);
 
         // TODO: test validations
     }
@@ -192,14 +185,13 @@ public class SaasFulfillmentApiTest {
      */
     @Test
     public void patchSubscriptionTest() throws ApiException {
-        Body body = null;
+        SubscriberPlan body = null;
         String contentType = null;
-        String authorization = null;
         ApiVersion apiVersion = null;
         UUID subscriptionId = null;
         UUID xMsRequestid = null;
         UUID xMsCorrelationid = null;
-        api.patchSubscription(body, contentType, authorization, apiVersion, subscriptionId, xMsRequestid, xMsCorrelationid);
+        api.patchSubscription(body, contentType, apiVersion, subscriptionId, xMsRequestid, xMsCorrelationid);
 
         // TODO: test validations
     }
@@ -215,11 +207,10 @@ public class SaasFulfillmentApiTest {
     public void resolveTest() throws ApiException {
         ApiVersion apiVersion = null;
         String contentType = null;
-        String authorization = null;
+        String xMsMarketplaceToken = null;
         UUID xMsRequestid = null;
         UUID xMsCorrelationid = null;
-        UUID xMsMarketplaceToken = null;
-        SubscriptionSummary response = api.resolve(apiVersion, contentType, authorization, xMsRequestid, xMsCorrelationid, xMsMarketplaceToken);
+        SubscriptionSummary response = api.resolve(apiVersion, contentType, xMsMarketplaceToken, xMsRequestid, xMsCorrelationid);
 
         // TODO: test validations
     }
@@ -233,15 +224,14 @@ public class SaasFulfillmentApiTest {
      */
     @Test
     public void updateOperationStatusTest() throws ApiException {
-        Body1 body = null;
+        UpdateOperation body = null;
         String contentType = null;
-        String authorization = null;
         ApiVersion apiVersion = null;
         UUID subscriptionId = null;
         UUID operationId = null;
         UUID xMsRequestid = null;
         UUID xMsCorrelationid = null;
-        api.updateOperationStatus(body, contentType, authorization, apiVersion, subscriptionId, operationId, xMsRequestid, xMsCorrelationid);
+        api.updateOperationStatus(body, contentType, apiVersion, subscriptionId, operationId, xMsRequestid, xMsCorrelationid);
 
         // TODO: test validations
     }

@@ -22,11 +22,12 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
 import java.util.UUID;
+import org.threeten.bp.OffsetDateTime;
 /**
  * ErrorErrorAdditionalInfo
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2020-04-18T12:09:05.863-07:00[America/Los_Angeles]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2020-04-19T20:04:00.284-07:00[America/Los_Angeles]")
 public class ErrorErrorAdditionalInfo {
   @SerializedName("usageEventId")
   private UUID usageEventId = null;
@@ -77,7 +78,7 @@ public class ErrorErrorAdditionalInfo {
   private StatusEnum status = null;
 
   @SerializedName("messageTime")
-  private String messageTime = null;
+  private OffsetDateTime messageTime = null;
 
   @SerializedName("resourceId")
   private UUID resourceId = null;
@@ -89,7 +90,7 @@ public class ErrorErrorAdditionalInfo {
   private String dimension = null;
 
   @SerializedName("effectiveStartTime")
-  private String effectiveStartTime = null;
+  private OffsetDateTime effectiveStartTime = null;
 
   @SerializedName("planId")
   private UUID planId = null;
@@ -130,7 +131,7 @@ public class ErrorErrorAdditionalInfo {
     this.status = status;
   }
 
-  public ErrorErrorAdditionalInfo messageTime(String messageTime) {
+  public ErrorErrorAdditionalInfo messageTime(OffsetDateTime messageTime) {
     this.messageTime = messageTime;
     return this;
   }
@@ -140,11 +141,11 @@ public class ErrorErrorAdditionalInfo {
    * @return messageTime
   **/
   @Schema(description = "Time this message was created in UTC")
-  public String getMessageTime() {
+  public OffsetDateTime getMessageTime() {
     return messageTime;
   }
 
-  public void setMessageTime(String messageTime) {
+  public void setMessageTime(OffsetDateTime messageTime) {
     this.messageTime = messageTime;
   }
 
@@ -202,7 +203,7 @@ public class ErrorErrorAdditionalInfo {
     this.dimension = dimension;
   }
 
-  public ErrorErrorAdditionalInfo effectiveStartTime(String effectiveStartTime) {
+  public ErrorErrorAdditionalInfo effectiveStartTime(OffsetDateTime effectiveStartTime) {
     this.effectiveStartTime = effectiveStartTime;
     return this;
   }
@@ -212,11 +213,11 @@ public class ErrorErrorAdditionalInfo {
    * @return effectiveStartTime
   **/
   @Schema(description = "Time in UTC when the usage event occurred")
-  public String getEffectiveStartTime() {
+  public OffsetDateTime getEffectiveStartTime() {
     return effectiveStartTime;
   }
 
-  public void setEffectiveStartTime(String effectiveStartTime) {
+  public void setEffectiveStartTime(OffsetDateTime effectiveStartTime) {
     this.effectiveStartTime = effectiveStartTime;
   }
 

@@ -22,11 +22,12 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
 import java.util.UUID;
+import org.threeten.bp.OffsetDateTime;
 /**
  * UsageEvent
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2020-04-18T12:09:05.863-07:00[America/Los_Angeles]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2020-04-19T20:04:00.284-07:00[America/Los_Angeles]")
 public class UsageEvent {
   @SerializedName("resourceId")
   private UUID resourceId = null;
@@ -38,7 +39,7 @@ public class UsageEvent {
   private String dimension = null;
 
   @SerializedName("effectiveStartTime")
-  private String effectiveStartTime = null;
+  private OffsetDateTime effectiveStartTime = null;
 
   @SerializedName("planId")
   private String planId = null;
@@ -97,7 +98,7 @@ public class UsageEvent {
     this.dimension = dimension;
   }
 
-  public UsageEvent effectiveStartTime(String effectiveStartTime) {
+  public UsageEvent effectiveStartTime(OffsetDateTime effectiveStartTime) {
     this.effectiveStartTime = effectiveStartTime;
     return this;
   }
@@ -107,11 +108,11 @@ public class UsageEvent {
    * @return effectiveStartTime
   **/
   @Schema(description = "Time in UTC when the usage event occurred")
-  public String getEffectiveStartTime() {
+  public OffsetDateTime getEffectiveStartTime() {
     return effectiveStartTime;
   }
 
-  public void setEffectiveStartTime(String effectiveStartTime) {
+  public void setEffectiveStartTime(OffsetDateTime effectiveStartTime) {
     this.effectiveStartTime = effectiveStartTime;
   }
 

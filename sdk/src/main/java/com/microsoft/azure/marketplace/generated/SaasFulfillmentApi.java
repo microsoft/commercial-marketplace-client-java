@@ -27,8 +27,6 @@ import java.io.IOException;
 
 
 import com.microsoft.azure.marketplace.ApiVersion;
-import com.microsoft.azure.marketplace.Body;
-import com.microsoft.azure.marketplace.Body1;
 import com.microsoft.azure.marketplace.Error;
 import com.microsoft.azure.marketplace.OperationList;
 import com.microsoft.azure.marketplace.OperationType;
@@ -38,6 +36,7 @@ import com.microsoft.azure.marketplace.Subscription;
 import com.microsoft.azure.marketplace.SubscriptionSummary;
 import com.microsoft.azure.marketplace.SubscriptionsResponse;
 import java.util.UUID;
+import com.microsoft.azure.marketplace.UpdateOperation;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -68,7 +67,6 @@ public class SaasFulfillmentApi {
      * Build call for activateSubscription
      * @param body  (required)
      * @param contentType application/json (required)
-     * @param authorization Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. (required)
      * @param apiVersion Version of the API. (required)
      * @param subscriptionId  (required)
      * @param xMsRequestid A unique string value for tracking the request from the client, preferably a GUID. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
@@ -78,7 +76,7 @@ public class SaasFulfillmentApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call activateSubscriptionCall(SubscriberPlan body, String contentType, String authorization, ApiVersion apiVersion, UUID subscriptionId, UUID xMsRequestid, UUID xMsCorrelationid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call activateSubscriptionCall(SubscriberPlan body, String contentType, ApiVersion apiVersion, UUID subscriptionId, UUID xMsRequestid, UUID xMsCorrelationid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = body;
         
         // create path and map variables
@@ -88,7 +86,7 @@ public class SaasFulfillmentApi {
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         if (apiVersion != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("ApiVersion", apiVersion));
+        localVarQueryParams.addAll(apiClient.parameterToPair("api-version", apiVersion));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         if (contentType != null)
@@ -97,8 +95,6 @@ public class SaasFulfillmentApi {
         localVarHeaderParams.put("x-ms-requestid", apiClient.parameterToString(xMsRequestid));
         if (xMsCorrelationid != null)
         localVarHeaderParams.put("x-ms-correlationid", apiClient.parameterToString(xMsCorrelationid));
-        if (authorization != null)
-        localVarHeaderParams.put("Authorization", apiClient.parameterToString(authorization));
 
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
@@ -131,7 +127,7 @@ public class SaasFulfillmentApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call activateSubscriptionValidateBeforeCall(SubscriberPlan body, String contentType, String authorization, ApiVersion apiVersion, UUID subscriptionId, UUID xMsRequestid, UUID xMsCorrelationid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call activateSubscriptionValidateBeforeCall(SubscriberPlan body, String contentType, ApiVersion apiVersion, UUID subscriptionId, UUID xMsRequestid, UUID xMsCorrelationid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         // verify the required parameter 'body' is set
         if (body == null) {
             throw new ApiException("Missing the required parameter 'body' when calling activateSubscription(Async)");
@@ -139,10 +135,6 @@ public class SaasFulfillmentApi {
         // verify the required parameter 'contentType' is set
         if (contentType == null) {
             throw new ApiException("Missing the required parameter 'contentType' when calling activateSubscription(Async)");
-        }
-        // verify the required parameter 'authorization' is set
-        if (authorization == null) {
-            throw new ApiException("Missing the required parameter 'authorization' when calling activateSubscription(Async)");
         }
         // verify the required parameter 'apiVersion' is set
         if (apiVersion == null) {
@@ -153,7 +145,7 @@ public class SaasFulfillmentApi {
             throw new ApiException("Missing the required parameter 'subscriptionId' when calling activateSubscription(Async)");
         }
         
-        com.squareup.okhttp.Call call = activateSubscriptionCall(body, contentType, authorization, apiVersion, subscriptionId, xMsRequestid, xMsCorrelationid, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = activateSubscriptionCall(body, contentType, apiVersion, subscriptionId, xMsRequestid, xMsCorrelationid, progressListener, progressRequestListener);
         return call;
 
         
@@ -167,15 +159,14 @@ public class SaasFulfillmentApi {
      * Use this call to activate a subscription.
      * @param body  (required)
      * @param contentType application/json (required)
-     * @param authorization Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. (required)
      * @param apiVersion Version of the API. (required)
      * @param subscriptionId  (required)
      * @param xMsRequestid A unique string value for tracking the request from the client, preferably a GUID. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @param xMsCorrelationid A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public void activateSubscription(SubscriberPlan body, String contentType, String authorization, ApiVersion apiVersion, UUID subscriptionId, UUID xMsRequestid, UUID xMsCorrelationid) throws ApiException {
-        activateSubscriptionWithHttpInfo(body, contentType, authorization, apiVersion, subscriptionId, xMsRequestid, xMsCorrelationid);
+    public void activateSubscription(SubscriberPlan body, String contentType, ApiVersion apiVersion, UUID subscriptionId, UUID xMsRequestid, UUID xMsCorrelationid) throws ApiException {
+        activateSubscriptionWithHttpInfo(body, contentType, apiVersion, subscriptionId, xMsRequestid, xMsCorrelationid);
     }
 
     /**
@@ -183,7 +174,6 @@ public class SaasFulfillmentApi {
      * Use this call to activate a subscription.
      * @param body  (required)
      * @param contentType application/json (required)
-     * @param authorization Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. (required)
      * @param apiVersion Version of the API. (required)
      * @param subscriptionId  (required)
      * @param xMsRequestid A unique string value for tracking the request from the client, preferably a GUID. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
@@ -191,8 +181,8 @@ public class SaasFulfillmentApi {
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<Void> activateSubscriptionWithHttpInfo(SubscriberPlan body, String contentType, String authorization, ApiVersion apiVersion, UUID subscriptionId, UUID xMsRequestid, UUID xMsCorrelationid) throws ApiException {
-        com.squareup.okhttp.Call call = activateSubscriptionValidateBeforeCall(body, contentType, authorization, apiVersion, subscriptionId, xMsRequestid, xMsCorrelationid, null, null);
+    public ApiResponse<Void> activateSubscriptionWithHttpInfo(SubscriberPlan body, String contentType, ApiVersion apiVersion, UUID subscriptionId, UUID xMsRequestid, UUID xMsCorrelationid) throws ApiException {
+        com.squareup.okhttp.Call call = activateSubscriptionValidateBeforeCall(body, contentType, apiVersion, subscriptionId, xMsRequestid, xMsCorrelationid, null, null);
         return apiClient.execute(call);
     }
 
@@ -201,7 +191,6 @@ public class SaasFulfillmentApi {
      * Use this call to activate a subscription.
      * @param body  (required)
      * @param contentType application/json (required)
-     * @param authorization Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. (required)
      * @param apiVersion Version of the API. (required)
      * @param subscriptionId  (required)
      * @param xMsRequestid A unique string value for tracking the request from the client, preferably a GUID. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
@@ -210,7 +199,7 @@ public class SaasFulfillmentApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call activateSubscriptionAsync(SubscriberPlan body, String contentType, String authorization, ApiVersion apiVersion, UUID subscriptionId, UUID xMsRequestid, UUID xMsCorrelationid, final ApiCallback<Void> callback) throws ApiException {
+    public com.squareup.okhttp.Call activateSubscriptionAsync(SubscriberPlan body, String contentType, ApiVersion apiVersion, UUID subscriptionId, UUID xMsRequestid, UUID xMsCorrelationid, final ApiCallback<Void> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -231,7 +220,7 @@ public class SaasFulfillmentApi {
             };
         }
 
-        com.squareup.okhttp.Call call = activateSubscriptionValidateBeforeCall(body, contentType, authorization, apiVersion, subscriptionId, xMsRequestid, xMsCorrelationid, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = activateSubscriptionValidateBeforeCall(body, contentType, apiVersion, subscriptionId, xMsRequestid, xMsCorrelationid, progressListener, progressRequestListener);
         apiClient.executeAsync(call, callback);
         return call;
     }
@@ -240,7 +229,6 @@ public class SaasFulfillmentApi {
      * @param subscriptionId  (required)
      * @param apiVersion Version of the API. (required)
      * @param contentType application/json (required)
-     * @param authorization Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. (required)
      * @param xMsRequestid A unique string value for tracking the request from the client, preferably a GUID. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @param xMsCorrelationid A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @param progressListener Progress listener
@@ -248,7 +236,7 @@ public class SaasFulfillmentApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call deleteSubscriptionCall(UUID subscriptionId, ApiVersion apiVersion, String contentType, String authorization, UUID xMsRequestid, UUID xMsCorrelationid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call deleteSubscriptionCall(UUID subscriptionId, ApiVersion apiVersion, String contentType, UUID xMsRequestid, UUID xMsCorrelationid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
         // create path and map variables
@@ -258,7 +246,7 @@ public class SaasFulfillmentApi {
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         if (apiVersion != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("ApiVersion", apiVersion));
+        localVarQueryParams.addAll(apiClient.parameterToPair("api-version", apiVersion));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         if (contentType != null)
@@ -267,8 +255,6 @@ public class SaasFulfillmentApi {
         localVarHeaderParams.put("x-ms-requestid", apiClient.parameterToString(xMsRequestid));
         if (xMsCorrelationid != null)
         localVarHeaderParams.put("x-ms-correlationid", apiClient.parameterToString(xMsCorrelationid));
-        if (authorization != null)
-        localVarHeaderParams.put("Authorization", apiClient.parameterToString(authorization));
 
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
@@ -301,7 +287,7 @@ public class SaasFulfillmentApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call deleteSubscriptionValidateBeforeCall(UUID subscriptionId, ApiVersion apiVersion, String contentType, String authorization, UUID xMsRequestid, UUID xMsCorrelationid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call deleteSubscriptionValidateBeforeCall(UUID subscriptionId, ApiVersion apiVersion, String contentType, UUID xMsRequestid, UUID xMsCorrelationid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         // verify the required parameter 'subscriptionId' is set
         if (subscriptionId == null) {
             throw new ApiException("Missing the required parameter 'subscriptionId' when calling deleteSubscription(Async)");
@@ -314,12 +300,8 @@ public class SaasFulfillmentApi {
         if (contentType == null) {
             throw new ApiException("Missing the required parameter 'contentType' when calling deleteSubscription(Async)");
         }
-        // verify the required parameter 'authorization' is set
-        if (authorization == null) {
-            throw new ApiException("Missing the required parameter 'authorization' when calling deleteSubscription(Async)");
-        }
         
-        com.squareup.okhttp.Call call = deleteSubscriptionCall(subscriptionId, apiVersion, contentType, authorization, xMsRequestid, xMsCorrelationid, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = deleteSubscriptionCall(subscriptionId, apiVersion, contentType, xMsRequestid, xMsCorrelationid, progressListener, progressRequestListener);
         return call;
 
         
@@ -334,13 +316,12 @@ public class SaasFulfillmentApi {
      * @param subscriptionId  (required)
      * @param apiVersion Version of the API. (required)
      * @param contentType application/json (required)
-     * @param authorization Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. (required)
      * @param xMsRequestid A unique string value for tracking the request from the client, preferably a GUID. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @param xMsCorrelationid A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public void deleteSubscription(UUID subscriptionId, ApiVersion apiVersion, String contentType, String authorization, UUID xMsRequestid, UUID xMsCorrelationid) throws ApiException {
-        deleteSubscriptionWithHttpInfo(subscriptionId, apiVersion, contentType, authorization, xMsRequestid, xMsCorrelationid);
+    public void deleteSubscription(UUID subscriptionId, ApiVersion apiVersion, String contentType, UUID xMsRequestid, UUID xMsCorrelationid) throws ApiException {
+        deleteSubscriptionWithHttpInfo(subscriptionId, apiVersion, contentType, xMsRequestid, xMsCorrelationid);
     }
 
     /**
@@ -349,14 +330,13 @@ public class SaasFulfillmentApi {
      * @param subscriptionId  (required)
      * @param apiVersion Version of the API. (required)
      * @param contentType application/json (required)
-     * @param authorization Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. (required)
      * @param xMsRequestid A unique string value for tracking the request from the client, preferably a GUID. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @param xMsCorrelationid A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<Void> deleteSubscriptionWithHttpInfo(UUID subscriptionId, ApiVersion apiVersion, String contentType, String authorization, UUID xMsRequestid, UUID xMsCorrelationid) throws ApiException {
-        com.squareup.okhttp.Call call = deleteSubscriptionValidateBeforeCall(subscriptionId, apiVersion, contentType, authorization, xMsRequestid, xMsCorrelationid, null, null);
+    public ApiResponse<Void> deleteSubscriptionWithHttpInfo(UUID subscriptionId, ApiVersion apiVersion, String contentType, UUID xMsRequestid, UUID xMsCorrelationid) throws ApiException {
+        com.squareup.okhttp.Call call = deleteSubscriptionValidateBeforeCall(subscriptionId, apiVersion, contentType, xMsRequestid, xMsCorrelationid, null, null);
         return apiClient.execute(call);
     }
 
@@ -366,14 +346,13 @@ public class SaasFulfillmentApi {
      * @param subscriptionId  (required)
      * @param apiVersion Version of the API. (required)
      * @param contentType application/json (required)
-     * @param authorization Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. (required)
      * @param xMsRequestid A unique string value for tracking the request from the client, preferably a GUID. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @param xMsCorrelationid A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call deleteSubscriptionAsync(UUID subscriptionId, ApiVersion apiVersion, String contentType, String authorization, UUID xMsRequestid, UUID xMsCorrelationid, final ApiCallback<Void> callback) throws ApiException {
+    public com.squareup.okhttp.Call deleteSubscriptionAsync(UUID subscriptionId, ApiVersion apiVersion, String contentType, UUID xMsRequestid, UUID xMsCorrelationid, final ApiCallback<Void> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -394,7 +373,7 @@ public class SaasFulfillmentApi {
             };
         }
 
-        com.squareup.okhttp.Call call = deleteSubscriptionValidateBeforeCall(subscriptionId, apiVersion, contentType, authorization, xMsRequestid, xMsCorrelationid, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = deleteSubscriptionValidateBeforeCall(subscriptionId, apiVersion, contentType, xMsRequestid, xMsCorrelationid, progressListener, progressRequestListener);
         apiClient.executeAsync(call, callback);
         return call;
     }
@@ -404,7 +383,6 @@ public class SaasFulfillmentApi {
      * @param operationId  (required)
      * @param apiVersion Version of the API. (required)
      * @param contentType application/json (required)
-     * @param authorization Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. (required)
      * @param xMsRequestid A unique string value for tracking the request from the client, preferably a GUID. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @param xMsCorrelationid A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @param progressListener Progress listener
@@ -412,7 +390,7 @@ public class SaasFulfillmentApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call getOperationStatusCall(UUID subscriptionId, UUID operationId, ApiVersion apiVersion, String contentType, String authorization, UUID xMsRequestid, UUID xMsCorrelationid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call getOperationStatusCall(UUID subscriptionId, UUID operationId, ApiVersion apiVersion, String contentType, UUID xMsRequestid, UUID xMsCorrelationid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
         // create path and map variables
@@ -423,7 +401,7 @@ public class SaasFulfillmentApi {
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         if (apiVersion != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("ApiVersion", apiVersion));
+        localVarQueryParams.addAll(apiClient.parameterToPair("api-version", apiVersion));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         if (contentType != null)
@@ -432,8 +410,6 @@ public class SaasFulfillmentApi {
         localVarHeaderParams.put("x-ms-requestid", apiClient.parameterToString(xMsRequestid));
         if (xMsCorrelationid != null)
         localVarHeaderParams.put("x-ms-correlationid", apiClient.parameterToString(xMsCorrelationid));
-        if (authorization != null)
-        localVarHeaderParams.put("Authorization", apiClient.parameterToString(authorization));
 
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
@@ -466,7 +442,7 @@ public class SaasFulfillmentApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call getOperationStatusValidateBeforeCall(UUID subscriptionId, UUID operationId, ApiVersion apiVersion, String contentType, String authorization, UUID xMsRequestid, UUID xMsCorrelationid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call getOperationStatusValidateBeforeCall(UUID subscriptionId, UUID operationId, ApiVersion apiVersion, String contentType, UUID xMsRequestid, UUID xMsCorrelationid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         // verify the required parameter 'subscriptionId' is set
         if (subscriptionId == null) {
             throw new ApiException("Missing the required parameter 'subscriptionId' when calling getOperationStatus(Async)");
@@ -483,12 +459,8 @@ public class SaasFulfillmentApi {
         if (contentType == null) {
             throw new ApiException("Missing the required parameter 'contentType' when calling getOperationStatus(Async)");
         }
-        // verify the required parameter 'authorization' is set
-        if (authorization == null) {
-            throw new ApiException("Missing the required parameter 'authorization' when calling getOperationStatus(Async)");
-        }
         
-        com.squareup.okhttp.Call call = getOperationStatusCall(subscriptionId, operationId, apiVersion, contentType, authorization, xMsRequestid, xMsCorrelationid, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = getOperationStatusCall(subscriptionId, operationId, apiVersion, contentType, xMsRequestid, xMsCorrelationid, progressListener, progressRequestListener);
         return call;
 
         
@@ -504,14 +476,13 @@ public class SaasFulfillmentApi {
      * @param operationId  (required)
      * @param apiVersion Version of the API. (required)
      * @param contentType application/json (required)
-     * @param authorization Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. (required)
      * @param xMsRequestid A unique string value for tracking the request from the client, preferably a GUID. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @param xMsCorrelationid A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @return OperationType
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public OperationType getOperationStatus(UUID subscriptionId, UUID operationId, ApiVersion apiVersion, String contentType, String authorization, UUID xMsRequestid, UUID xMsCorrelationid) throws ApiException {
-        ApiResponse<OperationType> resp = getOperationStatusWithHttpInfo(subscriptionId, operationId, apiVersion, contentType, authorization, xMsRequestid, xMsCorrelationid);
+    public OperationType getOperationStatus(UUID subscriptionId, UUID operationId, ApiVersion apiVersion, String contentType, UUID xMsRequestid, UUID xMsCorrelationid) throws ApiException {
+        ApiResponse<OperationType> resp = getOperationStatusWithHttpInfo(subscriptionId, operationId, apiVersion, contentType, xMsRequestid, xMsCorrelationid);
         return resp.getData();
     }
 
@@ -522,14 +493,13 @@ public class SaasFulfillmentApi {
      * @param operationId  (required)
      * @param apiVersion Version of the API. (required)
      * @param contentType application/json (required)
-     * @param authorization Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. (required)
      * @param xMsRequestid A unique string value for tracking the request from the client, preferably a GUID. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @param xMsCorrelationid A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @return ApiResponse&lt;OperationType&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<OperationType> getOperationStatusWithHttpInfo(UUID subscriptionId, UUID operationId, ApiVersion apiVersion, String contentType, String authorization, UUID xMsRequestid, UUID xMsCorrelationid) throws ApiException {
-        com.squareup.okhttp.Call call = getOperationStatusValidateBeforeCall(subscriptionId, operationId, apiVersion, contentType, authorization, xMsRequestid, xMsCorrelationid, null, null);
+    public ApiResponse<OperationType> getOperationStatusWithHttpInfo(UUID subscriptionId, UUID operationId, ApiVersion apiVersion, String contentType, UUID xMsRequestid, UUID xMsCorrelationid) throws ApiException {
+        com.squareup.okhttp.Call call = getOperationStatusValidateBeforeCall(subscriptionId, operationId, apiVersion, contentType, xMsRequestid, xMsCorrelationid, null, null);
         Type localVarReturnType = new TypeToken<OperationType>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -541,14 +511,13 @@ public class SaasFulfillmentApi {
      * @param operationId  (required)
      * @param apiVersion Version of the API. (required)
      * @param contentType application/json (required)
-     * @param authorization Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. (required)
      * @param xMsRequestid A unique string value for tracking the request from the client, preferably a GUID. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @param xMsCorrelationid A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getOperationStatusAsync(UUID subscriptionId, UUID operationId, ApiVersion apiVersion, String contentType, String authorization, UUID xMsRequestid, UUID xMsCorrelationid, final ApiCallback<OperationType> callback) throws ApiException {
+    public com.squareup.okhttp.Call getOperationStatusAsync(UUID subscriptionId, UUID operationId, ApiVersion apiVersion, String contentType, UUID xMsRequestid, UUID xMsCorrelationid, final ApiCallback<OperationType> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -569,7 +538,7 @@ public class SaasFulfillmentApi {
             };
         }
 
-        com.squareup.okhttp.Call call = getOperationStatusValidateBeforeCall(subscriptionId, operationId, apiVersion, contentType, authorization, xMsRequestid, xMsCorrelationid, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = getOperationStatusValidateBeforeCall(subscriptionId, operationId, apiVersion, contentType, xMsRequestid, xMsCorrelationid, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<OperationType>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -579,7 +548,6 @@ public class SaasFulfillmentApi {
      * @param subscriptionId  (required)
      * @param apiVersion Version of the API. (required)
      * @param contentType application/json (required)
-     * @param authorization Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. (required)
      * @param xMsRequestid A unique string value for tracking the request from the client, preferably a GUID. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @param xMsCorrelationid A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @param progressListener Progress listener
@@ -587,7 +555,7 @@ public class SaasFulfillmentApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call getSubscriptionCall(UUID subscriptionId, ApiVersion apiVersion, String contentType, String authorization, UUID xMsRequestid, UUID xMsCorrelationid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call getSubscriptionCall(UUID subscriptionId, ApiVersion apiVersion, String contentType, UUID xMsRequestid, UUID xMsCorrelationid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
         // create path and map variables
@@ -597,7 +565,7 @@ public class SaasFulfillmentApi {
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         if (apiVersion != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("ApiVersion", apiVersion));
+        localVarQueryParams.addAll(apiClient.parameterToPair("api-version", apiVersion));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         if (contentType != null)
@@ -606,8 +574,6 @@ public class SaasFulfillmentApi {
         localVarHeaderParams.put("x-ms-requestid", apiClient.parameterToString(xMsRequestid));
         if (xMsCorrelationid != null)
         localVarHeaderParams.put("x-ms-correlationid", apiClient.parameterToString(xMsCorrelationid));
-        if (authorization != null)
-        localVarHeaderParams.put("Authorization", apiClient.parameterToString(authorization));
 
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
@@ -640,7 +606,7 @@ public class SaasFulfillmentApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call getSubscriptionValidateBeforeCall(UUID subscriptionId, ApiVersion apiVersion, String contentType, String authorization, UUID xMsRequestid, UUID xMsCorrelationid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call getSubscriptionValidateBeforeCall(UUID subscriptionId, ApiVersion apiVersion, String contentType, UUID xMsRequestid, UUID xMsCorrelationid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         // verify the required parameter 'subscriptionId' is set
         if (subscriptionId == null) {
             throw new ApiException("Missing the required parameter 'subscriptionId' when calling getSubscription(Async)");
@@ -653,12 +619,8 @@ public class SaasFulfillmentApi {
         if (contentType == null) {
             throw new ApiException("Missing the required parameter 'contentType' when calling getSubscription(Async)");
         }
-        // verify the required parameter 'authorization' is set
-        if (authorization == null) {
-            throw new ApiException("Missing the required parameter 'authorization' when calling getSubscription(Async)");
-        }
         
-        com.squareup.okhttp.Call call = getSubscriptionCall(subscriptionId, apiVersion, contentType, authorization, xMsRequestid, xMsCorrelationid, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = getSubscriptionCall(subscriptionId, apiVersion, contentType, xMsRequestid, xMsCorrelationid, progressListener, progressRequestListener);
         return call;
 
         
@@ -673,14 +635,13 @@ public class SaasFulfillmentApi {
      * @param subscriptionId  (required)
      * @param apiVersion Version of the API. (required)
      * @param contentType application/json (required)
-     * @param authorization Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. (required)
      * @param xMsRequestid A unique string value for tracking the request from the client, preferably a GUID. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @param xMsCorrelationid A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @return Subscription
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public Subscription getSubscription(UUID subscriptionId, ApiVersion apiVersion, String contentType, String authorization, UUID xMsRequestid, UUID xMsCorrelationid) throws ApiException {
-        ApiResponse<Subscription> resp = getSubscriptionWithHttpInfo(subscriptionId, apiVersion, contentType, authorization, xMsRequestid, xMsCorrelationid);
+    public Subscription getSubscription(UUID subscriptionId, ApiVersion apiVersion, String contentType, UUID xMsRequestid, UUID xMsCorrelationid) throws ApiException {
+        ApiResponse<Subscription> resp = getSubscriptionWithHttpInfo(subscriptionId, apiVersion, contentType, xMsRequestid, xMsCorrelationid);
         return resp.getData();
     }
 
@@ -690,14 +651,13 @@ public class SaasFulfillmentApi {
      * @param subscriptionId  (required)
      * @param apiVersion Version of the API. (required)
      * @param contentType application/json (required)
-     * @param authorization Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. (required)
      * @param xMsRequestid A unique string value for tracking the request from the client, preferably a GUID. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @param xMsCorrelationid A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @return ApiResponse&lt;Subscription&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<Subscription> getSubscriptionWithHttpInfo(UUID subscriptionId, ApiVersion apiVersion, String contentType, String authorization, UUID xMsRequestid, UUID xMsCorrelationid) throws ApiException {
-        com.squareup.okhttp.Call call = getSubscriptionValidateBeforeCall(subscriptionId, apiVersion, contentType, authorization, xMsRequestid, xMsCorrelationid, null, null);
+    public ApiResponse<Subscription> getSubscriptionWithHttpInfo(UUID subscriptionId, ApiVersion apiVersion, String contentType, UUID xMsRequestid, UUID xMsCorrelationid) throws ApiException {
+        com.squareup.okhttp.Call call = getSubscriptionValidateBeforeCall(subscriptionId, apiVersion, contentType, xMsRequestid, xMsCorrelationid, null, null);
         Type localVarReturnType = new TypeToken<Subscription>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -708,14 +668,13 @@ public class SaasFulfillmentApi {
      * @param subscriptionId  (required)
      * @param apiVersion Version of the API. (required)
      * @param contentType application/json (required)
-     * @param authorization Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. (required)
      * @param xMsRequestid A unique string value for tracking the request from the client, preferably a GUID. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @param xMsCorrelationid A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getSubscriptionAsync(UUID subscriptionId, ApiVersion apiVersion, String contentType, String authorization, UUID xMsRequestid, UUID xMsCorrelationid, final ApiCallback<Subscription> callback) throws ApiException {
+    public com.squareup.okhttp.Call getSubscriptionAsync(UUID subscriptionId, ApiVersion apiVersion, String contentType, UUID xMsRequestid, UUID xMsCorrelationid, final ApiCallback<Subscription> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -736,7 +695,7 @@ public class SaasFulfillmentApi {
             };
         }
 
-        com.squareup.okhttp.Call call = getSubscriptionValidateBeforeCall(subscriptionId, apiVersion, contentType, authorization, xMsRequestid, xMsCorrelationid, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = getSubscriptionValidateBeforeCall(subscriptionId, apiVersion, contentType, xMsRequestid, xMsCorrelationid, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<Subscription>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -746,7 +705,6 @@ public class SaasFulfillmentApi {
      * @param subscriptionId  (required)
      * @param apiVersion Version of the API. (required)
      * @param contentType application/json (required)
-     * @param authorization Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. (required)
      * @param xMsRequestid A unique string value for tracking the request from the client, preferably a GUID. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @param xMsCorrelationid A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @param progressListener Progress listener
@@ -754,7 +712,7 @@ public class SaasFulfillmentApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call listAvailablePlansCall(UUID subscriptionId, ApiVersion apiVersion, String contentType, String authorization, UUID xMsRequestid, UUID xMsCorrelationid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call listAvailablePlansCall(UUID subscriptionId, ApiVersion apiVersion, String contentType, UUID xMsRequestid, UUID xMsCorrelationid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
         // create path and map variables
@@ -764,7 +722,7 @@ public class SaasFulfillmentApi {
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         if (apiVersion != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("ApiVersion", apiVersion));
+        localVarQueryParams.addAll(apiClient.parameterToPair("api-version", apiVersion));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         if (contentType != null)
@@ -773,8 +731,6 @@ public class SaasFulfillmentApi {
         localVarHeaderParams.put("x-ms-requestid", apiClient.parameterToString(xMsRequestid));
         if (xMsCorrelationid != null)
         localVarHeaderParams.put("x-ms-correlationid", apiClient.parameterToString(xMsCorrelationid));
-        if (authorization != null)
-        localVarHeaderParams.put("Authorization", apiClient.parameterToString(authorization));
 
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
@@ -807,7 +763,7 @@ public class SaasFulfillmentApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call listAvailablePlansValidateBeforeCall(UUID subscriptionId, ApiVersion apiVersion, String contentType, String authorization, UUID xMsRequestid, UUID xMsCorrelationid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call listAvailablePlansValidateBeforeCall(UUID subscriptionId, ApiVersion apiVersion, String contentType, UUID xMsRequestid, UUID xMsCorrelationid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         // verify the required parameter 'subscriptionId' is set
         if (subscriptionId == null) {
             throw new ApiException("Missing the required parameter 'subscriptionId' when calling listAvailablePlans(Async)");
@@ -820,12 +776,8 @@ public class SaasFulfillmentApi {
         if (contentType == null) {
             throw new ApiException("Missing the required parameter 'contentType' when calling listAvailablePlans(Async)");
         }
-        // verify the required parameter 'authorization' is set
-        if (authorization == null) {
-            throw new ApiException("Missing the required parameter 'authorization' when calling listAvailablePlans(Async)");
-        }
         
-        com.squareup.okhttp.Call call = listAvailablePlansCall(subscriptionId, apiVersion, contentType, authorization, xMsRequestid, xMsCorrelationid, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = listAvailablePlansCall(subscriptionId, apiVersion, contentType, xMsRequestid, xMsCorrelationid, progressListener, progressRequestListener);
         return call;
 
         
@@ -840,14 +792,13 @@ public class SaasFulfillmentApi {
      * @param subscriptionId  (required)
      * @param apiVersion Version of the API. (required)
      * @param contentType application/json (required)
-     * @param authorization Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. (required)
      * @param xMsRequestid A unique string value for tracking the request from the client, preferably a GUID. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @param xMsCorrelationid A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @return PlansResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public PlansResponse listAvailablePlans(UUID subscriptionId, ApiVersion apiVersion, String contentType, String authorization, UUID xMsRequestid, UUID xMsCorrelationid) throws ApiException {
-        ApiResponse<PlansResponse> resp = listAvailablePlansWithHttpInfo(subscriptionId, apiVersion, contentType, authorization, xMsRequestid, xMsCorrelationid);
+    public PlansResponse listAvailablePlans(UUID subscriptionId, ApiVersion apiVersion, String contentType, UUID xMsRequestid, UUID xMsCorrelationid) throws ApiException {
+        ApiResponse<PlansResponse> resp = listAvailablePlansWithHttpInfo(subscriptionId, apiVersion, contentType, xMsRequestid, xMsCorrelationid);
         return resp.getData();
     }
 
@@ -857,14 +808,13 @@ public class SaasFulfillmentApi {
      * @param subscriptionId  (required)
      * @param apiVersion Version of the API. (required)
      * @param contentType application/json (required)
-     * @param authorization Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. (required)
      * @param xMsRequestid A unique string value for tracking the request from the client, preferably a GUID. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @param xMsCorrelationid A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @return ApiResponse&lt;PlansResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<PlansResponse> listAvailablePlansWithHttpInfo(UUID subscriptionId, ApiVersion apiVersion, String contentType, String authorization, UUID xMsRequestid, UUID xMsCorrelationid) throws ApiException {
-        com.squareup.okhttp.Call call = listAvailablePlansValidateBeforeCall(subscriptionId, apiVersion, contentType, authorization, xMsRequestid, xMsCorrelationid, null, null);
+    public ApiResponse<PlansResponse> listAvailablePlansWithHttpInfo(UUID subscriptionId, ApiVersion apiVersion, String contentType, UUID xMsRequestid, UUID xMsCorrelationid) throws ApiException {
+        com.squareup.okhttp.Call call = listAvailablePlansValidateBeforeCall(subscriptionId, apiVersion, contentType, xMsRequestid, xMsCorrelationid, null, null);
         Type localVarReturnType = new TypeToken<PlansResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -875,14 +825,13 @@ public class SaasFulfillmentApi {
      * @param subscriptionId  (required)
      * @param apiVersion Version of the API. (required)
      * @param contentType application/json (required)
-     * @param authorization Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. (required)
      * @param xMsRequestid A unique string value for tracking the request from the client, preferably a GUID. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @param xMsCorrelationid A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call listAvailablePlansAsync(UUID subscriptionId, ApiVersion apiVersion, String contentType, String authorization, UUID xMsRequestid, UUID xMsCorrelationid, final ApiCallback<PlansResponse> callback) throws ApiException {
+    public com.squareup.okhttp.Call listAvailablePlansAsync(UUID subscriptionId, ApiVersion apiVersion, String contentType, UUID xMsRequestid, UUID xMsCorrelationid, final ApiCallback<PlansResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -903,7 +852,7 @@ public class SaasFulfillmentApi {
             };
         }
 
-        com.squareup.okhttp.Call call = listAvailablePlansValidateBeforeCall(subscriptionId, apiVersion, contentType, authorization, xMsRequestid, xMsCorrelationid, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = listAvailablePlansValidateBeforeCall(subscriptionId, apiVersion, contentType, xMsRequestid, xMsCorrelationid, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<PlansResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -913,7 +862,6 @@ public class SaasFulfillmentApi {
      * @param subscriptionId  (required)
      * @param apiVersion Version of the API. (required)
      * @param contentType application/json (required)
-     * @param authorization Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. (required)
      * @param xMsRequestid A unique string value for tracking the request from the client, preferably a GUID. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @param xMsCorrelationid A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @param progressListener Progress listener
@@ -921,7 +869,7 @@ public class SaasFulfillmentApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call listOperationsCall(UUID subscriptionId, ApiVersion apiVersion, String contentType, String authorization, UUID xMsRequestid, UUID xMsCorrelationid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call listOperationsCall(UUID subscriptionId, ApiVersion apiVersion, String contentType, UUID xMsRequestid, UUID xMsCorrelationid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
         // create path and map variables
@@ -931,7 +879,7 @@ public class SaasFulfillmentApi {
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         if (apiVersion != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("ApiVersion", apiVersion));
+        localVarQueryParams.addAll(apiClient.parameterToPair("api-version", apiVersion));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         if (contentType != null)
@@ -940,8 +888,6 @@ public class SaasFulfillmentApi {
         localVarHeaderParams.put("x-ms-requestid", apiClient.parameterToString(xMsRequestid));
         if (xMsCorrelationid != null)
         localVarHeaderParams.put("x-ms-correlationid", apiClient.parameterToString(xMsCorrelationid));
-        if (authorization != null)
-        localVarHeaderParams.put("Authorization", apiClient.parameterToString(authorization));
 
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
@@ -974,7 +920,7 @@ public class SaasFulfillmentApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call listOperationsValidateBeforeCall(UUID subscriptionId, ApiVersion apiVersion, String contentType, String authorization, UUID xMsRequestid, UUID xMsCorrelationid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call listOperationsValidateBeforeCall(UUID subscriptionId, ApiVersion apiVersion, String contentType, UUID xMsRequestid, UUID xMsCorrelationid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         // verify the required parameter 'subscriptionId' is set
         if (subscriptionId == null) {
             throw new ApiException("Missing the required parameter 'subscriptionId' when calling listOperations(Async)");
@@ -987,12 +933,8 @@ public class SaasFulfillmentApi {
         if (contentType == null) {
             throw new ApiException("Missing the required parameter 'contentType' when calling listOperations(Async)");
         }
-        // verify the required parameter 'authorization' is set
-        if (authorization == null) {
-            throw new ApiException("Missing the required parameter 'authorization' when calling listOperations(Async)");
-        }
         
-        com.squareup.okhttp.Call call = listOperationsCall(subscriptionId, apiVersion, contentType, authorization, xMsRequestid, xMsCorrelationid, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = listOperationsCall(subscriptionId, apiVersion, contentType, xMsRequestid, xMsCorrelationid, progressListener, progressRequestListener);
         return call;
 
         
@@ -1007,14 +949,13 @@ public class SaasFulfillmentApi {
      * @param subscriptionId  (required)
      * @param apiVersion Version of the API. (required)
      * @param contentType application/json (required)
-     * @param authorization Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. (required)
      * @param xMsRequestid A unique string value for tracking the request from the client, preferably a GUID. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @param xMsCorrelationid A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @return OperationList
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public OperationList listOperations(UUID subscriptionId, ApiVersion apiVersion, String contentType, String authorization, UUID xMsRequestid, UUID xMsCorrelationid) throws ApiException {
-        ApiResponse<OperationList> resp = listOperationsWithHttpInfo(subscriptionId, apiVersion, contentType, authorization, xMsRequestid, xMsCorrelationid);
+    public OperationList listOperations(UUID subscriptionId, ApiVersion apiVersion, String contentType, UUID xMsRequestid, UUID xMsCorrelationid) throws ApiException {
+        ApiResponse<OperationList> resp = listOperationsWithHttpInfo(subscriptionId, apiVersion, contentType, xMsRequestid, xMsCorrelationid);
         return resp.getData();
     }
 
@@ -1024,14 +965,13 @@ public class SaasFulfillmentApi {
      * @param subscriptionId  (required)
      * @param apiVersion Version of the API. (required)
      * @param contentType application/json (required)
-     * @param authorization Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. (required)
      * @param xMsRequestid A unique string value for tracking the request from the client, preferably a GUID. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @param xMsCorrelationid A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @return ApiResponse&lt;OperationList&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<OperationList> listOperationsWithHttpInfo(UUID subscriptionId, ApiVersion apiVersion, String contentType, String authorization, UUID xMsRequestid, UUID xMsCorrelationid) throws ApiException {
-        com.squareup.okhttp.Call call = listOperationsValidateBeforeCall(subscriptionId, apiVersion, contentType, authorization, xMsRequestid, xMsCorrelationid, null, null);
+    public ApiResponse<OperationList> listOperationsWithHttpInfo(UUID subscriptionId, ApiVersion apiVersion, String contentType, UUID xMsRequestid, UUID xMsCorrelationid) throws ApiException {
+        com.squareup.okhttp.Call call = listOperationsValidateBeforeCall(subscriptionId, apiVersion, contentType, xMsRequestid, xMsCorrelationid, null, null);
         Type localVarReturnType = new TypeToken<OperationList>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -1042,14 +982,13 @@ public class SaasFulfillmentApi {
      * @param subscriptionId  (required)
      * @param apiVersion Version of the API. (required)
      * @param contentType application/json (required)
-     * @param authorization Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. (required)
      * @param xMsRequestid A unique string value for tracking the request from the client, preferably a GUID. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @param xMsCorrelationid A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call listOperationsAsync(UUID subscriptionId, ApiVersion apiVersion, String contentType, String authorization, UUID xMsRequestid, UUID xMsCorrelationid, final ApiCallback<OperationList> callback) throws ApiException {
+    public com.squareup.okhttp.Call listOperationsAsync(UUID subscriptionId, ApiVersion apiVersion, String contentType, UUID xMsRequestid, UUID xMsCorrelationid, final ApiCallback<OperationList> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -1070,7 +1009,7 @@ public class SaasFulfillmentApi {
             };
         }
 
-        com.squareup.okhttp.Call call = listOperationsValidateBeforeCall(subscriptionId, apiVersion, contentType, authorization, xMsRequestid, xMsCorrelationid, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = listOperationsValidateBeforeCall(subscriptionId, apiVersion, contentType, xMsRequestid, xMsCorrelationid, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<OperationList>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -1079,7 +1018,7 @@ public class SaasFulfillmentApi {
      * Build call for listSubscriptions
      * @param apiVersion Version of the API. (required)
      * @param contentType application/json (required)
-     * @param authorization Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. (required)
+     * @param continuationToken Optional value, only used for ListSubscriptions. (optional)
      * @param xMsRequestid A unique string value for tracking the request from the client, preferably a GUID. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @param xMsCorrelationid A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @param progressListener Progress listener
@@ -1087,7 +1026,7 @@ public class SaasFulfillmentApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call listSubscriptionsCall(ApiVersion apiVersion, String contentType, String authorization, UUID xMsRequestid, UUID xMsCorrelationid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call listSubscriptionsCall(ApiVersion apiVersion, String contentType, String continuationToken, UUID xMsRequestid, UUID xMsCorrelationid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
         // create path and map variables
@@ -1096,7 +1035,9 @@ public class SaasFulfillmentApi {
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         if (apiVersion != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("ApiVersion", apiVersion));
+        localVarQueryParams.addAll(apiClient.parameterToPair("api-version", apiVersion));
+        if (continuationToken != null)
+        localVarQueryParams.addAll(apiClient.parameterToPair("continuationToken", continuationToken));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         if (contentType != null)
@@ -1105,8 +1046,6 @@ public class SaasFulfillmentApi {
         localVarHeaderParams.put("x-ms-requestid", apiClient.parameterToString(xMsRequestid));
         if (xMsCorrelationid != null)
         localVarHeaderParams.put("x-ms-correlationid", apiClient.parameterToString(xMsCorrelationid));
-        if (authorization != null)
-        localVarHeaderParams.put("Authorization", apiClient.parameterToString(authorization));
 
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
@@ -1139,7 +1078,7 @@ public class SaasFulfillmentApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call listSubscriptionsValidateBeforeCall(ApiVersion apiVersion, String contentType, String authorization, UUID xMsRequestid, UUID xMsCorrelationid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call listSubscriptionsValidateBeforeCall(ApiVersion apiVersion, String contentType, String continuationToken, UUID xMsRequestid, UUID xMsCorrelationid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         // verify the required parameter 'apiVersion' is set
         if (apiVersion == null) {
             throw new ApiException("Missing the required parameter 'apiVersion' when calling listSubscriptions(Async)");
@@ -1148,12 +1087,8 @@ public class SaasFulfillmentApi {
         if (contentType == null) {
             throw new ApiException("Missing the required parameter 'contentType' when calling listSubscriptions(Async)");
         }
-        // verify the required parameter 'authorization' is set
-        if (authorization == null) {
-            throw new ApiException("Missing the required parameter 'authorization' when calling listSubscriptions(Async)");
-        }
         
-        com.squareup.okhttp.Call call = listSubscriptionsCall(apiVersion, contentType, authorization, xMsRequestid, xMsCorrelationid, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = listSubscriptionsCall(apiVersion, contentType, continuationToken, xMsRequestid, xMsCorrelationid, progressListener, progressRequestListener);
         return call;
 
         
@@ -1167,14 +1102,14 @@ public class SaasFulfillmentApi {
      * Lists all the SaaS subscriptions for a publisher.
      * @param apiVersion Version of the API. (required)
      * @param contentType application/json (required)
-     * @param authorization Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. (required)
+     * @param continuationToken Optional value, only used for ListSubscriptions. (optional)
      * @param xMsRequestid A unique string value for tracking the request from the client, preferably a GUID. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @param xMsCorrelationid A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @return SubscriptionsResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public SubscriptionsResponse listSubscriptions(ApiVersion apiVersion, String contentType, String authorization, UUID xMsRequestid, UUID xMsCorrelationid) throws ApiException {
-        ApiResponse<SubscriptionsResponse> resp = listSubscriptionsWithHttpInfo(apiVersion, contentType, authorization, xMsRequestid, xMsCorrelationid);
+    public SubscriptionsResponse listSubscriptions(ApiVersion apiVersion, String contentType, String continuationToken, UUID xMsRequestid, UUID xMsCorrelationid) throws ApiException {
+        ApiResponse<SubscriptionsResponse> resp = listSubscriptionsWithHttpInfo(apiVersion, contentType, continuationToken, xMsRequestid, xMsCorrelationid);
         return resp.getData();
     }
 
@@ -1183,14 +1118,14 @@ public class SaasFulfillmentApi {
      * Lists all the SaaS subscriptions for a publisher.
      * @param apiVersion Version of the API. (required)
      * @param contentType application/json (required)
-     * @param authorization Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. (required)
+     * @param continuationToken Optional value, only used for ListSubscriptions. (optional)
      * @param xMsRequestid A unique string value for tracking the request from the client, preferably a GUID. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @param xMsCorrelationid A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @return ApiResponse&lt;SubscriptionsResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<SubscriptionsResponse> listSubscriptionsWithHttpInfo(ApiVersion apiVersion, String contentType, String authorization, UUID xMsRequestid, UUID xMsCorrelationid) throws ApiException {
-        com.squareup.okhttp.Call call = listSubscriptionsValidateBeforeCall(apiVersion, contentType, authorization, xMsRequestid, xMsCorrelationid, null, null);
+    public ApiResponse<SubscriptionsResponse> listSubscriptionsWithHttpInfo(ApiVersion apiVersion, String contentType, String continuationToken, UUID xMsRequestid, UUID xMsCorrelationid) throws ApiException {
+        com.squareup.okhttp.Call call = listSubscriptionsValidateBeforeCall(apiVersion, contentType, continuationToken, xMsRequestid, xMsCorrelationid, null, null);
         Type localVarReturnType = new TypeToken<SubscriptionsResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -1200,14 +1135,14 @@ public class SaasFulfillmentApi {
      * Lists all the SaaS subscriptions for a publisher.
      * @param apiVersion Version of the API. (required)
      * @param contentType application/json (required)
-     * @param authorization Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. (required)
+     * @param continuationToken Optional value, only used for ListSubscriptions. (optional)
      * @param xMsRequestid A unique string value for tracking the request from the client, preferably a GUID. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @param xMsCorrelationid A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call listSubscriptionsAsync(ApiVersion apiVersion, String contentType, String authorization, UUID xMsRequestid, UUID xMsCorrelationid, final ApiCallback<SubscriptionsResponse> callback) throws ApiException {
+    public com.squareup.okhttp.Call listSubscriptionsAsync(ApiVersion apiVersion, String contentType, String continuationToken, UUID xMsRequestid, UUID xMsCorrelationid, final ApiCallback<SubscriptionsResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -1228,7 +1163,7 @@ public class SaasFulfillmentApi {
             };
         }
 
-        com.squareup.okhttp.Call call = listSubscriptionsValidateBeforeCall(apiVersion, contentType, authorization, xMsRequestid, xMsCorrelationid, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = listSubscriptionsValidateBeforeCall(apiVersion, contentType, continuationToken, xMsRequestid, xMsCorrelationid, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<SubscriptionsResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -1237,7 +1172,6 @@ public class SaasFulfillmentApi {
      * Build call for patchSubscription
      * @param body  (required)
      * @param contentType application/json (required)
-     * @param authorization Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. (required)
      * @param apiVersion Version of the API. (required)
      * @param subscriptionId  (required)
      * @param xMsRequestid A unique string value for tracking the request from the client, preferably a GUID. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
@@ -1247,7 +1181,7 @@ public class SaasFulfillmentApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call patchSubscriptionCall(Body body, String contentType, String authorization, ApiVersion apiVersion, UUID subscriptionId, UUID xMsRequestid, UUID xMsCorrelationid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call patchSubscriptionCall(SubscriberPlan body, String contentType, ApiVersion apiVersion, UUID subscriptionId, UUID xMsRequestid, UUID xMsCorrelationid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = body;
         
         // create path and map variables
@@ -1257,7 +1191,7 @@ public class SaasFulfillmentApi {
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         if (apiVersion != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("ApiVersion", apiVersion));
+        localVarQueryParams.addAll(apiClient.parameterToPair("api-version", apiVersion));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         if (contentType != null)
@@ -1266,8 +1200,6 @@ public class SaasFulfillmentApi {
         localVarHeaderParams.put("x-ms-requestid", apiClient.parameterToString(xMsRequestid));
         if (xMsCorrelationid != null)
         localVarHeaderParams.put("x-ms-correlationid", apiClient.parameterToString(xMsCorrelationid));
-        if (authorization != null)
-        localVarHeaderParams.put("Authorization", apiClient.parameterToString(authorization));
 
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
@@ -1300,7 +1232,7 @@ public class SaasFulfillmentApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call patchSubscriptionValidateBeforeCall(Body body, String contentType, String authorization, ApiVersion apiVersion, UUID subscriptionId, UUID xMsRequestid, UUID xMsCorrelationid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call patchSubscriptionValidateBeforeCall(SubscriberPlan body, String contentType, ApiVersion apiVersion, UUID subscriptionId, UUID xMsRequestid, UUID xMsCorrelationid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         // verify the required parameter 'body' is set
         if (body == null) {
             throw new ApiException("Missing the required parameter 'body' when calling patchSubscription(Async)");
@@ -1308,10 +1240,6 @@ public class SaasFulfillmentApi {
         // verify the required parameter 'contentType' is set
         if (contentType == null) {
             throw new ApiException("Missing the required parameter 'contentType' when calling patchSubscription(Async)");
-        }
-        // verify the required parameter 'authorization' is set
-        if (authorization == null) {
-            throw new ApiException("Missing the required parameter 'authorization' when calling patchSubscription(Async)");
         }
         // verify the required parameter 'apiVersion' is set
         if (apiVersion == null) {
@@ -1322,7 +1250,7 @@ public class SaasFulfillmentApi {
             throw new ApiException("Missing the required parameter 'subscriptionId' when calling patchSubscription(Async)");
         }
         
-        com.squareup.okhttp.Call call = patchSubscriptionCall(body, contentType, authorization, apiVersion, subscriptionId, xMsRequestid, xMsCorrelationid, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = patchSubscriptionCall(body, contentType, apiVersion, subscriptionId, xMsRequestid, xMsCorrelationid, progressListener, progressRequestListener);
         return call;
 
         
@@ -1336,15 +1264,14 @@ public class SaasFulfillmentApi {
      * Use this call to update the plan, the user count (quantity), or both.
      * @param body  (required)
      * @param contentType application/json (required)
-     * @param authorization Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. (required)
      * @param apiVersion Version of the API. (required)
      * @param subscriptionId  (required)
      * @param xMsRequestid A unique string value for tracking the request from the client, preferably a GUID. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @param xMsCorrelationid A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public void patchSubscription(Body body, String contentType, String authorization, ApiVersion apiVersion, UUID subscriptionId, UUID xMsRequestid, UUID xMsCorrelationid) throws ApiException {
-        patchSubscriptionWithHttpInfo(body, contentType, authorization, apiVersion, subscriptionId, xMsRequestid, xMsCorrelationid);
+    public void patchSubscription(SubscriberPlan body, String contentType, ApiVersion apiVersion, UUID subscriptionId, UUID xMsRequestid, UUID xMsCorrelationid) throws ApiException {
+        patchSubscriptionWithHttpInfo(body, contentType, apiVersion, subscriptionId, xMsRequestid, xMsCorrelationid);
     }
 
     /**
@@ -1352,7 +1279,6 @@ public class SaasFulfillmentApi {
      * Use this call to update the plan, the user count (quantity), or both.
      * @param body  (required)
      * @param contentType application/json (required)
-     * @param authorization Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. (required)
      * @param apiVersion Version of the API. (required)
      * @param subscriptionId  (required)
      * @param xMsRequestid A unique string value for tracking the request from the client, preferably a GUID. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
@@ -1360,8 +1286,8 @@ public class SaasFulfillmentApi {
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<Void> patchSubscriptionWithHttpInfo(Body body, String contentType, String authorization, ApiVersion apiVersion, UUID subscriptionId, UUID xMsRequestid, UUID xMsCorrelationid) throws ApiException {
-        com.squareup.okhttp.Call call = patchSubscriptionValidateBeforeCall(body, contentType, authorization, apiVersion, subscriptionId, xMsRequestid, xMsCorrelationid, null, null);
+    public ApiResponse<Void> patchSubscriptionWithHttpInfo(SubscriberPlan body, String contentType, ApiVersion apiVersion, UUID subscriptionId, UUID xMsRequestid, UUID xMsCorrelationid) throws ApiException {
+        com.squareup.okhttp.Call call = patchSubscriptionValidateBeforeCall(body, contentType, apiVersion, subscriptionId, xMsRequestid, xMsCorrelationid, null, null);
         return apiClient.execute(call);
     }
 
@@ -1370,7 +1296,6 @@ public class SaasFulfillmentApi {
      * Use this call to update the plan, the user count (quantity), or both.
      * @param body  (required)
      * @param contentType application/json (required)
-     * @param authorization Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. (required)
      * @param apiVersion Version of the API. (required)
      * @param subscriptionId  (required)
      * @param xMsRequestid A unique string value for tracking the request from the client, preferably a GUID. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
@@ -1379,7 +1304,7 @@ public class SaasFulfillmentApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call patchSubscriptionAsync(Body body, String contentType, String authorization, ApiVersion apiVersion, UUID subscriptionId, UUID xMsRequestid, UUID xMsCorrelationid, final ApiCallback<Void> callback) throws ApiException {
+    public com.squareup.okhttp.Call patchSubscriptionAsync(SubscriberPlan body, String contentType, ApiVersion apiVersion, UUID subscriptionId, UUID xMsRequestid, UUID xMsCorrelationid, final ApiCallback<Void> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -1400,7 +1325,7 @@ public class SaasFulfillmentApi {
             };
         }
 
-        com.squareup.okhttp.Call call = patchSubscriptionValidateBeforeCall(body, contentType, authorization, apiVersion, subscriptionId, xMsRequestid, xMsCorrelationid, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = patchSubscriptionValidateBeforeCall(body, contentType, apiVersion, subscriptionId, xMsRequestid, xMsCorrelationid, progressListener, progressRequestListener);
         apiClient.executeAsync(call, callback);
         return call;
     }
@@ -1408,16 +1333,15 @@ public class SaasFulfillmentApi {
      * Build call for resolve
      * @param apiVersion Version of the API. (required)
      * @param contentType application/json (required)
-     * @param authorization Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. (required)
+     * @param xMsMarketplaceToken The token query parameter in the URL when the user is redirected to the SaaS partner&#x27;s website from Azure (for example,  https://contoso.com/signup?token&#x3D;..). Note, The URL decodes the token value from the browser before using it. (required)
      * @param xMsRequestid A unique string value for tracking the request from the client, preferably a GUID. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @param xMsCorrelationid A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
-     * @param xMsMarketplaceToken The token query parameter in the URL when the user is redirected to the SaaS partner&#x27;s website from Azure (for example,  https://contoso.com/signup?token&#x3D;..). Note, The URL decodes the token value from the browser before using it. (optional)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call resolveCall(ApiVersion apiVersion, String contentType, String authorization, UUID xMsRequestid, UUID xMsCorrelationid, UUID xMsMarketplaceToken, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call resolveCall(ApiVersion apiVersion, String contentType, String xMsMarketplaceToken, UUID xMsRequestid, UUID xMsCorrelationid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
         // create path and map variables
@@ -1426,7 +1350,7 @@ public class SaasFulfillmentApi {
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         if (apiVersion != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("ApiVersion", apiVersion));
+        localVarQueryParams.addAll(apiClient.parameterToPair("api-version", apiVersion));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         if (contentType != null)
@@ -1435,8 +1359,6 @@ public class SaasFulfillmentApi {
         localVarHeaderParams.put("x-ms-requestid", apiClient.parameterToString(xMsRequestid));
         if (xMsCorrelationid != null)
         localVarHeaderParams.put("x-ms-correlationid", apiClient.parameterToString(xMsCorrelationid));
-        if (authorization != null)
-        localVarHeaderParams.put("Authorization", apiClient.parameterToString(authorization));
         if (xMsMarketplaceToken != null)
         localVarHeaderParams.put("x-ms-marketplace-token", apiClient.parameterToString(xMsMarketplaceToken));
 
@@ -1471,7 +1393,7 @@ public class SaasFulfillmentApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call resolveValidateBeforeCall(ApiVersion apiVersion, String contentType, String authorization, UUID xMsRequestid, UUID xMsCorrelationid, UUID xMsMarketplaceToken, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call resolveValidateBeforeCall(ApiVersion apiVersion, String contentType, String xMsMarketplaceToken, UUID xMsRequestid, UUID xMsCorrelationid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         // verify the required parameter 'apiVersion' is set
         if (apiVersion == null) {
             throw new ApiException("Missing the required parameter 'apiVersion' when calling resolve(Async)");
@@ -1480,12 +1402,12 @@ public class SaasFulfillmentApi {
         if (contentType == null) {
             throw new ApiException("Missing the required parameter 'contentType' when calling resolve(Async)");
         }
-        // verify the required parameter 'authorization' is set
-        if (authorization == null) {
-            throw new ApiException("Missing the required parameter 'authorization' when calling resolve(Async)");
+        // verify the required parameter 'xMsMarketplaceToken' is set
+        if (xMsMarketplaceToken == null) {
+            throw new ApiException("Missing the required parameter 'xMsMarketplaceToken' when calling resolve(Async)");
         }
         
-        com.squareup.okhttp.Call call = resolveCall(apiVersion, contentType, authorization, xMsRequestid, xMsCorrelationid, xMsMarketplaceToken, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = resolveCall(apiVersion, contentType, xMsMarketplaceToken, xMsRequestid, xMsCorrelationid, progressListener, progressRequestListener);
         return call;
 
         
@@ -1499,15 +1421,14 @@ public class SaasFulfillmentApi {
      * The resolve endpoint enables the publisher to resolve a marketplace token to a persistent resource ID. The resource ID is the unique identifier for a SaaS subscription. When a user is redirected to a partner&#x27;s website, the URL contains a token in the query parameters. The partner is expected to use this token and make a request to resolve it. The response contains the unique SaaS subscription ID, name, offer ID, and plan for the resource. This token is valid for one hour only.
      * @param apiVersion Version of the API. (required)
      * @param contentType application/json (required)
-     * @param authorization Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. (required)
+     * @param xMsMarketplaceToken The token query parameter in the URL when the user is redirected to the SaaS partner&#x27;s website from Azure (for example,  https://contoso.com/signup?token&#x3D;..). Note, The URL decodes the token value from the browser before using it. (required)
      * @param xMsRequestid A unique string value for tracking the request from the client, preferably a GUID. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @param xMsCorrelationid A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
-     * @param xMsMarketplaceToken The token query parameter in the URL when the user is redirected to the SaaS partner&#x27;s website from Azure (for example,  https://contoso.com/signup?token&#x3D;..). Note, The URL decodes the token value from the browser before using it. (optional)
      * @return SubscriptionSummary
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public SubscriptionSummary resolve(ApiVersion apiVersion, String contentType, String authorization, UUID xMsRequestid, UUID xMsCorrelationid, UUID xMsMarketplaceToken) throws ApiException {
-        ApiResponse<SubscriptionSummary> resp = resolveWithHttpInfo(apiVersion, contentType, authorization, xMsRequestid, xMsCorrelationid, xMsMarketplaceToken);
+    public SubscriptionSummary resolve(ApiVersion apiVersion, String contentType, String xMsMarketplaceToken, UUID xMsRequestid, UUID xMsCorrelationid) throws ApiException {
+        ApiResponse<SubscriptionSummary> resp = resolveWithHttpInfo(apiVersion, contentType, xMsMarketplaceToken, xMsRequestid, xMsCorrelationid);
         return resp.getData();
     }
 
@@ -1516,15 +1437,14 @@ public class SaasFulfillmentApi {
      * The resolve endpoint enables the publisher to resolve a marketplace token to a persistent resource ID. The resource ID is the unique identifier for a SaaS subscription. When a user is redirected to a partner&#x27;s website, the URL contains a token in the query parameters. The partner is expected to use this token and make a request to resolve it. The response contains the unique SaaS subscription ID, name, offer ID, and plan for the resource. This token is valid for one hour only.
      * @param apiVersion Version of the API. (required)
      * @param contentType application/json (required)
-     * @param authorization Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. (required)
+     * @param xMsMarketplaceToken The token query parameter in the URL when the user is redirected to the SaaS partner&#x27;s website from Azure (for example,  https://contoso.com/signup?token&#x3D;..). Note, The URL decodes the token value from the browser before using it. (required)
      * @param xMsRequestid A unique string value for tracking the request from the client, preferably a GUID. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @param xMsCorrelationid A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
-     * @param xMsMarketplaceToken The token query parameter in the URL when the user is redirected to the SaaS partner&#x27;s website from Azure (for example,  https://contoso.com/signup?token&#x3D;..). Note, The URL decodes the token value from the browser before using it. (optional)
      * @return ApiResponse&lt;SubscriptionSummary&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<SubscriptionSummary> resolveWithHttpInfo(ApiVersion apiVersion, String contentType, String authorization, UUID xMsRequestid, UUID xMsCorrelationid, UUID xMsMarketplaceToken) throws ApiException {
-        com.squareup.okhttp.Call call = resolveValidateBeforeCall(apiVersion, contentType, authorization, xMsRequestid, xMsCorrelationid, xMsMarketplaceToken, null, null);
+    public ApiResponse<SubscriptionSummary> resolveWithHttpInfo(ApiVersion apiVersion, String contentType, String xMsMarketplaceToken, UUID xMsRequestid, UUID xMsCorrelationid) throws ApiException {
+        com.squareup.okhttp.Call call = resolveValidateBeforeCall(apiVersion, contentType, xMsMarketplaceToken, xMsRequestid, xMsCorrelationid, null, null);
         Type localVarReturnType = new TypeToken<SubscriptionSummary>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -1534,15 +1454,14 @@ public class SaasFulfillmentApi {
      * The resolve endpoint enables the publisher to resolve a marketplace token to a persistent resource ID. The resource ID is the unique identifier for a SaaS subscription. When a user is redirected to a partner&#x27;s website, the URL contains a token in the query parameters. The partner is expected to use this token and make a request to resolve it. The response contains the unique SaaS subscription ID, name, offer ID, and plan for the resource. This token is valid for one hour only.
      * @param apiVersion Version of the API. (required)
      * @param contentType application/json (required)
-     * @param authorization Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. (required)
+     * @param xMsMarketplaceToken The token query parameter in the URL when the user is redirected to the SaaS partner&#x27;s website from Azure (for example,  https://contoso.com/signup?token&#x3D;..). Note, The URL decodes the token value from the browser before using it. (required)
      * @param xMsRequestid A unique string value for tracking the request from the client, preferably a GUID. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @param xMsCorrelationid A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
-     * @param xMsMarketplaceToken The token query parameter in the URL when the user is redirected to the SaaS partner&#x27;s website from Azure (for example,  https://contoso.com/signup?token&#x3D;..). Note, The URL decodes the token value from the browser before using it. (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call resolveAsync(ApiVersion apiVersion, String contentType, String authorization, UUID xMsRequestid, UUID xMsCorrelationid, UUID xMsMarketplaceToken, final ApiCallback<SubscriptionSummary> callback) throws ApiException {
+    public com.squareup.okhttp.Call resolveAsync(ApiVersion apiVersion, String contentType, String xMsMarketplaceToken, UUID xMsRequestid, UUID xMsCorrelationid, final ApiCallback<SubscriptionSummary> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -1563,7 +1482,7 @@ public class SaasFulfillmentApi {
             };
         }
 
-        com.squareup.okhttp.Call call = resolveValidateBeforeCall(apiVersion, contentType, authorization, xMsRequestid, xMsCorrelationid, xMsMarketplaceToken, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = resolveValidateBeforeCall(apiVersion, contentType, xMsMarketplaceToken, xMsRequestid, xMsCorrelationid, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<SubscriptionSummary>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -1572,7 +1491,6 @@ public class SaasFulfillmentApi {
      * Build call for updateOperationStatus
      * @param body  (required)
      * @param contentType application/json (required)
-     * @param authorization Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. (required)
      * @param apiVersion Version of the API. (required)
      * @param subscriptionId  (required)
      * @param operationId  (required)
@@ -1583,7 +1501,7 @@ public class SaasFulfillmentApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call updateOperationStatusCall(Body1 body, String contentType, String authorization, ApiVersion apiVersion, UUID subscriptionId, UUID operationId, UUID xMsRequestid, UUID xMsCorrelationid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call updateOperationStatusCall(UpdateOperation body, String contentType, ApiVersion apiVersion, UUID subscriptionId, UUID operationId, UUID xMsRequestid, UUID xMsCorrelationid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = body;
         
         // create path and map variables
@@ -1594,7 +1512,7 @@ public class SaasFulfillmentApi {
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         if (apiVersion != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("ApiVersion", apiVersion));
+        localVarQueryParams.addAll(apiClient.parameterToPair("api-version", apiVersion));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         if (contentType != null)
@@ -1603,8 +1521,6 @@ public class SaasFulfillmentApi {
         localVarHeaderParams.put("x-ms-requestid", apiClient.parameterToString(xMsRequestid));
         if (xMsCorrelationid != null)
         localVarHeaderParams.put("x-ms-correlationid", apiClient.parameterToString(xMsCorrelationid));
-        if (authorization != null)
-        localVarHeaderParams.put("Authorization", apiClient.parameterToString(authorization));
 
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
@@ -1637,7 +1553,7 @@ public class SaasFulfillmentApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call updateOperationStatusValidateBeforeCall(Body1 body, String contentType, String authorization, ApiVersion apiVersion, UUID subscriptionId, UUID operationId, UUID xMsRequestid, UUID xMsCorrelationid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call updateOperationStatusValidateBeforeCall(UpdateOperation body, String contentType, ApiVersion apiVersion, UUID subscriptionId, UUID operationId, UUID xMsRequestid, UUID xMsCorrelationid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         // verify the required parameter 'body' is set
         if (body == null) {
             throw new ApiException("Missing the required parameter 'body' when calling updateOperationStatus(Async)");
@@ -1645,10 +1561,6 @@ public class SaasFulfillmentApi {
         // verify the required parameter 'contentType' is set
         if (contentType == null) {
             throw new ApiException("Missing the required parameter 'contentType' when calling updateOperationStatus(Async)");
-        }
-        // verify the required parameter 'authorization' is set
-        if (authorization == null) {
-            throw new ApiException("Missing the required parameter 'authorization' when calling updateOperationStatus(Async)");
         }
         // verify the required parameter 'apiVersion' is set
         if (apiVersion == null) {
@@ -1663,7 +1575,7 @@ public class SaasFulfillmentApi {
             throw new ApiException("Missing the required parameter 'operationId' when calling updateOperationStatus(Async)");
         }
         
-        com.squareup.okhttp.Call call = updateOperationStatusCall(body, contentType, authorization, apiVersion, subscriptionId, operationId, xMsRequestid, xMsCorrelationid, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = updateOperationStatusCall(body, contentType, apiVersion, subscriptionId, operationId, xMsRequestid, xMsCorrelationid, progressListener, progressRequestListener);
         return call;
 
         
@@ -1677,7 +1589,6 @@ public class SaasFulfillmentApi {
      * Update the status of an operation to indicate success or failure with the provided values.
      * @param body  (required)
      * @param contentType application/json (required)
-     * @param authorization Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. (required)
      * @param apiVersion Version of the API. (required)
      * @param subscriptionId  (required)
      * @param operationId  (required)
@@ -1685,8 +1596,8 @@ public class SaasFulfillmentApi {
      * @param xMsCorrelationid A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn&#x27;t provided, one will be generated and provided in the response headers. (optional)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public void updateOperationStatus(Body1 body, String contentType, String authorization, ApiVersion apiVersion, UUID subscriptionId, UUID operationId, UUID xMsRequestid, UUID xMsCorrelationid) throws ApiException {
-        updateOperationStatusWithHttpInfo(body, contentType, authorization, apiVersion, subscriptionId, operationId, xMsRequestid, xMsCorrelationid);
+    public void updateOperationStatus(UpdateOperation body, String contentType, ApiVersion apiVersion, UUID subscriptionId, UUID operationId, UUID xMsRequestid, UUID xMsCorrelationid) throws ApiException {
+        updateOperationStatusWithHttpInfo(body, contentType, apiVersion, subscriptionId, operationId, xMsRequestid, xMsCorrelationid);
     }
 
     /**
@@ -1694,7 +1605,6 @@ public class SaasFulfillmentApi {
      * Update the status of an operation to indicate success or failure with the provided values.
      * @param body  (required)
      * @param contentType application/json (required)
-     * @param authorization Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. (required)
      * @param apiVersion Version of the API. (required)
      * @param subscriptionId  (required)
      * @param operationId  (required)
@@ -1703,8 +1613,8 @@ public class SaasFulfillmentApi {
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<Void> updateOperationStatusWithHttpInfo(Body1 body, String contentType, String authorization, ApiVersion apiVersion, UUID subscriptionId, UUID operationId, UUID xMsRequestid, UUID xMsCorrelationid) throws ApiException {
-        com.squareup.okhttp.Call call = updateOperationStatusValidateBeforeCall(body, contentType, authorization, apiVersion, subscriptionId, operationId, xMsRequestid, xMsCorrelationid, null, null);
+    public ApiResponse<Void> updateOperationStatusWithHttpInfo(UpdateOperation body, String contentType, ApiVersion apiVersion, UUID subscriptionId, UUID operationId, UUID xMsRequestid, UUID xMsCorrelationid) throws ApiException {
+        com.squareup.okhttp.Call call = updateOperationStatusValidateBeforeCall(body, contentType, apiVersion, subscriptionId, operationId, xMsRequestid, xMsCorrelationid, null, null);
         return apiClient.execute(call);
     }
 
@@ -1713,7 +1623,6 @@ public class SaasFulfillmentApi {
      * Update the status of an operation to indicate success or failure with the provided values.
      * @param body  (required)
      * @param contentType application/json (required)
-     * @param authorization Get a [JSON web token](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal/saas-app/cpp-saas-registration#get-a-token-based-on-the-azure-ad-app), JWT, bearer token. (required)
      * @param apiVersion Version of the API. (required)
      * @param subscriptionId  (required)
      * @param operationId  (required)
@@ -1723,7 +1632,7 @@ public class SaasFulfillmentApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call updateOperationStatusAsync(Body1 body, String contentType, String authorization, ApiVersion apiVersion, UUID subscriptionId, UUID operationId, UUID xMsRequestid, UUID xMsCorrelationid, final ApiCallback<Void> callback) throws ApiException {
+    public com.squareup.okhttp.Call updateOperationStatusAsync(UpdateOperation body, String contentType, ApiVersion apiVersion, UUID subscriptionId, UUID operationId, UUID xMsRequestid, UUID xMsCorrelationid, final ApiCallback<Void> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -1744,7 +1653,7 @@ public class SaasFulfillmentApi {
             };
         }
 
-        com.squareup.okhttp.Call call = updateOperationStatusValidateBeforeCall(body, contentType, authorization, apiVersion, subscriptionId, operationId, xMsRequestid, xMsCorrelationid, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = updateOperationStatusValidateBeforeCall(body, contentType, apiVersion, subscriptionId, operationId, xMsRequestid, xMsCorrelationid, progressListener, progressRequestListener);
         apiClient.executeAsync(call, callback);
         return call;
     }

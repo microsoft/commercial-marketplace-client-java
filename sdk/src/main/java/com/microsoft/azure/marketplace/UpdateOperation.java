@@ -22,22 +22,28 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
 /**
- * StatusType
+ * UpdateOperation
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2020-04-18T12:09:05.863-07:00[America/Los_Angeles]")
-public class StatusType implements AnyOfbody1 {
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2020-04-19T20:04:00.284-07:00[America/Los_Angeles]")
+public class UpdateOperation {
+  @SerializedName("planId")
+  private String planId = null;
+
+  @SerializedName("quantity")
+  private Long quantity = null;
+
   /**
-   * Gets or Sets planId
+   * Gets or Sets status
    */
-  @JsonAdapter(PlanIdEnum.Adapter.class)
-  public enum PlanIdEnum {
+  @JsonAdapter(StatusEnum.Adapter.class)
+  public enum StatusEnum {
     SUCCESS("Success"),
     FAILURE("Failure");
 
     private String value;
 
-    PlanIdEnum(String value) {
+    StatusEnum(String value) {
       this.value = value;
     }
     public String getValue() {
@@ -48,30 +54,30 @@ public class StatusType implements AnyOfbody1 {
     public String toString() {
       return String.valueOf(value);
     }
-    public static PlanIdEnum fromValue(String text) {
-      for (PlanIdEnum b : PlanIdEnum.values()) {
+    public static StatusEnum fromValue(String text) {
+      for (StatusEnum b : StatusEnum.values()) {
         if (String.valueOf(b.value).equals(text)) {
           return b;
         }
       }
       return null;
     }
-    public static class Adapter extends TypeAdapter<PlanIdEnum> {
+    public static class Adapter extends TypeAdapter<StatusEnum> {
       @Override
-      public void write(final JsonWriter jsonWriter, final PlanIdEnum enumeration) throws IOException {
+      public void write(final JsonWriter jsonWriter, final StatusEnum enumeration) throws IOException {
         jsonWriter.value(enumeration.getValue());
       }
 
       @Override
-      public PlanIdEnum read(final JsonReader jsonReader) throws IOException {
+      public StatusEnum read(final JsonReader jsonReader) throws IOException {
         String value = jsonReader.nextString();
-        return PlanIdEnum.fromValue(String.valueOf(value));
+        return StatusEnum.fromValue(String.valueOf(value));
       }
     }
-  }  @SerializedName("planId")
-  private PlanIdEnum planId = null;
+  }  @SerializedName("status")
+  private StatusEnum status = null;
 
-  public StatusType planId(PlanIdEnum planId) {
+  public UpdateOperation planId(String planId) {
     this.planId = planId;
     return this;
   }
@@ -81,12 +87,48 @@ public class StatusType implements AnyOfbody1 {
    * @return planId
   **/
   @Schema(description = "")
-  public PlanIdEnum getPlanId() {
+  public String getPlanId() {
     return planId;
   }
 
-  public void setPlanId(PlanIdEnum planId) {
+  public void setPlanId(String planId) {
     this.planId = planId;
+  }
+
+  public UpdateOperation quantity(Long quantity) {
+    this.quantity = quantity;
+    return this;
+  }
+
+   /**
+   * Get quantity
+   * @return quantity
+  **/
+  @Schema(description = "")
+  public Long getQuantity() {
+    return quantity;
+  }
+
+  public void setQuantity(Long quantity) {
+    this.quantity = quantity;
+  }
+
+  public UpdateOperation status(StatusEnum status) {
+    this.status = status;
+    return this;
+  }
+
+   /**
+   * Get status
+   * @return status
+  **/
+  @Schema(description = "")
+  public StatusEnum getStatus() {
+    return status;
+  }
+
+  public void setStatus(StatusEnum status) {
+    this.status = status;
   }
 
 
@@ -98,22 +140,26 @@ public class StatusType implements AnyOfbody1 {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    StatusType statusType = (StatusType) o;
-    return Objects.equals(this.planId, statusType.planId);
+    UpdateOperation updateOperation = (UpdateOperation) o;
+    return Objects.equals(this.planId, updateOperation.planId) &&
+        Objects.equals(this.quantity, updateOperation.quantity) &&
+        Objects.equals(this.status, updateOperation.status);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(planId);
+    return Objects.hash(planId, quantity, status);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class StatusType {\n");
+    sb.append("class UpdateOperation {\n");
     
     sb.append("    planId: ").append(toIndentedString(planId)).append("\n");
+    sb.append("    quantity: ").append(toIndentedString(quantity)).append("\n");
+    sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("}");
     return sb.toString();
   }

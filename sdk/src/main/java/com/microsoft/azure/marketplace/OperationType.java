@@ -22,11 +22,12 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.IOException;
 import java.util.UUID;
+import org.threeten.bp.OffsetDateTime;
 /**
  * OperationType
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2020-04-18T12:09:05.863-07:00[America/Los_Angeles]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2020-04-19T20:04:00.284-07:00[America/Los_Angeles]")
 public class OperationType {
   @SerializedName("id")
   private UUID id = null;
@@ -53,7 +54,7 @@ public class OperationType {
   private String action = null;
 
   @SerializedName("timeStamp")
-  private String timeStamp = null;
+  private OffsetDateTime timeStamp = null;
 
   @SerializedName("status")
   private String status = null;
@@ -202,7 +203,7 @@ public class OperationType {
     this.action = action;
   }
 
-  public OperationType timeStamp(String timeStamp) {
+  public OperationType timeStamp(OffsetDateTime timeStamp) {
     this.timeStamp = timeStamp;
     return this;
   }
@@ -212,11 +213,11 @@ public class OperationType {
    * @return timeStamp
   **/
   @Schema(description = "")
-  public String getTimeStamp() {
+  public OffsetDateTime getTimeStamp() {
     return timeStamp;
   }
 
-  public void setTimeStamp(String timeStamp) {
+  public void setTimeStamp(OffsetDateTime timeStamp) {
     this.timeStamp = timeStamp;
   }
 
