@@ -35,11 +35,11 @@ public class SaasFulfillmentApiTest {
     public void before() throws Exception {
         marketplaceSettingsProvider = new MarketplaceSettingsProvider();
         // Authenticate and store the authentication with the Api.
-        ApiClient apiClient = new MarketplaceApiClient(marketplaceSettingsProvider.getAadTenantId(),
+        Configuration.initDefaultApiClient(marketplaceSettingsProvider.getAadTenantId(),
                 marketplaceSettingsProvider.getAadAppClientId(),
                 marketplaceSettingsProvider.getAadAppClientSecret());
 
-        api = new SaasFulfillmentApi(apiClient);
+        api = new SaasFulfillmentApi(Configuration.getDefaultApiClient());
     }
 
     /**
@@ -53,8 +53,9 @@ public class SaasFulfillmentApiTest {
     @Test
     public void activateSubscriptionTest() throws ApiException {
         SubscriberPlan body = new SubscriberPlan();
-        body.setQuantity(100l);
+        //body.setQuantity(100l);
         body.setPlanId("Basic");
+        body.setQuantity(100l);
         String contentType = JsonContent;
         ApiVersion apiVersion = ApiVersion._09_15;
         UUID subscriptionId = DefaultSubscription;
@@ -233,6 +234,8 @@ public class SaasFulfillmentApiTest {
         }
     }
 
+
+    //https://portal.seelyinc.com/index.html?token=7lbAkybVZD%2BjIkSrUB8f7nz3yE%2Fq5OfcJ67HZdnuHZBC1QSEl2L%2BeSlpcqQ%2BSSd7oQPI0jcW9CEJFBpq%2BryIxcySrVpEUwxGtEOEI8528ofgscw2hsZsf0O2VJ8GOpxT322Saf7KddVFI7IuamyQ5g1iS6Zi19JwzP5jqY6%2BaE8BdBfVZSHRaeah8qcN70sC7Q9BKzu4o66Wxfd6Y97A7TKHFSP%2FLaNX%2B8VKPYSwqK%2F1i9kFeugI37r9H6V0YTq2PMkwf301EE1AKRBvOkKaEQ%3D%3D
     /**
      * Resolve a subscription
      *

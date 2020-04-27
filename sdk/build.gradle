@@ -2,7 +2,7 @@ apply plugin: 'idea'
 apply plugin: 'eclipse'
 
 group = 'com.microsoft.azure.marketplace'
-version = '0.1.0'
+version = '1.0.0'
 
 buildscript {
     repositories {

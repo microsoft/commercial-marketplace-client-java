@@ -12,8 +12,8 @@
 
 package com.microsoft.azure.marketplace;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2020-04-19T20:04:00.284-07:00[America/Los_Angeles]")public class Configuration {
-    private static ApiClient defaultApiClient = new ApiClient();
+public class Configuration {
+    private static ApiClient defaultApiClient = null;
 
     /**
      * Get the default API client, which would be used when creating API
@@ -22,7 +22,22 @@ package com.microsoft.azure.marketplace;
      * @return Default API client
      */
     public static ApiClient getDefaultApiClient() {
+        if (null == defaultApiClient) {
+            throw new IllegalStateException("Make sure that the defaultApiClient is set first.");
+        }
         return defaultApiClient;
+    }
+
+    /**
+     * Initializes the default Api Client with the parameters needed to authenticate against
+     * AAD using the values entered into 'Technical Configuration' for the entity in the
+     * Microsoft Partner Portal.
+     * @param tenantId: GUID for the tenant holding the app registration/Service Principal.
+     * @param clientId: GUID identifying the app registration/Service Principal.
+     * @param clientSecret: Secret for the clientId.
+     */
+    public static void initDefaultApiClient(String tenantId, String clientId, String clientSecret) throws Exception {
+        defaultApiClient = new MarketplaceApiClient(tenantId, clientId, clientSecret);
     }
 
     /**

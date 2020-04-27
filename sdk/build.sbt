@@ -2,7 +2,7 @@ lazy val root = (project in file(".")).
   settings(
     organization := "com.microsoft.azure.marketplace",
     name := "azure-marketplace-client-java",
-    version := "0.1.0",
+    version := "1.0.0",
     scalaVersion := "2.11.4",
     scalacOptions ++= Seq("-feature"),
     javacOptions in compile ++= Seq("-Xlint:deprecation"),
