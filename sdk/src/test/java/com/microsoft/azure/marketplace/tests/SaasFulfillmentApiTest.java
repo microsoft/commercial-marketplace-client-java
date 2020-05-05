@@ -13,7 +13,10 @@
 package com.microsoft.azure.marketplace.tests;
 
 import com.microsoft.azure.marketplace.*;
+import com.microsoft.azure.marketplace.auth.Authentication;
+import com.microsoft.azure.marketplace.auth.OAuth;
 import com.microsoft.azure.marketplace.generated.SaasFulfillmentApi;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.Before;
 
@@ -40,6 +43,15 @@ public class SaasFulfillmentApiTest {
                 marketplaceSettingsProvider.getAadAppClientSecret());
 
         api = new SaasFulfillmentApi(Configuration.getDefaultApiClient());
+    }
+
+    @Test
+    public void checkAccessToken() {
+        ApiClient client = Configuration.getDefaultApiClient();
+        OAuth auth= (OAuth)client.getAuthentication("OAuth2");
+        String accessToken = auth.getAccessToken();
+        Assert.assertFalse("Failed to authenticate. Check that the tenant, client, and secret are correct.",
+                accessToken.substring(0, 5).equalsIgnoreCase("error"));
     }
 
     /**
