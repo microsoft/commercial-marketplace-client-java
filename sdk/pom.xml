@@ -19,18 +19,18 @@
 
   <licenses>
     <license>
-      <name>Unlicense</name>
-      <url>http://unlicense.org</url>
+      <name>MIT</name>
+      <url>https://mit-license.org/</url>
       <distribution>repo</distribution>
     </license>
   </licenses>
 
   <developers>
     <developer>
-      <name>Swagger</name>
-      <email>apiteam@swagger.io</email>
-      <organization>Swagger</organization>
-      <organizationUrl>http://swagger.io</organizationUrl>
+      <name>Microsoft</name>
+      <email>scseely@microsoft.com</email>
+      <organization>Microsoft</organization>
+      <organizationUrl>https://www.microsoft.com</organizationUrl>
     </developer>
   </developers>
 
@@ -50,6 +50,12 @@
           <argLine>-Xms512m -Xmx1500m</argLine>
           <parallel>methods</parallel>
           <forkMode>pertest</forkMode>
+          <environmentVariables>
+            <AAD_TENANT_ID>0f1a53c8-1135-457a-bcdb-d58abc87e4b7</AAD_TENANT_ID>
+            <AAD_APP_CLIENT_ID>4ac2e37a-8296-46cd-ac7e-323732979b50</AAD_APP_CLIENT_ID>
+            <AMP_API_VERSION>2018-09-15</AMP_API_VERSION>
+            <AAD_APP_CLIENT_SECRET>c1yqv6u@Ap1HE:Kf.s2_G/Gd7?J7L=.4</AAD_APP_CLIENT_SECRET>
+          </environmentVariables>
         </configuration>
       </plugin>
       <plugin>
@@ -66,7 +72,26 @@
           </execution>
         </executions>
       </plugin>
-
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <version>3.0.0-M3</version>
+        <executions>
+          <execution>
+            <id>enforce-maven</id>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+            <configuration>
+              <rules>
+                <requireMavenVersion>
+                  <version>3.0</version>
+                </requireMavenVersion>
+              </rules>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
       <!-- attach test jar -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
