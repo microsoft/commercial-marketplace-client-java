@@ -26,11 +26,11 @@ Use this call to activate a subscription.
 ### Example
 ```java
 // Import classes:
-//import com.microsoft.azure.marketplace.ApiClient;
-//import com.microsoft.azure.marketplace.ApiException;
-//import com.microsoft.azure.marketplace.Configuration;
-//import com.microsoft.azure.marketplace.auth.*;
-//import com.microsoft.azure.marketplace.generated.SaasFulfillmentApi;
+//import com.azure.marketplace.ApiClient;
+//import com.azure.marketplace.ApiException;
+//import com.azure.marketplace.Configuration;
+//import com.azure.marketplace.auth.*;
+//import com.azure.marketplace.generated.SaasFulfillmentApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -88,11 +88,11 @@ Unsubscribe and delete the specified subscription.
 ### Example
 ```java
 // Import classes:
-//import com.microsoft.azure.marketplace.ApiClient;
-//import com.microsoft.azure.marketplace.ApiException;
-//import com.microsoft.azure.marketplace.Configuration;
-//import com.microsoft.azure.marketplace.auth.*;
-//import com.microsoft.azure.marketplace.generated.SaasFulfillmentApi;
+//import com.azure.marketplace.ApiClient;
+//import com.azure.marketplace.ApiException;
+//import com.azure.marketplace.Configuration;
+//import com.azure.marketplace.auth.*;
+//import com.azure.marketplace.generated.SaasFulfillmentApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -148,11 +148,11 @@ Enables the publisher to track the status of the specified triggered async opera
 ### Example
 ```java
 // Import classes:
-//import com.microsoft.azure.marketplace.ApiClient;
-//import com.microsoft.azure.marketplace.ApiException;
-//import com.microsoft.azure.marketplace.Configuration;
-//import com.microsoft.azure.marketplace.auth.*;
-//import com.microsoft.azure.marketplace.generated.SaasFulfillmentApi;
+//import com.azure.marketplace.ApiClient;
+//import com.azure.marketplace.ApiException;
+//import com.azure.marketplace.Configuration;
+//import com.azure.marketplace.auth.*;
+//import com.azure.marketplace.generated.SaasFulfillmentApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -211,11 +211,11 @@ Gets the specified SaaS subscription. Use this call to get license information a
 ### Example
 ```java
 // Import classes:
-//import com.microsoft.azure.marketplace.ApiClient;
-//import com.microsoft.azure.marketplace.ApiException;
-//import com.microsoft.azure.marketplace.Configuration;
-//import com.microsoft.azure.marketplace.auth.*;
-//import com.microsoft.azure.marketplace.generated.SaasFulfillmentApi;
+//import com.azure.marketplace.ApiClient;
+//import com.azure.marketplace.ApiException;
+//import com.azure.marketplace.Configuration;
+//import com.azure.marketplace.auth.*;
+//import com.azure.marketplace.generated.SaasFulfillmentApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -272,11 +272,11 @@ Use this call to find out if there are any private or public offers for the curr
 ### Example
 ```java
 // Import classes:
-//import com.microsoft.azure.marketplace.ApiClient;
-//import com.microsoft.azure.marketplace.ApiException;
-//import com.microsoft.azure.marketplace.Configuration;
-//import com.microsoft.azure.marketplace.auth.*;
-//import com.microsoft.azure.marketplace.generated.SaasFulfillmentApi;
+//import com.azure.marketplace.ApiClient;
+//import com.azure.marketplace.ApiException;
+//import com.azure.marketplace.Configuration;
+//import com.azure.marketplace.auth.*;
+//import com.azure.marketplace.generated.SaasFulfillmentApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -333,11 +333,11 @@ Lists the outstanding operations for the current publisher.
 ### Example
 ```java
 // Import classes:
-//import com.microsoft.azure.marketplace.ApiClient;
-//import com.microsoft.azure.marketplace.ApiException;
-//import com.microsoft.azure.marketplace.Configuration;
-//import com.microsoft.azure.marketplace.auth.*;
-//import com.microsoft.azure.marketplace.generated.SaasFulfillmentApi;
+//import com.azure.marketplace.ApiClient;
+//import com.azure.marketplace.ApiException;
+//import com.azure.marketplace.Configuration;
+//import com.azure.marketplace.auth.*;
+//import com.azure.marketplace.generated.SaasFulfillmentApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -394,11 +394,11 @@ Lists all the SaaS subscriptions for a publisher.
 ### Example
 ```java
 // Import classes:
-//import com.microsoft.azure.marketplace.ApiClient;
-//import com.microsoft.azure.marketplace.ApiException;
-//import com.microsoft.azure.marketplace.Configuration;
-//import com.microsoft.azure.marketplace.auth.*;
-//import com.microsoft.azure.marketplace.generated.SaasFulfillmentApi;
+//import com.azure.marketplace.ApiClient;
+//import com.azure.marketplace.ApiException;
+//import com.azure.marketplace.Configuration;
+//import com.azure.marketplace.auth.*;
+//import com.azure.marketplace.generated.SaasFulfillmentApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -455,11 +455,11 @@ Use this call to update the plan, the user count (quantity), or both.
 ### Example
 ```java
 // Import classes:
-//import com.microsoft.azure.marketplace.ApiClient;
-//import com.microsoft.azure.marketplace.ApiException;
-//import com.microsoft.azure.marketplace.Configuration;
-//import com.microsoft.azure.marketplace.auth.*;
-//import com.microsoft.azure.marketplace.generated.SaasFulfillmentApi;
+//import com.azure.marketplace.ApiClient;
+//import com.azure.marketplace.ApiException;
+//import com.azure.marketplace.Configuration;
+//import com.azure.marketplace.auth.*;
+//import com.azure.marketplace.generated.SaasFulfillmentApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -517,11 +517,11 @@ The resolve endpoint enables the publisher to resolve a marketplace token to a p
 ### Example
 ```java
 // Import classes:
-//import com.microsoft.azure.marketplace.ApiClient;
-//import com.microsoft.azure.marketplace.ApiException;
-//import com.microsoft.azure.marketplace.Configuration;
-//import com.microsoft.azure.marketplace.auth.*;
-//import com.microsoft.azure.marketplace.generated.SaasFulfillmentApi;
+//import com.azure.marketplace.ApiClient;
+//import com.azure.marketplace.ApiException;
+//import com.azure.marketplace.Configuration;
+//import com.azure.marketplace.auth.*;
+//import com.azure.marketplace.generated.SaasFulfillmentApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -578,11 +578,11 @@ Update the status of an operation to indicate success or failure with the provid
 ### Example
 ```java
 // Import classes:
-//import com.microsoft.azure.marketplace.ApiClient;
-//import com.microsoft.azure.marketplace.ApiException;
-//import com.microsoft.azure.marketplace.Configuration;
-//import com.microsoft.azure.marketplace.auth.*;
-//import com.microsoft.azure.marketplace.generated.SaasFulfillmentApi;
+//import com.azure.marketplace.ApiClient;
+//import com.azure.marketplace.ApiException;
+//import com.azure.marketplace.Configuration;
+//import com.azure.marketplace.auth.*;
+//import com.azure.marketplace.generated.SaasFulfillmentApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 

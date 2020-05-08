@@ -1,7 +1,7 @@
 apply plugin: 'idea'
 apply plugin: 'eclipse'
 
-group = 'com.microsoft.azure.marketplace'
+group = 'com.azure.marketplace'
 version = '1.0.0'
 
 buildscript {

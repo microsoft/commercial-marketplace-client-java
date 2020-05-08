@@ -18,11 +18,11 @@ The batch usage event API allows you to emit usage events for more than one purc
 ### Example
 ```java
 // Import classes:
-//import com.microsoft.azure.marketplace.ApiClient;
-//import com.microsoft.azure.marketplace.ApiException;
-//import com.microsoft.azure.marketplace.Configuration;
-//import com.microsoft.azure.marketplace.auth.*;
-//import com.microsoft.azure.marketplace.generated.SaasMarketplaceMeterApi;
+//import com.azure.marketplace.ApiClient;
+//import com.azure.marketplace.ApiException;
+//import com.azure.marketplace.Configuration;
+//import com.azure.marketplace.auth.*;
+//import com.azure.marketplace.generated.SaasMarketplaceMeterApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -77,11 +77,11 @@ Posts a single usage event to the marketplace metering service API.
 ### Example
 ```java
 // Import classes:
-//import com.microsoft.azure.marketplace.ApiClient;
-//import com.microsoft.azure.marketplace.ApiException;
-//import com.microsoft.azure.marketplace.Configuration;
-//import com.microsoft.azure.marketplace.auth.*;
-//import com.microsoft.azure.marketplace.generated.SaasMarketplaceMeterApi;
+//import com.azure.marketplace.ApiClient;
+//import com.azure.marketplace.ApiException;
+//import com.azure.marketplace.Configuration;
+//import com.azure.marketplace.auth.*;
+//import com.azure.marketplace.generated.SaasMarketplaceMeterApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 

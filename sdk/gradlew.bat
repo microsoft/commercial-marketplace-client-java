@@ -1,3 +1,6 @@
+@rem Copyright (c) Microsoft Corporation.
+@rem Licensed under the MIT license.
+
 @if "%DEBUG%" == "" @echo off
 @rem ##########################################################################
 @rem
