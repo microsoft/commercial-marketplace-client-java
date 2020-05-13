@@ -70,7 +70,7 @@ Please follow the [installation](#installation) instruction and execute the foll
 import com.azure.marketplace.*;
 import com.azure.marketplace.auth.*;
 import com.azure.marketplace.*;
-import com.azure.marketplace.generated.SaasFulfillmentApi;
+import com.azure.marketplace.api.SaasFulfillmentApi;
 
 import java.io.File;
 import java.util.*;

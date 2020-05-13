@@ -12,7 +12,7 @@
  * Licensed under the MIT license.
  */
 
-package com.azure.marketplace.generated;
+package com.azure.marketplace.api;
 
 import com.azure.marketplace.*;
 import org.junit.Ignore;

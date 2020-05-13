@@ -9,7 +9,7 @@ import com.azure.marketplace.Error;
 import java.util.UUID;
 import com.azure.marketplace.UsageEvent;
 import com.azure.marketplace.UsageEventOkResponse;
-import com.azure.marketplace.generated.SaasMarketplaceMeterApi;
+import com.azure.marketplace.api.SaasMarketplaceMeterApi;
 import org.junit.Test;
 import org.junit.Ignore;
 

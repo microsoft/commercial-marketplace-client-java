@@ -5,7 +5,7 @@ package com.azure.marketplace.tests;
 
 import com.azure.marketplace.*;
 import com.azure.marketplace.auth.OAuth;
-import com.azure.marketplace.generated.SaasFulfillmentApi;
+import com.azure.marketplace.api.SaasFulfillmentApi;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
