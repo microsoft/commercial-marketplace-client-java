@@ -34,7 +34,7 @@ Add this dependency to your project's POM:
 
 ```xml
 <dependency>
-  <groupId>com.microsoft.azure.marketplace</groupId>
+  <groupId>com.azure.marketplace</groupId>
   <artifactId>azure-marketplace-client-java</artifactId>
   <version>1.0.0</version>
   <scope>compile</scope>
@@ -46,7 +46,7 @@ Add this dependency to your project's POM:
 Add this dependency to your project's build file:
 
 ```groovy
-compile "com.microsoft.azure.marketplace:azure-marketplace-client-java:0.1.0"
+compile "com.azure.marketplace:azure-marketplace-client-java:0.1.0"
 ```
 
 ### Others
@@ -67,10 +67,10 @@ Then manually install the following JARs:
 Please follow the [installation](#installation) instruction and execute the following Java code:
 
 ```java
-import com.microsoft.azure.marketplace.*;
-import com.microsoft.azure.marketplace.auth.*;
-import com.microsoft.azure.marketplace.*;
-import com.microsoft.azure.marketplace.generated.SaasFulfillmentApi;
+import com.azure.marketplace.*;
+import com.azure.marketplace.auth.*;
+import com.azure.marketplace.*;
+import com.azure.marketplace.api.SaasFulfillmentApi;
 
 import java.io.File;
 import java.util.*;
