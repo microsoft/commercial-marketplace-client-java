@@ -1,0 +1,5 @@
+export AAD_TENANT_ID=<Same ID as is used on the Technical Configuration page for your SaaS offer.>
+export AAD_APP_CLIENT_ID=<Same ID as is used on the Technical Configuration page for your SaaS offer.>
+export AAD_APP_CLIENT_SECRET=<A secret associated with the AAD_APP_CLIENT_ID used on the Technical Configuration page for your SaaS offer.>
+export AAD_APP_CERT=<A certificate associated with the AAD_APP_CLIENT_ID used on the Technical Configuration page for your SaaS offer. See README.md for details>
+export AAD_APP_CERT_SECRET=<Password for the certificate.>
