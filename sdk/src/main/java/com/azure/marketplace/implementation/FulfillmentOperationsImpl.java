@@ -11,9 +11,9 @@
 package com.azure.marketplace.implementation;
 
 import retrofit2.Retrofit;
-import com.azure.marketplace.Fulfillments;
-import com.azure.marketplace.models.FulfillmentDeleteSubscriptionHeaders;
-import com.azure.marketplace.models.FulfillmentUpdateSubscriptionHeaders;
+import com.azure.marketplace.FulfillmentOperations;
+import com.azure.marketplace.models.FulfillmentOperationsDeleteSubscriptionHeaders;
+import com.azure.marketplace.models.FulfillmentOperationsUpdateSubscriptionHeaders;
 import com.azure.marketplace.models.PageImpl;
 import com.azure.marketplace.models.ResolvedSubscription;
 import com.azure.marketplace.models.SubscriberPlan;
@@ -49,61 +49,61 @@ import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
- * in Fulfillments.
+ * in FulfillmentOperations.
  */
-public class FulfillmentsImpl implements Fulfillments {
+public class FulfillmentOperationsImpl implements FulfillmentOperations {
     /** The Retrofit service to perform REST calls. */
-    private FulfillmentsService service;
+    private FulfillmentOperationsService service;
     /** The service client containing this operation class. */
     private MarketplaceClientImpl client;
 
     /**
-     * Initializes an instance of FulfillmentsImpl.
+     * Initializes an instance of FulfillmentOperationsImpl.
      *
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public FulfillmentsImpl(Retrofit retrofit, MarketplaceClientImpl client) {
-        this.service = retrofit.create(FulfillmentsService.class);
+    public FulfillmentOperationsImpl(Retrofit retrofit, MarketplaceClientImpl client) {
+        this.service = retrofit.create(FulfillmentOperationsService.class);
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for Fulfillments to be
+     * The interface defining all the services for FulfillmentOperations to be
      * used by Retrofit to perform actually REST calls.
      */
-    interface FulfillmentsService {
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.azure.marketplace.Fulfillments resolve" })
+    interface FulfillmentOperationsService {
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.azure.marketplace.FulfillmentOperations resolve" })
         @POST("saas/subscriptions/resolve")
-        Observable<Response<ResponseBody>> resolve(@Query("api-version") String apiVersion, @Header("Content-Type") String contentType, @Header("x-ms-requestid") UUID requestId, @Header("x-ms-correlationid") UUID correlationId, @Header("x-ms-marketplace-token") String xMsMarketplaceToken, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> resolve(@Query("api-version") String apiVersion, @Header("x-ms-requestid") UUID requestId, @Header("x-ms-correlationid") UUID correlationId, @Header("x-ms-marketplace-token") String xMsMarketplaceToken, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.azure.marketplace.Fulfillments listSubscriptions" })
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.azure.marketplace.FulfillmentOperations listSubscriptions" })
         @GET("saas/subscriptions/")
-        Observable<Response<ResponseBody>> listSubscriptions(@Query("api-version") String apiVersion, @Query("continuationToken") String continuationToken, @Header("Content-Type") String contentType, @Header("x-ms-requestid") UUID requestId, @Header("x-ms-correlationid") UUID correlationId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> listSubscriptions(@Query("api-version") String apiVersion, @Query("continuationToken") String continuationToken, @Header("x-ms-requestid") UUID requestId, @Header("x-ms-correlationid") UUID correlationId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.azure.marketplace.Fulfillments getSubscription" })
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.azure.marketplace.FulfillmentOperations getSubscription" })
         @GET("saas/subscriptions/{subscriptionId}")
-        Observable<Response<ResponseBody>> getSubscription(@Path("subscriptionId") UUID subscriptionId, @Query("api-version") String apiVersion, @Header("Content-Type") String contentType, @Header("x-ms-requestid") UUID requestId, @Header("x-ms-correlationid") UUID correlationId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> getSubscription(@Path("subscriptionId") UUID subscriptionId, @Query("api-version") String apiVersion, @Header("x-ms-requestid") UUID requestId, @Header("x-ms-correlationid") UUID correlationId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.azure.marketplace.Fulfillments updateSubscription" })
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.azure.marketplace.FulfillmentOperations updateSubscription" })
         @PATCH("saas/subscriptions/{subscriptionId}")
-        Observable<Response<ResponseBody>> updateSubscription(@Path("subscriptionId") UUID subscriptionId, @Query("api-version") String apiVersion, @Header("Content-Type") String contentType, @Header("x-ms-requestid") UUID requestId, @Header("x-ms-correlationid") UUID correlationId, @Header("accept-language") String acceptLanguage, @Body SubscriberPlan body, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> updateSubscription(@Path("subscriptionId") UUID subscriptionId, @Query("api-version") String apiVersion, @Header("x-ms-requestid") UUID requestId, @Header("x-ms-correlationid") UUID correlationId, @Header("accept-language") String acceptLanguage, @Body SubscriberPlan body, @Header("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.azure.marketplace.Fulfillments deleteSubscription" })
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.azure.marketplace.FulfillmentOperations deleteSubscription" })
         @HTTP(path = "saas/subscriptions/{subscriptionId}", method = "DELETE", hasBody = true)
-        Observable<Response<ResponseBody>> deleteSubscription(@Path("subscriptionId") UUID subscriptionId, @Query("api-version") String apiVersion, @Header("Content-Type") String contentType, @Header("x-ms-requestid") UUID requestId, @Header("x-ms-correlationid") UUID correlationId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> deleteSubscription(@Path("subscriptionId") UUID subscriptionId, @Query("api-version") String apiVersion, @Header("x-ms-requestid") UUID requestId, @Header("x-ms-correlationid") UUID correlationId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.azure.marketplace.Fulfillments listAvailablePlans" })
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.azure.marketplace.FulfillmentOperations listAvailablePlans" })
         @GET("saas/subscriptions/{subscriptionId}/listAvailablePlans")
-        Observable<Response<ResponseBody>> listAvailablePlans(@Path("subscriptionId") UUID subscriptionId, @Query("api-version") String apiVersion, @Header("Content-Type") String contentType, @Header("x-ms-requestid") UUID requestId, @Header("x-ms-correlationid") UUID correlationId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> listAvailablePlans(@Path("subscriptionId") UUID subscriptionId, @Query("api-version") String apiVersion, @Header("x-ms-requestid") UUID requestId, @Header("x-ms-correlationid") UUID correlationId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.azure.marketplace.Fulfillments activateSubscription" })
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.azure.marketplace.FulfillmentOperations activateSubscription" })
         @POST("saas/subscriptions/{subscriptionId}/activate")
-        Observable<Response<ResponseBody>> activateSubscription(@Path("subscriptionId") UUID subscriptionId, @Query("api-version") String apiVersion, @Header("Content-Type") String contentType, @Header("x-ms-requestid") UUID requestId, @Header("x-ms-correlationid") UUID correlationId, @Header("accept-language") String acceptLanguage, @Body SubscriberPlan body, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> activateSubscription(@Path("subscriptionId") UUID subscriptionId, @Query("api-version") String apiVersion, @Header("x-ms-requestid") UUID requestId, @Header("x-ms-correlationid") UUID correlationId, @Header("accept-language") String acceptLanguage, @Body SubscriberPlan body, @Header("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.azure.marketplace.Fulfillments listSubscriptionsNext" })
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.azure.marketplace.FulfillmentOperations listSubscriptionsNext" })
         @GET
-        Observable<Response<ResponseBody>> listSubscriptionsNext(@Url String nextUrl, @Header("Content-Type") String contentType, @Header("x-ms-requestid") UUID requestId, @Header("x-ms-correlationid") UUID correlationId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> listSubscriptionsNext(@Url String nextUrl, @Header("x-ms-requestid") UUID requestId, @Header("x-ms-correlationid") UUID correlationId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
     }
 
@@ -164,10 +164,9 @@ public class FulfillmentsImpl implements Fulfillments {
             throw new IllegalArgumentException("Parameter xMsMarketplaceToken is required and cannot be null.");
         }
         final String apiVersion = "2018-08-31";
-        final String contentType = "application/json";
         final UUID requestId = null;
         final UUID correlationId = null;
-        return service.resolve(apiVersion, contentType, requestId, correlationId, xMsMarketplaceToken, this.client.acceptLanguage(), this.client.userAgent())
+        return service.resolve(apiVersion, requestId, correlationId, xMsMarketplaceToken, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ResolvedSubscription>>>() {
                 @Override
                 public Observable<ServiceResponse<ResolvedSubscription>> call(Response<ResponseBody> response) {
@@ -246,8 +245,7 @@ public class FulfillmentsImpl implements Fulfillments {
             throw new IllegalArgumentException("Parameter xMsMarketplaceToken is required and cannot be null.");
         }
         final String apiVersion = "2018-08-31";
-        final String contentType = "application/json";
-        return service.resolve(apiVersion, contentType, requestId, correlationId, xMsMarketplaceToken, this.client.acceptLanguage(), this.client.userAgent())
+        return service.resolve(apiVersion, requestId, correlationId, xMsMarketplaceToken, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ResolvedSubscription>>>() {
                 @Override
                 public Observable<ServiceResponse<ResolvedSubscription>> call(Response<ResponseBody> response) {
@@ -286,7 +284,7 @@ public class FulfillmentsImpl implements Fulfillments {
         return new PagedList<Subscription>(response.body()) {
             @Override
             public Page<Subscription> nextPage(String nextPageLink) {
-                return listSubscriptionsNextSinglePageAsync(nextPageLink, contentType, null, null).toBlocking().single().body();
+                return listSubscriptionsNextSinglePageAsync(nextPageLink, null, null).toBlocking().single().body();
             }
         };
     }
@@ -305,7 +303,7 @@ public class FulfillmentsImpl implements Fulfillments {
             new Func1<String, Observable<ServiceResponse<Page<Subscription>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<Subscription>>> call(String nextPageLink) {
-                    return listSubscriptionsNextSinglePageAsync(nextPageLink, contentType, null, null);
+                    return listSubscriptionsNextSinglePageAsync(nextPageLink, null, null);
                 }
             },
             serviceCallback);
@@ -344,7 +342,7 @@ public class FulfillmentsImpl implements Fulfillments {
                     if (nextPageLink == null) {
                         return Observable.just(page);
                     }
-                    return Observable.just(page).concatWith(listSubscriptionsNextWithServiceResponseAsync(nextPageLink, contentType, null, null));
+                    return Observable.just(page).concatWith(listSubscriptionsNextWithServiceResponseAsync(nextPageLink, null, null));
                 }
             });
     }
@@ -358,11 +356,10 @@ public class FulfillmentsImpl implements Fulfillments {
      */
     public Observable<ServiceResponse<Page<Subscription>>> listSubscriptionsSinglePageAsync() {
         final String apiVersion = "2018-08-31";
-        final String contentType = "application/json";
         final String continuationToken = null;
         final UUID requestId = null;
         final UUID correlationId = null;
-        return service.listSubscriptions(apiVersion, continuationToken, contentType, requestId, correlationId, this.client.acceptLanguage(), this.client.userAgent())
+        return service.listSubscriptions(apiVersion, continuationToken, requestId, correlationId, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<Subscription>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<Subscription>>> call(Response<ResponseBody> response) {
@@ -477,8 +474,7 @@ public class FulfillmentsImpl implements Fulfillments {
      */
     public Observable<ServiceResponse<Page<Subscription>>> listSubscriptionsSinglePageAsync(final String continuationToken, final UUID requestId, final UUID correlationId) {
         final String apiVersion = "2018-08-31";
-        final String contentType = "application/json";
-        return service.listSubscriptions(apiVersion, continuationToken, contentType, requestId, correlationId, this.client.acceptLanguage(), this.client.userAgent())
+        return service.listSubscriptions(apiVersion, continuationToken, requestId, correlationId, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<Subscription>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<Subscription>>> call(Response<ResponseBody> response) {
@@ -558,10 +554,9 @@ public class FulfillmentsImpl implements Fulfillments {
             throw new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.");
         }
         final String apiVersion = "2018-08-31";
-        final String contentType = "application/json";
         final UUID requestId = null;
         final UUID correlationId = null;
-        return service.getSubscription(subscriptionId, apiVersion, contentType, requestId, correlationId, this.client.acceptLanguage(), this.client.userAgent())
+        return service.getSubscription(subscriptionId, apiVersion, requestId, correlationId, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Subscription>>>() {
                 @Override
                 public Observable<ServiceResponse<Subscription>> call(Response<ResponseBody> response) {
@@ -640,8 +635,7 @@ public class FulfillmentsImpl implements Fulfillments {
             throw new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.");
         }
         final String apiVersion = "2018-08-31";
-        final String contentType = "application/json";
-        return service.getSubscription(subscriptionId, apiVersion, contentType, requestId, correlationId, this.client.acceptLanguage(), this.client.userAgent())
+        return service.getSubscription(subscriptionId, apiVersion, requestId, correlationId, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Subscription>>>() {
                 @Override
                 public Observable<ServiceResponse<Subscription>> call(Response<ResponseBody> response) {
@@ -700,9 +694,9 @@ public class FulfillmentsImpl implements Fulfillments {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> updateSubscriptionAsync(UUID subscriptionId) {
-        return updateSubscriptionWithServiceResponseAsync(subscriptionId).map(new Func1<ServiceResponseWithHeaders<Void, FulfillmentUpdateSubscriptionHeaders>, Void>() {
+        return updateSubscriptionWithServiceResponseAsync(subscriptionId).map(new Func1<ServiceResponseWithHeaders<Void, FulfillmentOperationsUpdateSubscriptionHeaders>, Void>() {
             @Override
-            public Void call(ServiceResponseWithHeaders<Void, FulfillmentUpdateSubscriptionHeaders> response) {
+            public Void call(ServiceResponseWithHeaders<Void, FulfillmentOperationsUpdateSubscriptionHeaders> response) {
                 return response.body();
             }
         });
@@ -716,12 +710,11 @@ public class FulfillmentsImpl implements Fulfillments {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public Observable<ServiceResponseWithHeaders<Void, FulfillmentUpdateSubscriptionHeaders>> updateSubscriptionWithServiceResponseAsync(UUID subscriptionId) {
+    public Observable<ServiceResponseWithHeaders<Void, FulfillmentOperationsUpdateSubscriptionHeaders>> updateSubscriptionWithServiceResponseAsync(UUID subscriptionId) {
         if (subscriptionId == null) {
             throw new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.");
         }
         final String apiVersion = "2018-08-31";
-        final String contentType = "application/json";
         final UUID requestId = null;
         final UUID correlationId = null;
         final String planId = null;
@@ -729,12 +722,12 @@ public class FulfillmentsImpl implements Fulfillments {
         SubscriberPlan body = new SubscriberPlan();
         body.withPlanId(null);
         body.withQuantity(null);
-        return service.updateSubscription(subscriptionId, apiVersion, contentType, requestId, correlationId, this.client.acceptLanguage(), body, this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, FulfillmentUpdateSubscriptionHeaders>>>() {
+        return service.updateSubscription(subscriptionId, apiVersion, requestId, correlationId, this.client.acceptLanguage(), body, this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, FulfillmentOperationsUpdateSubscriptionHeaders>>>() {
                 @Override
-                public Observable<ServiceResponseWithHeaders<Void, FulfillmentUpdateSubscriptionHeaders>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponseWithHeaders<Void, FulfillmentOperationsUpdateSubscriptionHeaders>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponseWithHeaders<Void, FulfillmentUpdateSubscriptionHeaders> clientResponse = updateSubscriptionDelegate(response);
+                        ServiceResponseWithHeaders<Void, FulfillmentOperationsUpdateSubscriptionHeaders> clientResponse = updateSubscriptionDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -790,9 +783,9 @@ public class FulfillmentsImpl implements Fulfillments {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> updateSubscriptionAsync(UUID subscriptionId, UUID requestId, UUID correlationId, String planId, Long quantity) {
-        return updateSubscriptionWithServiceResponseAsync(subscriptionId, requestId, correlationId, planId, quantity).map(new Func1<ServiceResponseWithHeaders<Void, FulfillmentUpdateSubscriptionHeaders>, Void>() {
+        return updateSubscriptionWithServiceResponseAsync(subscriptionId, requestId, correlationId, planId, quantity).map(new Func1<ServiceResponseWithHeaders<Void, FulfillmentOperationsUpdateSubscriptionHeaders>, Void>() {
             @Override
-            public Void call(ServiceResponseWithHeaders<Void, FulfillmentUpdateSubscriptionHeaders> response) {
+            public Void call(ServiceResponseWithHeaders<Void, FulfillmentOperationsUpdateSubscriptionHeaders> response) {
                 return response.body();
             }
         });
@@ -810,21 +803,20 @@ public class FulfillmentsImpl implements Fulfillments {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public Observable<ServiceResponseWithHeaders<Void, FulfillmentUpdateSubscriptionHeaders>> updateSubscriptionWithServiceResponseAsync(UUID subscriptionId, UUID requestId, UUID correlationId, String planId, Long quantity) {
+    public Observable<ServiceResponseWithHeaders<Void, FulfillmentOperationsUpdateSubscriptionHeaders>> updateSubscriptionWithServiceResponseAsync(UUID subscriptionId, UUID requestId, UUID correlationId, String planId, Long quantity) {
         if (subscriptionId == null) {
             throw new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.");
         }
         final String apiVersion = "2018-08-31";
-        final String contentType = "application/json";
         SubscriberPlan body = new SubscriberPlan();
         body.withPlanId(planId);
         body.withQuantity(quantity);
-        return service.updateSubscription(subscriptionId, apiVersion, contentType, requestId, correlationId, this.client.acceptLanguage(), body, this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, FulfillmentUpdateSubscriptionHeaders>>>() {
+        return service.updateSubscription(subscriptionId, apiVersion, requestId, correlationId, this.client.acceptLanguage(), body, this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, FulfillmentOperationsUpdateSubscriptionHeaders>>>() {
                 @Override
-                public Observable<ServiceResponseWithHeaders<Void, FulfillmentUpdateSubscriptionHeaders>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponseWithHeaders<Void, FulfillmentOperationsUpdateSubscriptionHeaders>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponseWithHeaders<Void, FulfillmentUpdateSubscriptionHeaders> clientResponse = updateSubscriptionDelegate(response);
+                        ServiceResponseWithHeaders<Void, FulfillmentOperationsUpdateSubscriptionHeaders> clientResponse = updateSubscriptionDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -833,7 +825,7 @@ public class FulfillmentsImpl implements Fulfillments {
             });
     }
 
-    private ServiceResponseWithHeaders<Void, FulfillmentUpdateSubscriptionHeaders> updateSubscriptionDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
+    private ServiceResponseWithHeaders<Void, FulfillmentOperationsUpdateSubscriptionHeaders> updateSubscriptionDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
         return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .register(400, new TypeToken<Void>() { }.getType())
@@ -841,7 +833,7 @@ public class FulfillmentsImpl implements Fulfillments {
                 .register(404, new TypeToken<Void>() { }.getType())
                 .register(500, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
-                .buildWithHeaders(response, FulfillmentUpdateSubscriptionHeaders.class);
+                .buildWithHeaders(response, FulfillmentOperationsUpdateSubscriptionHeaders.class);
     }
 
     /**
@@ -879,9 +871,9 @@ public class FulfillmentsImpl implements Fulfillments {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> deleteSubscriptionAsync(UUID subscriptionId) {
-        return deleteSubscriptionWithServiceResponseAsync(subscriptionId).map(new Func1<ServiceResponseWithHeaders<Void, FulfillmentDeleteSubscriptionHeaders>, Void>() {
+        return deleteSubscriptionWithServiceResponseAsync(subscriptionId).map(new Func1<ServiceResponseWithHeaders<Void, FulfillmentOperationsDeleteSubscriptionHeaders>, Void>() {
             @Override
-            public Void call(ServiceResponseWithHeaders<Void, FulfillmentDeleteSubscriptionHeaders> response) {
+            public Void call(ServiceResponseWithHeaders<Void, FulfillmentOperationsDeleteSubscriptionHeaders> response) {
                 return response.body();
             }
         });
@@ -895,20 +887,19 @@ public class FulfillmentsImpl implements Fulfillments {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public Observable<ServiceResponseWithHeaders<Void, FulfillmentDeleteSubscriptionHeaders>> deleteSubscriptionWithServiceResponseAsync(UUID subscriptionId) {
+    public Observable<ServiceResponseWithHeaders<Void, FulfillmentOperationsDeleteSubscriptionHeaders>> deleteSubscriptionWithServiceResponseAsync(UUID subscriptionId) {
         if (subscriptionId == null) {
             throw new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.");
         }
         final String apiVersion = "2018-08-31";
-        final String contentType = "application/json";
         final UUID requestId = null;
         final UUID correlationId = null;
-        return service.deleteSubscription(subscriptionId, apiVersion, contentType, requestId, correlationId, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, FulfillmentDeleteSubscriptionHeaders>>>() {
+        return service.deleteSubscription(subscriptionId, apiVersion, requestId, correlationId, this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, FulfillmentOperationsDeleteSubscriptionHeaders>>>() {
                 @Override
-                public Observable<ServiceResponseWithHeaders<Void, FulfillmentDeleteSubscriptionHeaders>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponseWithHeaders<Void, FulfillmentOperationsDeleteSubscriptionHeaders>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponseWithHeaders<Void, FulfillmentDeleteSubscriptionHeaders> clientResponse = deleteSubscriptionDelegate(response);
+                        ServiceResponseWithHeaders<Void, FulfillmentOperationsDeleteSubscriptionHeaders> clientResponse = deleteSubscriptionDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -958,9 +949,9 @@ public class FulfillmentsImpl implements Fulfillments {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> deleteSubscriptionAsync(UUID subscriptionId, UUID requestId, UUID correlationId) {
-        return deleteSubscriptionWithServiceResponseAsync(subscriptionId, requestId, correlationId).map(new Func1<ServiceResponseWithHeaders<Void, FulfillmentDeleteSubscriptionHeaders>, Void>() {
+        return deleteSubscriptionWithServiceResponseAsync(subscriptionId, requestId, correlationId).map(new Func1<ServiceResponseWithHeaders<Void, FulfillmentOperationsDeleteSubscriptionHeaders>, Void>() {
             @Override
-            public Void call(ServiceResponseWithHeaders<Void, FulfillmentDeleteSubscriptionHeaders> response) {
+            public Void call(ServiceResponseWithHeaders<Void, FulfillmentOperationsDeleteSubscriptionHeaders> response) {
                 return response.body();
             }
         });
@@ -976,18 +967,17 @@ public class FulfillmentsImpl implements Fulfillments {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public Observable<ServiceResponseWithHeaders<Void, FulfillmentDeleteSubscriptionHeaders>> deleteSubscriptionWithServiceResponseAsync(UUID subscriptionId, UUID requestId, UUID correlationId) {
+    public Observable<ServiceResponseWithHeaders<Void, FulfillmentOperationsDeleteSubscriptionHeaders>> deleteSubscriptionWithServiceResponseAsync(UUID subscriptionId, UUID requestId, UUID correlationId) {
         if (subscriptionId == null) {
             throw new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.");
         }
         final String apiVersion = "2018-08-31";
-        final String contentType = "application/json";
-        return service.deleteSubscription(subscriptionId, apiVersion, contentType, requestId, correlationId, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, FulfillmentDeleteSubscriptionHeaders>>>() {
+        return service.deleteSubscription(subscriptionId, apiVersion, requestId, correlationId, this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, FulfillmentOperationsDeleteSubscriptionHeaders>>>() {
                 @Override
-                public Observable<ServiceResponseWithHeaders<Void, FulfillmentDeleteSubscriptionHeaders>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponseWithHeaders<Void, FulfillmentOperationsDeleteSubscriptionHeaders>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponseWithHeaders<Void, FulfillmentDeleteSubscriptionHeaders> clientResponse = deleteSubscriptionDelegate(response);
+                        ServiceResponseWithHeaders<Void, FulfillmentOperationsDeleteSubscriptionHeaders> clientResponse = deleteSubscriptionDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -996,7 +986,7 @@ public class FulfillmentsImpl implements Fulfillments {
             });
     }
 
-    private ServiceResponseWithHeaders<Void, FulfillmentDeleteSubscriptionHeaders> deleteSubscriptionDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
+    private ServiceResponseWithHeaders<Void, FulfillmentOperationsDeleteSubscriptionHeaders> deleteSubscriptionDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
         return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .register(400, new TypeToken<Void>() { }.getType())
@@ -1004,7 +994,7 @@ public class FulfillmentsImpl implements Fulfillments {
                 .register(404, new TypeToken<Void>() { }.getType())
                 .register(500, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
-                .buildWithHeaders(response, FulfillmentDeleteSubscriptionHeaders.class);
+                .buildWithHeaders(response, FulfillmentOperationsDeleteSubscriptionHeaders.class);
     }
 
     /**
@@ -1064,10 +1054,9 @@ public class FulfillmentsImpl implements Fulfillments {
             throw new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.");
         }
         final String apiVersion = "2018-08-31";
-        final String contentType = "application/json";
         final UUID requestId = null;
         final UUID correlationId = null;
-        return service.listAvailablePlans(subscriptionId, apiVersion, contentType, requestId, correlationId, this.client.acceptLanguage(), this.client.userAgent())
+        return service.listAvailablePlans(subscriptionId, apiVersion, requestId, correlationId, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<SubscriptionPlans>>>() {
                 @Override
                 public Observable<ServiceResponse<SubscriptionPlans>> call(Response<ResponseBody> response) {
@@ -1146,8 +1135,7 @@ public class FulfillmentsImpl implements Fulfillments {
             throw new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.");
         }
         final String apiVersion = "2018-08-31";
-        final String contentType = "application/json";
-        return service.listAvailablePlans(subscriptionId, apiVersion, contentType, requestId, correlationId, this.client.acceptLanguage(), this.client.userAgent())
+        return service.listAvailablePlans(subscriptionId, apiVersion, requestId, correlationId, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<SubscriptionPlans>>>() {
                 @Override
                 public Observable<ServiceResponse<SubscriptionPlans>> call(Response<ResponseBody> response) {
@@ -1227,7 +1215,6 @@ public class FulfillmentsImpl implements Fulfillments {
             throw new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.");
         }
         final String apiVersion = "2018-08-31";
-        final String contentType = "application/json";
         final UUID requestId = null;
         final UUID correlationId = null;
         final String planId = null;
@@ -1235,7 +1222,7 @@ public class FulfillmentsImpl implements Fulfillments {
         SubscriberPlan body = new SubscriberPlan();
         body.withPlanId(null);
         body.withQuantity(null);
-        return service.activateSubscription(subscriptionId, apiVersion, contentType, requestId, correlationId, this.client.acceptLanguage(), body, this.client.userAgent())
+        return service.activateSubscription(subscriptionId, apiVersion, requestId, correlationId, this.client.acceptLanguage(), body, this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
                 public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
@@ -1321,11 +1308,10 @@ public class FulfillmentsImpl implements Fulfillments {
             throw new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.");
         }
         final String apiVersion = "2018-08-31";
-        final String contentType = "application/json";
         SubscriberPlan body = new SubscriberPlan();
         body.withPlanId(planId);
         body.withQuantity(quantity);
-        return service.activateSubscription(subscriptionId, apiVersion, contentType, requestId, correlationId, this.client.acceptLanguage(), body, this.client.userAgent())
+        return service.activateSubscription(subscriptionId, apiVersion, requestId, correlationId, this.client.acceptLanguage(), body, this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
                 public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
@@ -1365,7 +1351,7 @@ public class FulfillmentsImpl implements Fulfillments {
         return new PagedList<Subscription>(response.body()) {
             @Override
             public Page<Subscription> nextPage(String nextPageLink) {
-                return listSubscriptionsNextSinglePageAsync(nextPageLink, contentType, null, null).toBlocking().single().body();
+                return listSubscriptionsNextSinglePageAsync(nextPageLink, null, null).toBlocking().single().body();
             }
         };
     }
@@ -1386,7 +1372,7 @@ public class FulfillmentsImpl implements Fulfillments {
             new Func1<String, Observable<ServiceResponse<Page<Subscription>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<Subscription>>> call(String nextPageLink) {
-                    return listSubscriptionsNextSinglePageAsync(nextPageLink, contentType, null, null);
+                    return listSubscriptionsNextSinglePageAsync(nextPageLink, null, null);
                 }
             },
             serviceCallback);
@@ -1427,7 +1413,7 @@ public class FulfillmentsImpl implements Fulfillments {
                     if (nextPageLink == null) {
                         return Observable.just(page);
                     }
-                    return Observable.just(page).concatWith(listSubscriptionsNextWithServiceResponseAsync(nextPageLink, contentType, null, null));
+                    return Observable.just(page).concatWith(listSubscriptionsNextWithServiceResponseAsync(nextPageLink, null, null));
                 }
             });
     }
@@ -1444,11 +1430,10 @@ public class FulfillmentsImpl implements Fulfillments {
         if (nextPageLink == null) {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
-        final String contentType = "application/json";
         final UUID requestId = null;
         final UUID correlationId = null;
         String nextUrl = String.format("%s", nextPageLink);
-        return service.listSubscriptionsNext(nextUrl, contentType, requestId, correlationId, this.client.acceptLanguage(), this.client.userAgent())
+        return service.listSubscriptionsNext(nextUrl, requestId, correlationId, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<Subscription>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<Subscription>>> call(Response<ResponseBody> response) {
@@ -1566,9 +1551,8 @@ public class FulfillmentsImpl implements Fulfillments {
         if (nextPageLink == null) {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
-        final String contentType = "application/json";
         String nextUrl = String.format("%s", nextPageLink);
-        return service.listSubscriptionsNext(nextUrl, contentType, requestId, correlationId, this.client.acceptLanguage(), this.client.userAgent())
+        return service.listSubscriptionsNext(nextUrl, requestId, correlationId, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<Subscription>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<Subscription>>> call(Response<ResponseBody> response) {

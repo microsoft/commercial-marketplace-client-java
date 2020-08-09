@@ -30,7 +30,7 @@ openapi-type: arm
 
 ```yaml
 input-file:
-  - https://raw.githubusercontent.com/Azure/azure-marketplace-openapi/master/marketplace.json?token=AIVAUWTB2EHTE3SXD4TGBGK7FMSKW
+  - ./marketplace.json
 ```
 
 # Code Generation

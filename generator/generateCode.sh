@@ -1,10 +1,19 @@
 docker build -t local/autorest .
 
-if [[ -d "../src/sdk" ]]; then
-    rm -rf "../src/sdk"
+generated_code_dir="../sdk/src/main/java/com/azure/marketplace"
+
+if [[ -d $generated_code_dir ]]; then
+    echo "Cleaning out previously generated files"
+    rm -rf "$generated_code_dir/implementation"
+    rm -rf "$generated_code_dir/models"
+    rm "$generated_code_dir/FulfillmentOperations.java"
+    rm "$generated_code_dir/MarketplaceClient.java"
+    rm "$generated_code_dir/MeteringOperations.java"
+    rm "$generated_code_dir/package-info.java"
+    rm "$generated_code_dir/SubscriptionOperations.java"
 fi
 
-mkdir -p "../src/sdk"
+mkdir -p "../sdk/src/"
 
 current_dir=$(pwd)
 
@@ -18,5 +27,5 @@ docker run --rm --name autorest \
     --java-sdks-folder=/out  \
     --add-credentials 
 
-cp -r ./temp/src/main/java/* ../src/sdk/
+cp -r ./temp/src/* ../sdk/src
 

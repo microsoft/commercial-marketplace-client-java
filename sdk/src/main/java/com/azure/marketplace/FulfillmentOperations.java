@@ -10,8 +10,8 @@
 
 package com.azure.marketplace;
 
-import com.azure.marketplace.models.FulfillmentDeleteSubscriptionHeaders;
-import com.azure.marketplace.models.FulfillmentUpdateSubscriptionHeaders;
+import com.azure.marketplace.models.FulfillmentOperationsDeleteSubscriptionHeaders;
+import com.azure.marketplace.models.FulfillmentOperationsUpdateSubscriptionHeaders;
 import com.azure.marketplace.models.ResolvedSubscription;
 import com.azure.marketplace.models.Subscription;
 import com.azure.marketplace.models.SubscriptionPlans;
@@ -30,9 +30,9 @@ import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
- * in Fulfillments.
+ * in FulfillmentOperations.
  */
-public interface Fulfillments {
+public interface FulfillmentOperations {
     /**
      * Resolve a subscription.
      * The resolve endpoint enables the publisher to resolve a marketplace token to a persistent resource ID. The resource ID is the unique identifier for a SaaS subscription. When a user is redirected to a partner's website, the URL contains a token in the query parameters. The partner is expected to use this token and make a request to resolve it. The response contains the unique SaaS subscription ID, name, offer ID, and plan for the resource. This token is valid for one hour only.
@@ -348,7 +348,7 @@ public interface Fulfillments {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    Observable<ServiceResponseWithHeaders<Void, FulfillmentUpdateSubscriptionHeaders>> updateSubscriptionWithServiceResponseAsync(UUID subscriptionId);
+    Observable<ServiceResponseWithHeaders<Void, FulfillmentOperationsUpdateSubscriptionHeaders>> updateSubscriptionWithServiceResponseAsync(UUID subscriptionId);
     /**
      * Patch a subscription.
      * Use this call to update the plan, the user count (quantity), or both.
@@ -405,7 +405,7 @@ public interface Fulfillments {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    Observable<ServiceResponseWithHeaders<Void, FulfillmentUpdateSubscriptionHeaders>> updateSubscriptionWithServiceResponseAsync(UUID subscriptionId, UUID requestId, UUID correlationId, String planId, Long quantity);
+    Observable<ServiceResponseWithHeaders<Void, FulfillmentOperationsUpdateSubscriptionHeaders>> updateSubscriptionWithServiceResponseAsync(UUID subscriptionId, UUID requestId, UUID correlationId, String planId, Long quantity);
 
     /**
      * Delete a subscription.
@@ -447,7 +447,7 @@ public interface Fulfillments {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    Observable<ServiceResponseWithHeaders<Void, FulfillmentDeleteSubscriptionHeaders>> deleteSubscriptionWithServiceResponseAsync(UUID subscriptionId);
+    Observable<ServiceResponseWithHeaders<Void, FulfillmentOperationsDeleteSubscriptionHeaders>> deleteSubscriptionWithServiceResponseAsync(UUID subscriptionId);
     /**
      * Delete a subscription.
      * Unsubscribe and delete the specified subscription.
@@ -496,7 +496,7 @@ public interface Fulfillments {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    Observable<ServiceResponseWithHeaders<Void, FulfillmentDeleteSubscriptionHeaders>> deleteSubscriptionWithServiceResponseAsync(UUID subscriptionId, UUID requestId, UUID correlationId);
+    Observable<ServiceResponseWithHeaders<Void, FulfillmentOperationsDeleteSubscriptionHeaders>> deleteSubscriptionWithServiceResponseAsync(UUID subscriptionId, UUID requestId, UUID correlationId);
 
     /**
      * List available plans.

@@ -10,9 +10,9 @@
 
 package com.azure.marketplace.implementation;
 
-import com.azure.marketplace.Fulfillments;
+import com.azure.marketplace.FulfillmentOperations;
 import com.azure.marketplace.MarketplaceClient;
-import com.azure.marketplace.Meterings;
+import com.azure.marketplace.MeteringOperations;
 import com.azure.marketplace.SubscriptionOperations;
 import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.AzureServiceClient;
@@ -104,16 +104,16 @@ public class MarketplaceClientImpl extends AzureServiceClient implements Marketp
     }
 
     /**
-     * The Fulfillments object to access its operations.
+     * The FulfillmentOperations object to access its operations.
      */
-    private Fulfillments fulfillments;
+    private FulfillmentOperations fulfillmentOperations;
 
     /**
-     * Gets the Fulfillments object to access its operations.
-     * @return the Fulfillments object.
+     * Gets the FulfillmentOperations object to access its operations.
+     * @return the FulfillmentOperations object.
      */
-    public Fulfillments fulfillments() {
-        return this.fulfillments;
+    public FulfillmentOperations fulfillmentOperations() {
+        return this.fulfillmentOperations;
     }
 
     /**
@@ -130,16 +130,16 @@ public class MarketplaceClientImpl extends AzureServiceClient implements Marketp
     }
 
     /**
-     * The Meterings object to access its operations.
+     * The MeteringOperations object to access its operations.
      */
-    private Meterings meterings;
+    private MeteringOperations meteringOperations;
 
     /**
-     * Gets the Meterings object to access its operations.
-     * @return the Meterings object.
+     * Gets the MeteringOperations object to access its operations.
+     * @return the MeteringOperations object.
      */
-    public Meterings meterings() {
-        return this.meterings;
+    public MeteringOperations meteringOperations() {
+        return this.meteringOperations;
     }
 
     /**
@@ -176,9 +176,9 @@ public class MarketplaceClientImpl extends AzureServiceClient implements Marketp
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
-        this.fulfillments = new FulfillmentsImpl(restClient().retrofit(), this);
+        this.fulfillmentOperations = new FulfillmentOperationsImpl(restClient().retrofit(), this);
         this.subscriptionOperations = new SubscriptionOperationsImpl(restClient().retrofit(), this);
-        this.meterings = new MeteringsImpl(restClient().retrofit(), this);
+        this.meteringOperations = new MeteringOperationsImpl(restClient().retrofit(), this);
         this.azureClient = new AzureClient(this);
     }
 

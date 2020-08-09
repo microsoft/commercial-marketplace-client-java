@@ -83,10 +83,10 @@ public interface MarketplaceClient {
     MarketplaceClient withGenerateClientRequestId(boolean generateClientRequestId);
 
     /**
-     * Gets the Fulfillments object to access its operations.
-     * @return the Fulfillments object.
+     * Gets the FulfillmentOperations object to access its operations.
+     * @return the FulfillmentOperations object.
      */
-    Fulfillments fulfillments();
+    FulfillmentOperations fulfillmentOperations();
 
     /**
      * Gets the SubscriptionOperations object to access its operations.
@@ -95,9 +95,9 @@ public interface MarketplaceClient {
     SubscriptionOperations subscriptionOperations();
 
     /**
-     * Gets the Meterings object to access its operations.
-     * @return the Meterings object.
+     * Gets the MeteringOperations object to access its operations.
+     * @return the MeteringOperations object.
      */
-    Meterings meterings();
+    MeteringOperations meteringOperations();
 
 }

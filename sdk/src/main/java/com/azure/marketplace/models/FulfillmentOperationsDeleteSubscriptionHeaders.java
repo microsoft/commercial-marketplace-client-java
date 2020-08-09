@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Defines headers for DeleteSubscription operation.
  */
-public class FulfillmentDeleteSubscriptionHeaders {
+public class FulfillmentOperationsDeleteSubscriptionHeaders {
     /**
      * The operationLocationUri property.
      */
@@ -35,9 +35,9 @@ public class FulfillmentDeleteSubscriptionHeaders {
      * Set the operationLocationUri value.
      *
      * @param operationLocationUri the operationLocationUri value to set
-     * @return the FulfillmentDeleteSubscriptionHeaders object itself.
+     * @return the FulfillmentOperationsDeleteSubscriptionHeaders object itself.
      */
-    public FulfillmentDeleteSubscriptionHeaders withOperationLocationUri(String operationLocationUri) {
+    public FulfillmentOperationsDeleteSubscriptionHeaders withOperationLocationUri(String operationLocationUri) {
         this.operationLocationUri = operationLocationUri;
         return this;
     }

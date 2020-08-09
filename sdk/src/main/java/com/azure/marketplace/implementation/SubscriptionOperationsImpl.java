@@ -63,15 +63,15 @@ public class SubscriptionOperationsImpl implements SubscriptionOperations {
     interface SubscriptionOperationsService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.azure.marketplace.SubscriptionOperations listOperations" })
         @GET("saas/subscriptions/{subscriptionId}/operations")
-        Observable<Response<ResponseBody>> listOperations(@Path("subscriptionId") UUID subscriptionId, @Query("api-version") String apiVersion, @Header("Content-Type") String contentType, @Header("x-ms-requestid") UUID requestId, @Header("x-ms-correlationid") UUID correlationId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> listOperations(@Path("subscriptionId") UUID subscriptionId, @Query("api-version") String apiVersion, @Header("x-ms-requestid") UUID requestId, @Header("x-ms-correlationid") UUID correlationId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.azure.marketplace.SubscriptionOperations getOperationStatus" })
         @GET("saas/subscriptions/{subscriptionId}/operations/{operationId}")
-        Observable<Response<ResponseBody>> getOperationStatus(@Path("subscriptionId") UUID subscriptionId, @Path("operationId") UUID operationId, @Query("api-version") String apiVersion, @Header("Content-Type") String contentType, @Header("x-ms-requestid") UUID requestId, @Header("x-ms-correlationid") UUID correlationId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> getOperationStatus(@Path("subscriptionId") UUID subscriptionId, @Path("operationId") UUID operationId, @Query("api-version") String apiVersion, @Header("x-ms-requestid") UUID requestId, @Header("x-ms-correlationid") UUID correlationId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.azure.marketplace.SubscriptionOperations updateOperationStatus" })
         @PATCH("saas/subscriptions/{subscriptionId}/operations/{operationId}")
-        Observable<Response<ResponseBody>> updateOperationStatus(@Path("subscriptionId") UUID subscriptionId, @Path("operationId") UUID operationId, @Query("api-version") String apiVersion, @Header("Content-Type") String contentType, @Header("x-ms-requestid") UUID requestId, @Header("x-ms-correlationid") UUID correlationId, @Header("accept-language") String acceptLanguage, @Body UpdateOperation body, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> updateOperationStatus(@Path("subscriptionId") UUID subscriptionId, @Path("operationId") UUID operationId, @Query("api-version") String apiVersion, @Header("x-ms-requestid") UUID requestId, @Header("x-ms-correlationid") UUID correlationId, @Header("accept-language") String acceptLanguage, @Body UpdateOperation body, @Header("User-Agent") String userAgent);
 
     }
 
@@ -132,10 +132,9 @@ public class SubscriptionOperationsImpl implements SubscriptionOperations {
             throw new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.");
         }
         final String apiVersion = "2018-08-31";
-        final String contentType = "application/json";
         final UUID requestId = null;
         final UUID correlationId = null;
-        return service.listOperations(subscriptionId, apiVersion, contentType, requestId, correlationId, this.client.acceptLanguage(), this.client.userAgent())
+        return service.listOperations(subscriptionId, apiVersion, requestId, correlationId, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<OperationList>>>() {
                 @Override
                 public Observable<ServiceResponse<OperationList>> call(Response<ResponseBody> response) {
@@ -214,8 +213,7 @@ public class SubscriptionOperationsImpl implements SubscriptionOperations {
             throw new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.");
         }
         final String apiVersion = "2018-08-31";
-        final String contentType = "application/json";
-        return service.listOperations(subscriptionId, apiVersion, contentType, requestId, correlationId, this.client.acceptLanguage(), this.client.userAgent())
+        return service.listOperations(subscriptionId, apiVersion, requestId, correlationId, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<OperationList>>>() {
                 @Override
                 public Observable<ServiceResponse<OperationList>> call(Response<ResponseBody> response) {
@@ -304,10 +302,9 @@ public class SubscriptionOperationsImpl implements SubscriptionOperations {
             throw new IllegalArgumentException("Parameter operationId is required and cannot be null.");
         }
         final String apiVersion = "2018-08-31";
-        final String contentType = "application/json";
         final UUID requestId = null;
         final UUID correlationId = null;
-        return service.getOperationStatus(subscriptionId, operationId, apiVersion, contentType, requestId, correlationId, this.client.acceptLanguage(), this.client.userAgent())
+        return service.getOperationStatus(subscriptionId, operationId, apiVersion, requestId, correlationId, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Operation>>>() {
                 @Override
                 public Observable<ServiceResponse<Operation>> call(Response<ResponseBody> response) {
@@ -393,8 +390,7 @@ public class SubscriptionOperationsImpl implements SubscriptionOperations {
             throw new IllegalArgumentException("Parameter operationId is required and cannot be null.");
         }
         final String apiVersion = "2018-08-31";
-        final String contentType = "application/json";
-        return service.getOperationStatus(subscriptionId, operationId, apiVersion, contentType, requestId, correlationId, this.client.acceptLanguage(), this.client.userAgent())
+        return service.getOperationStatus(subscriptionId, operationId, apiVersion, requestId, correlationId, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Operation>>>() {
                 @Override
                 public Observable<ServiceResponse<Operation>> call(Response<ResponseBody> response) {
@@ -482,7 +478,6 @@ public class SubscriptionOperationsImpl implements SubscriptionOperations {
             throw new IllegalArgumentException("Parameter operationId is required and cannot be null.");
         }
         final String apiVersion = "2018-08-31";
-        final String contentType = "application/json";
         final UUID requestId = null;
         final UUID correlationId = null;
         final String planId = null;
@@ -492,7 +487,7 @@ public class SubscriptionOperationsImpl implements SubscriptionOperations {
         body.withPlanId(null);
         body.withQuantity(null);
         body.withStatus(null);
-        return service.updateOperationStatus(subscriptionId, operationId, apiVersion, contentType, requestId, correlationId, this.client.acceptLanguage(), body, this.client.userAgent())
+        return service.updateOperationStatus(subscriptionId, operationId, apiVersion, requestId, correlationId, this.client.acceptLanguage(), body, this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
                 public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
@@ -589,12 +584,11 @@ public class SubscriptionOperationsImpl implements SubscriptionOperations {
             throw new IllegalArgumentException("Parameter operationId is required and cannot be null.");
         }
         final String apiVersion = "2018-08-31";
-        final String contentType = "application/json";
         UpdateOperation body = new UpdateOperation();
         body.withPlanId(planId);
         body.withQuantity(quantity);
         body.withStatus(status);
-        return service.updateOperationStatus(subscriptionId, operationId, apiVersion, contentType, requestId, correlationId, this.client.acceptLanguage(), body, this.client.userAgent())
+        return service.updateOperationStatus(subscriptionId, operationId, apiVersion, requestId, correlationId, this.client.acceptLanguage(), body, this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
                 public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
