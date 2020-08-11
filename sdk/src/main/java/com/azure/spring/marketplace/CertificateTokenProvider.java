@@ -1,13 +1,7 @@
 package com.azure.spring.marketplace;
 
-import com.microsoft.rest.credentials.ServiceClientCredentials;
-import okhttp3.Interceptor;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.security.cert.X509Certificate;
 import java.util.UUID;
 
@@ -20,7 +14,7 @@ import java.util.UUID;
 //
 // You can upload certificate.pem to Azure for use as the public key. Certificate.pfx is used locally.
 @Service
-public class CertificateTokenProvider implements ServiceClientCredentials {
+public class CertificateTokenProvider implements MarketplaceTokenProvider {
     UUID _tenantId;
     UUID _clientId;
     X509Certificate _clientSecret;
@@ -33,26 +27,7 @@ public class CertificateTokenProvider implements ServiceClientCredentials {
         _certificatePassword = certificatePassword;
     }
 
-    @Override
-    public void applyCredentialsFilter(OkHttpClient.Builder builder) {
-        builder.addNetworkInterceptor(
-                new Interceptor() {
-                    @Override
-                    public Response intercept(Chain chain) throws IOException {
-                        Request request = null;
-                        Request original = chain.request();
-                        String token = acquireToken();
-                        String bearerToken = String.format("Bearer %s", token);
-                        // Request customization: add request headers
-                        Request.Builder requestBuilder = original.newBuilder()
-                                .addHeader("Authorize", bearerToken);
-                        request = requestBuilder.build();
-                        return chain.proceed(request);
-                    }
-                });
-    }
-
-    private String acquireToken(){
-        
+    public String acquireToken(){
+      return null;
     }
 }

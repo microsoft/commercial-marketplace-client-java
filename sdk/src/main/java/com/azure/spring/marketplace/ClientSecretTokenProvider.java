@@ -2,9 +2,6 @@ package com.azure.spring.marketplace;
 
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
-import com.microsoft.rest.credentials.ServiceClientCredentials;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -17,7 +14,7 @@ import java.net.URLEncoder;
 import java.util.UUID;
 
 @Service
-public class ClientSecretTokenProvider implements ServiceClientCredentials {
+public class ClientSecretTokenProvider implements MarketplaceTokenProvider {
     UUID _tenantId;
     UUID _clientId;
     String _clientSecret;
@@ -28,23 +25,7 @@ public class ClientSecretTokenProvider implements ServiceClientCredentials {
         _clientSecret = clientSecret;
     }
 
-    @Override
-    public void applyCredentialsFilter(OkHttpClient.Builder builder) {
-        builder.addNetworkInterceptor(
-                chain -> {
-                    Request request;
-                    Request original = chain.request();
-                    String token = acquireToken();
-                    String bearerToken = String.format("Bearer %s", token);
-                    // Request customization: add request headers
-                    Request.Builder requestBuilder = original.newBuilder()
-                            .addHeader("Authorization", bearerToken);
-                    request = requestBuilder.build();
-                    return chain.proceed(request);
-                });
-    }
-
-    private String acquireToken() throws IOException {
+    public String acquireToken() throws IOException {
         String authority = String.format("https://login.microsoftonline.com/%s/oauth2/v2.0/token", _tenantId);
         URL url = new URL(authority);
         HttpURLConnection con = (HttpURLConnection) url.openConnection();

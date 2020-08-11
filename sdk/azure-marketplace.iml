@@ -98,5 +98,7 @@
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-core:5.3.3.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-web:5.3.3.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-web:5.2.6.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:unknown" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-simple:unknown" level="project" />
   </component>
 </module>
