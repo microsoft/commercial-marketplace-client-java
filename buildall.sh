@@ -6,6 +6,6 @@ popd
 
 pushd ./sdk
 
-mvn -B package 
+mvn -e -B package 
 
 popd

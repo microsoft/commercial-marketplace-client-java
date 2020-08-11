@@ -4,6 +4,7 @@ import com.azure.marketplace.MarketplaceClient;
 import com.azure.spring.marketplace.ClientSecretTokenProvider;
 import com.azure.spring.marketplace.implementation.MarketplaceClientImpl;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -13,10 +14,18 @@ import java.util.UUID;
 public class MarketplaceClientCredentialConfig {
     @Bean
     public ServiceClientCredentials serviceClientCredentials() {
+        String tenantId = System.getenv("AAD_TENANT_ID");
+        String clientId = System.getenv("AAD_APP_CLIENT_ID");
+        String clientSecret = System.getenv("AAD_APP_CLIENT_SECRET");
+
+        if (StringUtils.isEmpty(tenantId)){
+            throw new IllegalStateException("AAD_TENANT_ID, AAD_APP_CLIENT_ID, and AAD_APP_CLIENT_SECRET must be defined as environment variables.");
+        }
+
         ClientSecretTokenProvider instance = new ClientSecretTokenProvider(
-                UUID.fromString("0f1a53c8-1135-457a-bcdb-d58abc87e4b7"),
-                UUID.fromString("4ac2e37a-8296-46cd-ac7e-323732979b50"),
-                    "49CZ2a2_tI-iOf_YrZQIiiP1S_J6V_1mAn");
+                UUID.fromString(tenantId),
+                UUID.fromString(clientId),
+                clientSecret);
         return instance;
     }
 

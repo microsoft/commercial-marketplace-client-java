@@ -38,8 +38,7 @@
               "$ref": "#/components/schemas/ApiVersion"
             },
             "required": true,
-            "description": "Version of the API.",
-            "x-ms-api-version": false
+            "description": "Version of the API."
           },
           {
             "in": "header",
@@ -113,8 +112,7 @@
               "$ref": "#/components/schemas/ApiVersion"
             },
             "required": true,
-            "description": "Version of the API.",
-            "x-ms-api-version": false
+            "description": "Version of the API."
           },
           {
             "in": "query",
@@ -194,8 +192,7 @@
               "$ref": "#/components/schemas/ApiVersion"
             },
             "required": true,
-            "description": "Version of the API.",
-            "x-ms-api-version": false
+            "description": "Version of the API."
           },
           {
             "in": "header",
@@ -264,8 +261,7 @@
               "$ref": "#/components/schemas/ApiVersion"
             },
             "required": true,
-            "description": "Version of the API.",
-            "x-ms-api-version": false
+            "description": "Version of the API."
           },
           {
             "in": "header",
@@ -349,8 +345,7 @@
               "$ref": "#/components/schemas/ApiVersion"
             },
             "required": true,
-            "description": "Version of the API.",
-            "x-ms-api-version": false
+            "description": "Version of the API."
           },
           {
             "in": "header",
@@ -426,8 +421,7 @@
               "$ref": "#/components/schemas/ApiVersion"
             },
             "required": true,
-            "description": "Version of the API.",
-            "x-ms-api-version": false
+            "description": "Version of the API."
           },
           {
             "in": "header",
@@ -498,8 +492,7 @@
               "$ref": "#/components/schemas/ApiVersion"
             },
             "required": true,
-            "description": "Version of the API.",
-            "x-ms-api-version": false
+            "description": "Version of the API."
           },
           {
             "in": "header",
@@ -576,8 +569,7 @@
               "$ref": "#/components/schemas/ApiVersion"
             },
             "required": true,
-            "description": "Version of the API.",
-            "x-ms-api-version": false
+            "description": "Version of the API."
           },
           {
             "in": "header",
@@ -660,8 +652,7 @@
               "$ref": "#/components/schemas/ApiVersion"
             },
             "required": true,
-            "description": "Version of the API.",
-            "x-ms-api-version": false
+            "description": "Version of the API."
           },
           {
             "in": "header",
@@ -742,8 +733,7 @@
               "$ref": "#/components/schemas/ApiVersion"
             },
             "required": true,
-            "description": "Version of the API.",
-            "x-ms-api-version": false
+            "description": "Version of the API."
           },
           {
             "in": "header",
@@ -814,8 +804,7 @@
               "$ref": "#/components/schemas/ApiVersion"
             },
             "required": true,
-            "description": "Version of the API.",
-            "x-ms-api-version": false
+            "description": "Version of the API."
           },
           {
             "in": "header",
@@ -887,8 +876,7 @@
               "$ref": "#/components/schemas/ApiVersion"
             },
             "required": true,
-            "description": "Version of the API.",
-            "x-ms-api-version": false
+            "description": "Version of the API."
           },
           {
             "in": "header",

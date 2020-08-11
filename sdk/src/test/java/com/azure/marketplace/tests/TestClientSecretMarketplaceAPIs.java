@@ -24,7 +24,7 @@ import java.util.UUID;
 @ContextConfiguration(classes={MarketplaceClientCredentialConfig.class})
 @ComponentScan(basePackages={"com.azure.spring.marketplace.implementation"})
 @EnableAutoConfiguration
-public class TestMarketplaceAPIs {
+public class TestClientSecretMarketplaceAPIs {
     @Autowired
     private MarketplaceClient _client;
 
