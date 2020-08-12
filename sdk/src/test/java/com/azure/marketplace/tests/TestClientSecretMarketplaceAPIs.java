@@ -1,50 +1,63 @@
-// Copyright (c) Microsoft Corporation.
-// Licensed under the MIT license.
-
+/**
+ * Copyright (c) Microsoft Corporation. All rights reserved.
+ * Licensed under the MIT License. See License.txt in the project root for
+ * license information.
+ *
+ **/
 package com.azure.marketplace.tests;
 
+import com.azure.marketplace.ClientSecretTokenProvider;
+import com.azure.marketplace.ClientSecretTokenProviderSettings;
 import com.azure.marketplace.MarketplaceClient;
+import com.azure.marketplace.implementation.MarketplaceClientImpl;
 import com.azure.marketplace.models.Operation;
 import com.azure.marketplace.models.OperationList;
 import com.azure.marketplace.models.Subscription;
 import com.azure.marketplace.models.SubscriptionPlans;
 import com.microsoft.azure.PagedList;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.*;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
 import java.util.UUID;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes={MarketplaceClientCredentialConfig.class})
-@ComponentScan(basePackages={"com.azure.spring.marketplace.implementation"})
-@EnableAutoConfiguration
 public class TestClientSecretMarketplaceAPIs {
-    @Autowired
-    private MarketplaceClient _client;
+    private MarketplaceClient client;
+    private UUID subscriptionId;
 
-    private UUID _subscriptionId;
+    void initClient(){
+        String tenantId = System.getenv("AAD_TENANT_ID");
+        String clientId = System.getenv("AAD_APP_CLIENT_ID");
+        String clientSecret = System.getenv("AAD_APP_CLIENT_SECRET");
+
+        if (StringUtils.isEmpty(clientId) || StringUtils.isEmpty(clientSecret)){
+            throw new IllegalStateException("AAD_TENANT_ID, AAD_APP_CLIENT_ID, and AAD_APP_CLIENT_SECRET must be defined as environment variables.");
+        }
+
+        ClientSecretTokenProviderSettings settings = new ClientSecretTokenProviderSettings();
+        settings.set_tenantId(UUID.fromString(tenantId));
+        settings.set_clientId(UUID.fromString(clientId));
+        settings.set_clientSecret(clientSecret);
+        ClientSecretTokenProvider credentials = new ClientSecretTokenProvider(settings);
+        this.client = new MarketplaceClientImpl(credentials);
+    }
 
     @Before
     public void setup(){
-        PagedList<Subscription> subscriptions = _client.fulfillmentOperations().listSubscriptions();
+        initClient();
+        PagedList<Subscription> subscriptions = this.client.fulfillmentOperations().listSubscriptions();
         subscriptions.loadAll();
         if (subscriptions.isEmpty()) {
             throw new AssumptionViolatedException("No subscriptions are active for this login. Giving up.");
         }
 
-        _subscriptionId = subscriptions.get(0).id();
+        this.subscriptionId = subscriptions.get(0).id();
     }
 
     @Test
     @Ignore
     public void getOperationStatusTest() {
-        PagedList<Subscription> subscriptions = _client.fulfillmentOperations().listSubscriptions();
+        PagedList<Subscription> subscriptions = this.client.fulfillmentOperations().listSubscriptions();
         if (subscriptions.isEmpty()) {
             Assert.fail("Test could not complete. No subscriptions in account. Consider adding subscriptions or disabling this test.");
             return;
@@ -54,14 +67,14 @@ public class TestClientSecretMarketplaceAPIs {
 
         for (int i = 0; i < subscriptions.size(); ++i) {
             Subscription sub = subscriptions.get(i);
-            OperationList operationList = _client.subscriptionOperations().listOperations(sub.id());
+            OperationList operationList = this.client.subscriptionOperations().listOperations(sub.id());
             List<Operation> operations = operationList.operations();
             if (operations.isEmpty()) {
                 continue;
             }
 
             Operation operation = operations.get(0);
-            Operation operationStatus = _client.subscriptionOperations().getOperationStatus(sub.id(), operation.id());
+            Operation operationStatus = this.client.subscriptionOperations().getOperationStatus(sub.id(), operation.id());
             Assert.assertEquals(operation.status(), operationStatus.status());
             return;
         }
@@ -72,19 +85,19 @@ public class TestClientSecretMarketplaceAPIs {
 
     @Test
     public void getSubscriptionTest() {
-        Subscription response = _client.fulfillmentOperations().getSubscription(_subscriptionId);
-        Assert.assertEquals(_subscriptionId, response.id());
+        Subscription response = this.client.fulfillmentOperations().getSubscription(this.subscriptionId);
+        Assert.assertEquals(this.subscriptionId, response.id());
     }
 
     @Test
     public void listAvailablePlansTest() {
-        SubscriptionPlans response = _client.fulfillmentOperations().listAvailablePlans(_subscriptionId);
+        SubscriptionPlans response = this.client.fulfillmentOperations().listAvailablePlans(this.subscriptionId);
         Assert.assertFalse("No plans returned.", response.plans().isEmpty());
     }
 
     @Test
     public void listSubscriptionsTest() {
-        PagedList<Subscription> subscriptions = _client.fulfillmentOperations().listSubscriptions();
+        PagedList<Subscription> subscriptions = this.client.fulfillmentOperations().listSubscriptions();
         subscriptions.loadAll();
         Assert.assertFalse("No subscriptions available for this account. Try another.", subscriptions.isEmpty());
     }

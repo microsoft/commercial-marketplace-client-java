@@ -1,34 +1,35 @@
-package com.azure.spring.marketplace;
+/**
+ * Copyright (c) Microsoft Corporation. All rights reserved.
+ * Licensed under the MIT License. See License.txt in the project root for
+ * license information.
+ *
+ **/
+package com.azure.marketplace;
 
+import com.azure.core.util.logging.ClientLogger;
 import com.microsoft.aad.msal4j.ClientCredentialFactory;
 import com.microsoft.aad.msal4j.ClientCredentialParameters;
 import com.microsoft.aad.msal4j.ConfidentialClientApplication;
 import com.microsoft.aad.msal4j.IAuthenticationResult;
-import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.Collections;
-import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
-@Service
 public class ClientSecretTokenProvider implements MarketplaceTokenProvider {
-    UUID _tenantId;
-    UUID _clientId;
-    String _clientSecret;
+    private ClientSecretTokenProviderSettings settings;
+    private final ClientLogger logger = new ClientLogger(ClientSecretTokenProvider.class);
 
-    public ClientSecretTokenProvider(UUID tenantId, UUID clientId, String clientSecret) {
-        _tenantId = tenantId;
-        _clientId = clientId;
-        _clientSecret = clientSecret;
+    public ClientSecretTokenProvider(ClientSecretTokenProviderSettings settings) {
+        this.settings = settings;
     }
 
     public String acquireToken() throws IOException {
-        String authority = String.format(Constants.AadAuthority, _tenantId);
+        String authority = String.format(Constants.AadAuthority, this.settings.get_tenantId().toString());
         ConfidentialClientApplication app = ConfidentialClientApplication.builder(
-                _clientId.toString(),
-                ClientCredentialFactory.createFromSecret(_clientSecret))
+                this.settings.get_clientId().toString(),
+                ClientCredentialFactory.createFromSecret(this.settings.get_clientSecret()))
                 .authority(authority)
                 .build();
 
@@ -40,9 +41,9 @@ public class ClientSecretTokenProvider implements MarketplaceTokenProvider {
         try {
             return future.get().accessToken();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            logger.error(e.toString());
         } catch (ExecutionException e) {
-            e.printStackTrace();
+            logger.error(e.toString());
         }
 
         return null;
