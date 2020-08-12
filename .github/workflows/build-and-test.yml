@@ -5,9 +5,9 @@ name: Build and test SDK
 
 on:
   push:
-    branches: [ master, dev, autorest ]
+    branches: [ master, dev ]
   pull_request:
-    branches: [ master, dev, autorest ]
+    branches: [ master, dev ]
 
 jobs:
   build:
