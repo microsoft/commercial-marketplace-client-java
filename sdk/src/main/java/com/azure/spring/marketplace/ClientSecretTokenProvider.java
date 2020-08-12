@@ -1,17 +1,16 @@
 package com.azure.spring.marketplace;
 
-import com.google.gson.Gson;
-import com.google.gson.annotations.SerializedName;
+import com.microsoft.aad.msal4j.ClientCredentialFactory;
+import com.microsoft.aad.msal4j.ClientCredentialParameters;
+import com.microsoft.aad.msal4j.ConfidentialClientApplication;
+import com.microsoft.aad.msal4j.IAuthenticationResult;
 import org.springframework.stereotype.Service;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
+import java.util.Collections;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 @Service
 public class ClientSecretTokenProvider implements MarketplaceTokenProvider {
@@ -26,43 +25,26 @@ public class ClientSecretTokenProvider implements MarketplaceTokenProvider {
     }
 
     public String acquireToken() throws IOException {
-        String authority = String.format("https://login.microsoftonline.com/%s/oauth2/v2.0/token", _tenantId);
-        URL url = new URL(authority);
-        HttpURLConnection con = (HttpURLConnection) url.openConnection();
-        con.setRequestMethod("POST");
-        con.setDoOutput(true);
-        DataOutputStream outputStream = new DataOutputStream(con.getOutputStream());
-        String urlPostParameters =
-                String.format("grant_type=client_credentials&scope=%s&client_id=%s&client_secret=%s",
-                        Constants.MarketplaceResourceScope,
-                        URLEncoder.encode(_clientId.toString(), "UTF-8"),
-                        URLEncoder.encode(_clientSecret, "UTF-8"));
-        outputStream.writeBytes(urlPostParameters);
-        outputStream.flush();
-        outputStream.close();
-        int responseCode = con.getResponseCode();
-        if (responseCode == HttpURLConnection.HTTP_OK) {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(con.getInputStream()));
-            String inputLine;
-            StringBuilder response = new StringBuilder();
+        String authority = String.format(Constants.AadAuthority, _tenantId);
+        ConfidentialClientApplication app = ConfidentialClientApplication.builder(
+                _clientId.toString(),
+                ClientCredentialFactory.createFromSecret(_clientSecret))
+                .authority(authority)
+                .build();
 
-            while ((inputLine = reader.readLine()) != null) {
-                response.append(inputLine);
-            }
-            reader.close();
-            String allContent = response.toString();
-            Gson gson = new Gson();
-            OAuthInfo info = gson.fromJson(allContent, OAuthInfo.class);
-            return info.getAccessToken();
+        ClientCredentialParameters clientCredentialParam = ClientCredentialParameters.builder(
+                Collections.singleton(Constants.MarketplaceResourceScope))
+                .build();
+
+        CompletableFuture<IAuthenticationResult> future = app.acquireToken(clientCredentialParam);
+        try {
+            return future.get().accessToken();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
         }
 
-        return String.format("Error: responseCode: %d", responseCode);
-    }
-
-    static class OAuthInfo{
-        @SerializedName("access_token")
-        private String _accessToken;
-
-        public String getAccessToken() { return _accessToken; }
+        return null;
     }
 }

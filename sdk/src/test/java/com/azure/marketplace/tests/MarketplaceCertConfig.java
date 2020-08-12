@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
+import java.security.UnrecoverableEntryException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.util.Enumeration;
@@ -27,7 +28,7 @@ public class MarketplaceCertConfig {
         String clientSecretLocation = System.getenv("AAD_APP_CERT_LOCATION");
         String certificatePassword = System.getenv("AAD_APP_CERT_SECRET");
         X509Certificate clientSecret = null;
-
+        KeyStore.PrivateKeyEntry privateKey = null;
         try {
             FileInputStream is = new FileInputStream(clientSecretLocation);
             KeyStore ks= KeyStore.getInstance("PKCS12");
@@ -45,7 +46,9 @@ public class MarketplaceCertConfig {
             if (alias == null){
                 throw new IllegalStateException("AAD_TENANT_ID, AAD_APP_CLIENT_ID, AAD_APP_CERT_LOCATION, and AAD_APP_CERT_SECRET must be defined as environment variables.");
             }
+
             clientSecret = (X509Certificate) ks.getCertificate(alias);
+            privateKey = (KeyStore.PrivateKeyEntry)ks.getEntry(alias, new KeyStore.PasswordProtection(certificatePassword.toCharArray()));
         } catch (IOException e) {
             e.printStackTrace();
         } catch (CertificateException e) {
@@ -53,6 +56,8 @@ public class MarketplaceCertConfig {
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         } catch (KeyStoreException e) {
+            e.printStackTrace();
+        } catch (UnrecoverableEntryException e){
             e.printStackTrace();
         }
 
@@ -63,7 +68,7 @@ public class MarketplaceCertConfig {
         CertificateTokenProvider instance = new CertificateTokenProvider(
                 UUID.fromString(tenantId),
                 UUID.fromString(clientId),
-                clientSecret, certificatePassword);
+                privateKey, clientSecret);
 
         return instance;
     }
