@@ -27,6 +27,27 @@ You can run the tests from the command line by executing a build from the root o
 mvn -B package --file sdk/pom.xml
 ```
 
+You will need to have the following setup first:
+
+1. You must have access to the [Partner Center Commercial Marketplace page.](https://partner.microsoft.com/dashboard/commercial-marketplace/). You can setup a Partner account by visiting the [partner page](https://partner.microsoft.com/) and selecting "Become a partner". Once you do that, enroll in the [Commercial Marketplace](https://docs.microsoft.com/azure/marketplace/partner-center-portal/create-account).  
+1. You must have at least one SaaS offer published to the Preview stage. Instructions [here.](https://docs.microsoft.com/azure/marketplace/partner-center-portal/create-new-saas-offer)
+1. You must have at least one subscription to the SaaS offer.
+
+The tests assume the presence of the following environment variables. These variables allow the tests to login on your behalf.
+
+- AAD_TENANT_ID: Same ID as is used on the Technical Configuration page for your SaaS offer.
+- AAD_APP_CLIENT_ID: Same ID as is used on the Technical Configuration page for your SaaS offer.
+- AAD_APP_CLIENT_SECRET: A secret associated with the AAD_APP_CLIENT_ID used on the Technical Configuration page for your SaaS offer.
+- AAD_APP_CERT: A base64-encoded version of a certificate which also contains a private key. This certificate is used to authenticate the AAD_APP_CLIENT_ID. You can do the conversion in a bash shell with the command line with "base64 &lt;certificate.pfx&gt; -w 0". Websites also exist, such as [Base64.Guru](https://base64.guru/converter/encode/file).
+- AAD_APP_CERT_SECRET: Password for the certificate.
+
+To create the certificate using OpenSSL, these lines work great:
+
+```bash
+openssl req -x509 -nodes -days 3650 -newkey rsa:4096 -keyout privateKey.key -out certificate.pem
+openssl pkcs12 -export -out certificate.pfx -inkey privateKey.key -in certificate.pem
+```
+
 ### Prerequisites
 
 Java 8 or later is required to use this library.
