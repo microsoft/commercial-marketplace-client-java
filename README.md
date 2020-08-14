@@ -20,9 +20,12 @@ This repository is for active development of the Azure Commericial Marketplace S
 
 ## Getting started
 
-To get started with a the library, see the **README.md** file located in the [sdk project folder](./sdk/README.md). 
+For samples of how to use the methods, look to the [test code](./sdk/src/test/java/com/azure/marketplace/tests/).
 
-For samples of how to use the methods, look to the [test code](./sdk/src/test/java/com/microsoft/azure/marketplace/tests).
+You can run the tests from the command line by executing a build from the root of the repository: 
+```bash
+mvn -B package --file sdk/pom.xml
+```
 
 ### Prerequisites
 
