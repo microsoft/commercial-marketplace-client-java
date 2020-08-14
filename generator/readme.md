@@ -42,10 +42,10 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: commercial-marketplace-saas-sdk-client-java
+  - repo: commercial-marketplace-sdk-java
 ```
 
-## C#
+## Java#
 
 These settings apply only when `--java` is specified on the command line.
 Please also specify `--java-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
