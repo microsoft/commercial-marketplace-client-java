@@ -35,9 +35,9 @@ public class TestClientSecretMarketplaceAPIs {
         }
 
         ClientSecretTokenProviderSettings settings = new ClientSecretTokenProviderSettings();
-        settings.set_tenantId(UUID.fromString(tenantId));
-        settings.set_clientId(UUID.fromString(clientId));
-        settings.set_clientSecret(clientSecret);
+        settings.setTenantId(UUID.fromString(tenantId));
+        settings.setClientId(UUID.fromString(clientId));
+        settings.setClientSecret(clientSecret);
         ClientSecretTokenProvider credentials = new ClientSecretTokenProvider(settings);
         this.client = new MarketplaceClientImpl(credentials);
     }

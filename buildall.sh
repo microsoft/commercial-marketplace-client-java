@@ -1,3 +1,5 @@
+. variables.conf
+
 pushd ./generator
 
 ./generateCode.sh
@@ -6,6 +8,7 @@ popd
 
 pushd ./sdk
 
-mvn -e -B package 
+mvn -B package 
+mvn javadoc:javadoc
 
 popd

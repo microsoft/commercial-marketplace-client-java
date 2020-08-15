@@ -12,7 +12,7 @@ import java.util.UUID;
 
 @Data
 public class ClientSecretTokenProviderSettings {
-    UUID _clientId;
-    UUID _tenantId;
-    String _clientSecret;
+    UUID clientId;
+    UUID tenantId;
+    String clientSecret;
 }

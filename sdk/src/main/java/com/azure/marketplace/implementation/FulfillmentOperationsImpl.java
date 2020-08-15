@@ -466,9 +466,9 @@ public class FulfillmentOperationsImpl implements FulfillmentOperations {
      * List subscriptions.
      * Lists all the SaaS subscriptions for a publisher.
      *
-    ServiceResponse<PageImpl<Subscription>> * @param continuationToken Optional value, only used for ListSubscriptions.
-    ServiceResponse<PageImpl<Subscription>> * @param requestId A unique string value for tracking the request from the client, preferably a GUID. If this value isn't provided, one will be generated and provided in the response headers.
-    ServiceResponse<PageImpl<Subscription>> * @param correlationId A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn't provided, one will be generated and provided in the response headers.
+     * @param continuationToken Optional value, only used for ListSubscriptions.
+     * @param requestId A unique string value for tracking the request from the client, preferably a GUID. If this value isn't provided, one will be generated and provided in the response headers.
+     * @param correlationId A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn't provided, one will be generated and provided in the response headers.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the PagedList&lt;Subscription&gt; object wrapped in {@link ServiceResponse} if successful.
      */
@@ -1541,9 +1541,9 @@ public class FulfillmentOperationsImpl implements FulfillmentOperations {
      * List subscriptions.
      * Lists all the SaaS subscriptions for a publisher.
      *
-    ServiceResponse<PageImpl<Subscription>> * @param nextPageLink The NextLink from the previous successful call to List operation.
-    ServiceResponse<PageImpl<Subscription>> * @param requestId A unique string value for tracking the request from the client, preferably a GUID. If this value isn't provided, one will be generated and provided in the response headers.
-    ServiceResponse<PageImpl<Subscription>> * @param correlationId A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn't provided, one will be generated and provided in the response headers.
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param requestId A unique string value for tracking the request from the client, preferably a GUID. If this value isn't provided, one will be generated and provided in the response headers.
+     * @param correlationId A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn't provided, one will be generated and provided in the response headers.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the PagedList&lt;Subscription&gt; object wrapped in {@link ServiceResponse} if successful.
      */

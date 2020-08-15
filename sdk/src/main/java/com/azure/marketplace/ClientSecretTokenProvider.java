@@ -26,10 +26,10 @@ public class ClientSecretTokenProvider implements MarketplaceTokenProvider {
     }
 
     public String acquireToken() throws IOException {
-        String authority = String.format(Constants.AadAuthority, this.settings.get_tenantId().toString());
+        String authority = String.format(Constants.AadAuthority, this.settings.getTenantId().toString());
         ConfidentialClientApplication app = ConfidentialClientApplication.builder(
-                this.settings.get_clientId().toString(),
-                ClientCredentialFactory.createFromSecret(this.settings.get_clientSecret()))
+                this.settings.getClientId().toString(),
+                ClientCredentialFactory.createFromSecret(this.settings.getClientSecret()))
                 .authority(authority)
                 .build();
 

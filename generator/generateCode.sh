@@ -29,3 +29,6 @@ docker run --rm --name autorest \
 
 cp -r ./temp/src/* ../sdk/src
 
+# Fix FullfillmentOperationsImpl.java for an issue with javadoc generation
+FulfillmentOperationsImplFile='../sdk/src/main/java/com/azure/marketplace/implementation/FulfillmentOperationsImpl.java'
+sed -i 's/ServiceResponse<PageImpl<Subscription>> \* @param/ \* @param/' $FulfillmentOperationsImplFile

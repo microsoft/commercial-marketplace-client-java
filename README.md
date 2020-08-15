@@ -41,6 +41,8 @@ The tests assume the presence of the following environment variables. These vari
 - AAD_APP_CERT: A base64-encoded version of a certificate which also contains a private key. This certificate is used to authenticate the AAD_APP_CLIENT_ID. You can do the conversion in a bash shell with the command line with "base64 &lt;certificate.pfx&gt; -w 0". Websites also exist, such as [Base64.Guru](https://base64.guru/converter/encode/file).
 - AAD_APP_CERT_SECRET: Password for the certificate.
 
+You can make sure these are set by using the template [variables.conf.template](./variables.conf.template) and then copying that file to variables.conf. Once copied, fill in the proper values.
+
 To create the certificate using OpenSSL, these lines work great:
 
 ```bash
