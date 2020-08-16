@@ -4,9 +4,9 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.azure</groupId>
+  <groupId>com.microsoft.azure</groupId>
   <artifactId>azure-marketplace</artifactId>
-  <version>1.0.0-beta</version> 
+  <version>1.0.0.${sha}.beta</version>
 
   <name>Microsoft Azure client library for Marketplace</name>
   <description>This package contains the Microsoft Azure Marketplace client library.</description>
@@ -24,6 +24,7 @@
     <maven.compiler.target>1.8</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <sha>0000000</sha> 
   </properties>
 
   <build>
