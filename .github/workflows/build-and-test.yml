@@ -20,6 +20,7 @@ jobs:
         AAD_APP_CERT: ${{ secrets.AAD_APP_CERT }}
         AAD_APP_CERT_SECRET: ${{ secrets.AAD_APP_CERT_SECRET }}
         AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}
+        SHA: ${{ github.sha }}
 
     steps:
     - uses: actions/checkout@v2
@@ -28,9 +29,9 @@ jobs:
       with:
         java-version: 1.8
     - name: Build JAR, Sources, and Docs with Maven
-      run: SHA="${{ github.sha }}" && ENV_SHA=$(echo ${SHA:0:7}) && mvn -B package --file sdk/pom.xml -Dsha=$ENV_SHA
+      run: mvn -B package --file sdk/pom.xml -Dsha=${SHA:0:7}
     - name: Copy artifacts to single directory
-      run: SHA="${{ github.sha }}" && ./prepareOutput.sh $(echo ${SHA:0:7})
+      run: ./prepareOutput.sh $(echo ${SHA:0:7})
     - name: Upload artifacts to Azure Blob Storage
       uses: bacongobbler/azure-blob-storage-upload@v1.1.1
       with:
