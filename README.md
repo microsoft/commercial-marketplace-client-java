@@ -24,7 +24,8 @@ For samples of how to use the methods, look to the [test code](./sdk/src/test/ja
 
 You can run the tests from the command line by executing a build from the root of the repository: 
 ```bash
-mvn -B package --file sdk/pom.xml
+. ./variables.conf
+mvn test --file sdk/pom.xml
 ```
 
 You will need to have the following setup first:
