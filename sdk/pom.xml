@@ -5,17 +5,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.azure.marketplace</groupId>
+  <groupId>com.github.azure</groupId>
   <artifactId>azure-marketplace-client-java</artifactId>
   <packaging>jar</packaging>
   <name>azure-marketplace-client-java</name>
   <version>1.0.0</version>
-  <url>https://github.com/swagger-api/swagger-codegen</url>
-  <description>Swagger Java</description>
+  <url>https://github.com/Azure/commercial-marketplace-client-java/</url>
+  <description>Azure Commericial Marketplace SaaS Client SDK for Java</description>
   <scm>
-    <connection>scm:git:git@github.com:swagger-api/swagger-codegen.git</connection>
-    <developerConnection>scm:git:git@github.com:swagger-api/swagger-codegen.git</developerConnection>
-    <url>https://github.com/swagger-api/swagger-codegen</url>
+    <connection>scm:git:git@github.com:Azure/commercial-marketplace-client-java.git</connection>
+    <developerConnection>scm:git:git@github.com:Azure/commercial-marketplace-client-java.git</developerConnection>
+    <url>https://github.com/Azure/commercial-marketplace-client-java/</url>
   </scm>
   <prerequisites>
     <maven>2.2.0</maven>
@@ -31,10 +31,10 @@
 
   <developers>
     <developer>
-      <name>Microsoft</name>
-      <email>scseely@microsoft.com</email>
-      <organization>Microsoft</organization>
-      <organizationUrl>https://www.microsoft.com</organizationUrl>
+      <name>Scott Seely</name>
+      <email>scott@scottseely.com</email>
+      <organization>Scott Seely</organization>
+      <organizationUrl>https://scottseely.com</organizationUrl>
     </developer>
   </developers>
 
