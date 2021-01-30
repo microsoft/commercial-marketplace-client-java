@@ -1,0 +1,7 @@
+# Intellij artifacts
+.classpath/
+.factorypath/
+.idea/
+.project/
+.settings/
+target/
