@@ -29,8 +29,16 @@ public class TestClientSecretMarketplaceAPIs {
         String clientId = System.getenv("AAD_APP_CLIENT_ID");
         String clientSecret = System.getenv("AAD_APP_CLIENT_SECRET");
 
-        if (StringUtils.isEmpty(clientId) || StringUtils.isEmpty(clientSecret)){
-            throw new IllegalStateException("AAD_TENANT_ID, AAD_APP_CLIENT_ID, and AAD_APP_CLIENT_SECRET must be defined as environment variables.");
+        if (StringUtils.isEmpty(tenantId)){
+            throw new IllegalStateException("AAD_TENANT_ID must be defined as an environment variable.");
+        }
+        
+        if (StringUtils.isEmpty(clientId)){
+            throw new IllegalStateException("AAD_APP_CLIENT_ID must be defined as an environment variable.");
+        }
+
+        if (StringUtils.isEmpty(clientSecret)){
+            throw new IllegalStateException("AAD_APP_CLIENT_SECRET must be defined as an environment variable.");
         }
 
         ClientSecretTokenProviderSettings settings = new ClientSecretTokenProviderSettings();
