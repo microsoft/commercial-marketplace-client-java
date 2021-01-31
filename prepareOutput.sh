@@ -1,5 +1,6 @@
 TIME_STAMP=$(date +"%Y-%m-%d_%H-%M")
 newdir=./blobStorage/java/$TIME_STAMP/$1
+
 echo Creating $newdir
 mkdir -p $newdir
 echo "$newdir created"
