@@ -31,7 +31,7 @@ jobs:
     - name: Build JAR, Sources, and Docs with Maven
       run: mvn -B package --file sdk/pom.xml -Dsha=${SHA:0:7}
     - name: Copy artifacts to single directory
-      run: ./prepareOutput.sh $(echo ${SHA:0:7})
+      run: chmod +x ./prepareOutput.sh && ./prepareOutput.sh $(echo ${SHA:0:7})
     - name: Upload artifacts to Azure Blob Storage
       uses: bacongobbler/azure-blob-storage-upload@v1.1.1
       with:

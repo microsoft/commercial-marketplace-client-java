@@ -53,7 +53,7 @@ openssl pkcs12 -export -out certificate.pfx -inkey privateKey.key -in certificat
 
 ### Prerequisites
 
-Java 8 or later is required to use this library.
+Java 11 or later is required to use this library. Prefer to use [Azul Java SDK](https://www.azul.com/downloads/zulu-community/?package=jdk)
 
 ### Client
 
