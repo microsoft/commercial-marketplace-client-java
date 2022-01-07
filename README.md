@@ -1,7 +1,7 @@
 
 # Readme
 
-This project welcomes contributions and suggestions.  Most contributions require you to agree to a
+This project welcomes contributions and suggestions. Most contributions require you to agree to a
 Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
 the rights to use your contribution. For details, visit https://cla.opensource.microsoft.com.
 
@@ -14,9 +14,9 @@ For more information see the [Code of Conduct FAQ](https://opensource.microsoft.
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
 
-# Azure Commericial Marketplace SaaS Client SDK for Java
+# Azure Commercial Marketplace SaaS Client SDK for Java
 
-This repository is for active development of the Azure Commericial Marketplace SaaS Client SDK for Java. For consumers of the SDK we recommend visiting our versioned [developer docs](./sdk/README.md).
+This repository is for active development of the Azure Commercial Marketplace SaaS Client SDK for Java. For consumers of the SDK we recommend visiting our versioned [developer docs](README.md).
 
 ## Getting started
 
@@ -30,8 +30,8 @@ mvn test --file sdk/pom.xml
 
 You will need to have the following setup first:
 
-1. You must have access to the [Partner Center Commercial Marketplace page.](https://partner.microsoft.com/dashboard/commercial-marketplace/). You can setup a Partner account by visiting the [partner page](https://partner.microsoft.com/) and selecting "Become a partner". Once you do that, enroll in the [Commercial Marketplace](https://docs.microsoft.com/azure/marketplace/partner-center-portal/create-account).  
-1. You must have at least one SaaS offer published to the Preview stage. Instructions [here.](https://docs.microsoft.com/azure/marketplace/partner-center-portal/create-new-saas-offer)
+1. You must have access to the [Partner Center Commercial Marketplace page](https://partner.microsoft.com/dashboard/commercial-marketplace/). You can setup a Partner account by visiting the [partner page](https://partner.microsoft.com/) and selecting "Become a partner". Once you do that, enroll in the [Commercial Marketplace](https://docs.microsoft.com/azure/marketplace/partner-center-portal/create-account).  
+1. You must have at least one SaaS offer published to the Preview stage. Instructions [here](https://docs.microsoft.com/azure/marketplace/partner-center-portal/create-new-saas-offer).
 1. You must have at least one subscription to the SaaS offer.
 
 The tests assume the presence of the following environment variables. These variables allow the tests to login on your behalf.
@@ -53,7 +53,7 @@ openssl pkcs12 -export -out certificate.pfx -inkey privateKey.key -in certificat
 
 ### Prerequisites
 
-Java 11 or later is required to use this library. Prefer to use [Azul Java SDK](https://www.azul.com/downloads/zulu-community/?package=jdk)
+Java 11 or later is required to use this library. Preferentially use [Azul Java SDK](https://www.azul.com/downloads/zulu-community/?package=jdk)
 
 ### Client
 
@@ -106,6 +106,4 @@ Security issues and bugs should be reported privately, via email, to the Microso
 Azure Marketplace SDK for Java is licensed under the [MIT](LICENSE.txt) license.
 
 <!-- Links -->
-[java_guidelines](https://azure.github.io/azure-sdk/java_introduction.html)
-
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/commercial-marketplace-saas-sdk-client-java%2FREADME.png)

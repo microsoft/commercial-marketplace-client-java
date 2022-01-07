@@ -5,8 +5,6 @@ Thank you for your interest in contributing to Azure Commercial Marketplace SaaS
 
 - For reporting bugs, requesting features, or asking for support, please file an issue in the [issues](https://github.com/Azure/commercial-marketplace-saas-sdk-client-java/issues) section of the project.
 
-- If you would like to become an active contributor to this project please follow the instructions provided in [Microsoft Azure Projects Contribution Guidelines](http://azure.github.com/guidelines.html).
-
 - To make code changes, or contribute something new, please follow the [GitHub Forks / Pull requests model](https://help.github.com/articles/fork-a-repo/): Fork the repo, make the change and propose it back by submitting a pull request.
 
 - Refer to the [wiki](https://github.com/Azure/azure-sdk-for-java/wiki/Building#testing-for-spotbugs-and-checkstyle-issues) to learn about how Azure SDK for java generates CheckStyle, SpotBugs, Jacoco, and JavaDoc reports.
@@ -44,7 +42,7 @@ Merging Pull Requests (for project contributors with write access)
 
 ### Pre-requisites
 
-- Install Java Development Kit 8
+- Install Java Development Kit 11
   - add `JAVA_HOME` to environment variables
 - Install [Maven](http://maven.apache.org/download.cgi)
   - add `MAVEN_HOME` to environment variables
@@ -61,7 +59,8 @@ This repository uses Maven to build the module that makes up the Azure Commercia
 * AAD_TENANT_ID: Tenant ID used for your AAD.
 * AAD_APP_CLIENT_ID: Client ID for your App Registration
 * AAD_APP_CLIENT_SECRET: Client Secret for the App Registration
-* AMP_API_VERSION: Version of the API; `2018-08-31` for production marketplace endpoint, `2018-09-15` for the Mock endpoint. Many tests use `2018-09-15`.
+* AAD_APP_CERT: A base64-encoded version of a certificate which also contains a private key. This certificate is used to authenticate the AAD_APP_CLIENT_ID. You can do the conversion in a bash shell with the command line with "base64 &lt;certificate.pfx&gt; -w 0". Websites also exist, such as *[Base64.Guru](https://base64.guru/converter/encode/file).
+* AAD_APP_CERT_SECRET: Password for the certificate.
 
 You can build by running the following command from the sdk directory in the repository:
 
@@ -87,7 +86,7 @@ Live tests assume a live resource exists. The Azure Marketplace team has this va
 
 ## Versions and versioning
 
-When updating the version of the library, make sure to make changes to [pom.xml](./sdk/pom.xml) and to the documentation [start page](./sdk/README.md).
+When updating the version of the library, make sure to make changes to [pom.xml](./sdk/pom.xml) and to the documentation [start page](README.md).
 
 ### What does the process look like?
 
