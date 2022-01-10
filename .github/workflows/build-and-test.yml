@@ -25,7 +25,7 @@ jobs:
         distribution: 'zulu'
         java-version: '11'
     - name: Build JAR, Sources, and Docs with Maven
-      run: mvn -B package --file sdk/pom.xml -Dsha=${env.SHA:0:7}
+      run: mvn -B package --file sdk/pom.xml -Dsha=${SHA:0:7}
       env:
         AAD_TENANT_ID: ${{ secrets.AAD_TENANT_ID }}
         AAD_APP_CLIENT_ID: ${{ secrets.AAD_APP_CLIENT_ID }}
@@ -33,7 +33,7 @@ jobs:
         AAD_APP_CERT: ${{ secrets.AAD_APP_CERT }}
         AAD_APP_CERT_SECRET: ${{ secrets.AAD_APP_CERT_SECRET }}
     - name: Copy artifacts to single directory
-      run: chmod +x ./prepareOutput.sh && ./prepareOutput.sh $(echo ${env.SHA:0:7})
+      run: chmod +x ./prepareOutput.sh && ./prepareOutput.sh $(echo ${SHA:0:7})
     - name: Upload artifacts to Azure Blob Storage
       uses: bacongobbler/azure-blob-storage-upload@v1.2.0
       with:
