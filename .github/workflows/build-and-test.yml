@@ -9,13 +9,19 @@ on:
   pull_request:
     branches: [ main, dev ]
 
+env:
+  AAD_TENANT_ID: ${{ secrets.AAD_TENANT_ID }}
+  AAD_APP_CLIENT_ID: ${{ secrets.AAD_APP_CLIENT_ID }}
+  AAD_APP_CLIENT_SECRET: ${{ secrets.AAD_APP_CLIENT_SECRET }}
+  AAD_APP_CERT: ${{ secrets.AAD_APP_CERT }}
+  AAD_APP_CERT_SECRET: ${{ secrets.AAD_APP_CERT_SECRET }}
+  AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}
+  SHA: ${{ github.sha }}
+
 jobs:
   build:
 
     runs-on: ubuntu-latest
-    env:
-        AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}
-        SHA: ${{ github.sha }}
 
     steps:
     - uses: actions/checkout@v2
@@ -25,12 +31,6 @@ jobs:
         distribution: 'zulu'
         java-version: '11'
     - name: Build JAR, Sources, and Docs with Maven
-      env:
-        AAD_TENANT_ID: ${{ secrets.AAD_TENANT_ID }}
-        AAD_APP_CLIENT_ID: ${{ secrets.AAD_APP_CLIENT_ID }}
-        AAD_APP_CLIENT_SECRET: ${{ secrets.AAD_APP_CLIENT_SECRET }}
-        AAD_APP_CERT: ${{ secrets.AAD_APP_CERT }}
-        AAD_APP_CERT_SECRET: ${{ secrets.AAD_APP_CERT_SECRET }}
       run: mvn -B package --file sdk/pom.xml -Dsha=${SHA:0:7}
     - name: Copy artifacts to single directory
       run: chmod +x ./prepareOutput.sh && ./prepareOutput.sh $(echo ${SHA:0:7})
