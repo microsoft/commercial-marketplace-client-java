@@ -36,7 +36,7 @@ public final class UsageEvent {
      * Number of units consumed
      */
     @JsonProperty(value = "quantity")
-    private Long quantity;
+    private Double quantity;
 
     /*
      * Dimension identifier
@@ -107,7 +107,7 @@ public final class UsageEvent {
      *
      * @return the quantity value.
      */
-    public Long getQuantity() {
+    public Double getQuantity() {
         return this.quantity;
     }
 
@@ -117,7 +117,7 @@ public final class UsageEvent {
      * @param quantity the quantity value to set.
      * @return the UsageEvent object itself.
      */
-    public UsageEvent setQuantity(Long quantity) {
+    public UsageEvent setQuantity(Double quantity) {
         this.quantity = quantity;
         return this;
     }

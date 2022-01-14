@@ -13,9 +13,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
-/** The UsageEventOkResponse model. */
+/** The UsageBatchEventOkMessage model. */
 @Fluent
-public final class UsageEventOkResponse {
+public final class UsageBatchEventOkMessage {
     /*
      * Unique identifier associated with the usage event
      */
@@ -70,6 +70,12 @@ public final class UsageEventOkResponse {
     @JsonProperty(value = "planId")
     private String planId;
 
+    /*
+     * The error property.
+     */
+    @JsonProperty(value = "error")
+    private UsageEventConflictResponse error;
+
     /**
      * Get the usageEventId property: Unique identifier associated with the usage event.
      *
@@ -83,9 +89,9 @@ public final class UsageEventOkResponse {
      * Set the usageEventId property: Unique identifier associated with the usage event.
      *
      * @param usageEventId the usageEventId value to set.
-     * @return the UsageEventOkResponse object itself.
+     * @return the UsageBatchEventOkMessage object itself.
      */
-    public UsageEventOkResponse setUsageEventId(UUID usageEventId) {
+    public UsageBatchEventOkMessage setUsageEventId(UUID usageEventId) {
         this.usageEventId = usageEventId;
         return this;
     }
@@ -103,9 +109,9 @@ public final class UsageEventOkResponse {
      * Set the status property: Status of the operation.
      *
      * @param status the status value to set.
-     * @return the UsageEventOkResponse object itself.
+     * @return the UsageBatchEventOkMessage object itself.
      */
-    public UsageEventOkResponse setStatus(UsageEventStatusEnum status) {
+    public UsageBatchEventOkMessage setStatus(UsageEventStatusEnum status) {
         this.status = status;
         return this;
     }
@@ -123,9 +129,9 @@ public final class UsageEventOkResponse {
      * Set the messageTime property: Time this message was created in UTC.
      *
      * @param messageTime the messageTime value to set.
-     * @return the UsageEventOkResponse object itself.
+     * @return the UsageBatchEventOkMessage object itself.
      */
-    public UsageEventOkResponse setMessageTime(OffsetDateTime messageTime) {
+    public UsageBatchEventOkMessage setMessageTime(OffsetDateTime messageTime) {
         this.messageTime = messageTime;
         return this;
     }
@@ -143,9 +149,9 @@ public final class UsageEventOkResponse {
      * Set the resourceId property: Identifier of the resource against which usage is emitted.
      *
      * @param resourceId the resourceId value to set.
-     * @return the UsageEventOkResponse object itself.
+     * @return the UsageBatchEventOkMessage object itself.
      */
-    public UsageEventOkResponse setResourceId(UUID resourceId) {
+    public UsageBatchEventOkMessage setResourceId(UUID resourceId) {
         this.resourceId = resourceId;
         return this;
     }
@@ -163,9 +169,9 @@ public final class UsageEventOkResponse {
      * Set the resourceUri property: Identifier of the managed app resource against which usage is emitted.
      *
      * @param resourceUri the resourceUri value to set.
-     * @return the UsageEventOkResponse object itself.
+     * @return the UsageBatchEventOkMessage object itself.
      */
-    public UsageEventOkResponse setResourceUri(String resourceUri) {
+    public UsageBatchEventOkMessage setResourceUri(String resourceUri) {
         this.resourceUri = resourceUri;
         return this;
     }
@@ -183,9 +189,9 @@ public final class UsageEventOkResponse {
      * Set the quantity property: Number of units consumed.
      *
      * @param quantity the quantity value to set.
-     * @return the UsageEventOkResponse object itself.
+     * @return the UsageBatchEventOkMessage object itself.
      */
-    public UsageEventOkResponse setQuantity(Double quantity) {
+    public UsageBatchEventOkMessage setQuantity(Double quantity) {
         this.quantity = quantity;
         return this;
     }
@@ -203,9 +209,9 @@ public final class UsageEventOkResponse {
      * Set the dimension property: Dimension identifier.
      *
      * @param dimension the dimension value to set.
-     * @return the UsageEventOkResponse object itself.
+     * @return the UsageBatchEventOkMessage object itself.
      */
-    public UsageEventOkResponse setDimension(String dimension) {
+    public UsageBatchEventOkMessage setDimension(String dimension) {
         this.dimension = dimension;
         return this;
     }
@@ -223,9 +229,9 @@ public final class UsageEventOkResponse {
      * Set the effectiveStartTime property: Time in UTC when the usage event occurred.
      *
      * @param effectiveStartTime the effectiveStartTime value to set.
-     * @return the UsageEventOkResponse object itself.
+     * @return the UsageBatchEventOkMessage object itself.
      */
-    public UsageEventOkResponse setEffectiveStartTime(OffsetDateTime effectiveStartTime) {
+    public UsageBatchEventOkMessage setEffectiveStartTime(OffsetDateTime effectiveStartTime) {
         this.effectiveStartTime = effectiveStartTime;
         return this;
     }
@@ -243,10 +249,30 @@ public final class UsageEventOkResponse {
      * Set the planId property: Plan associated with the purchased offer.
      *
      * @param planId the planId value to set.
-     * @return the UsageEventOkResponse object itself.
+     * @return the UsageBatchEventOkMessage object itself.
      */
-    public UsageEventOkResponse setPlanId(String planId) {
+    public UsageBatchEventOkMessage setPlanId(String planId) {
         this.planId = planId;
+        return this;
+    }
+
+    /**
+     * Get the error property: The error property.
+     *
+     * @return the error value.
+     */
+    public UsageEventConflictResponse getError() {
+        return this.error;
+    }
+
+    /**
+     * Set the error property: The error property.
+     *
+     * @param error the error value to set.
+     * @return the UsageBatchEventOkMessage object itself.
+     */
+    public UsageBatchEventOkMessage setError(UsageEventConflictResponse error) {
+        this.error = error;
         return this;
     }
 }

@@ -10,6 +10,7 @@ package com.microsoft.marketplace.saas.models;
 
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -77,6 +78,12 @@ public final class Subscription {
     private SubscriptionTerm term;
 
     /*
+     * Indicating whether the subscription will renew automatically.
+     */
+    @JsonProperty(value = "autoRenew")
+    private Boolean autoRenew;
+
+    /*
      * Indicating whether the current subscription is a test asset.
      */
     @JsonProperty(value = "isTest")
@@ -115,17 +122,23 @@ public final class Subscription {
     private String storeFront;
 
     /*
+     * Possible Values are None, Csp (Csp sandbox purchase)
+     */
+    @JsonProperty(value = "sandboxType")
+    private SandboxTypeEnum sandboxType;
+
+    /*
+     * The created property.
+     */
+    @JsonProperty(value = "created")
+    private OffsetDateTime created;
+
+    /*
      * Dry Run indicates all transactions run as Test-Mode in the commerce
      * stack
      */
     @JsonProperty(value = "sessionMode")
     private SessionModeEnum sessionMode;
-
-    /*
-     * Possible Values are None, Csp (Csp sandbox purchase)
-     */
-    @JsonProperty(value = "sandboxType")
-    private SandboxTypeEnum sandboxType;
 
     /**
      * Get the id property: The id property.
@@ -328,6 +341,26 @@ public final class Subscription {
     }
 
     /**
+     * Get the autoRenew property: Indicating whether the subscription will renew automatically.
+     *
+     * @return the autoRenew value.
+     */
+    public Boolean isAutoRenew() {
+        return this.autoRenew;
+    }
+
+    /**
+     * Set the autoRenew property: Indicating whether the subscription will renew automatically.
+     *
+     * @param autoRenew the autoRenew value to set.
+     * @return the Subscription object itself.
+     */
+    public Subscription setAutoRenew(Boolean autoRenew) {
+        this.autoRenew = autoRenew;
+        return this;
+    }
+
+    /**
      * Get the isTest property: Indicating whether the current subscription is a test asset.
      *
      * @return the isTest value.
@@ -450,26 +483,6 @@ public final class Subscription {
     }
 
     /**
-     * Get the sessionMode property: Dry Run indicates all transactions run as Test-Mode in the commerce stack.
-     *
-     * @return the sessionMode value.
-     */
-    public SessionModeEnum getSessionMode() {
-        return this.sessionMode;
-    }
-
-    /**
-     * Set the sessionMode property: Dry Run indicates all transactions run as Test-Mode in the commerce stack.
-     *
-     * @param sessionMode the sessionMode value to set.
-     * @return the Subscription object itself.
-     */
-    public Subscription setSessionMode(SessionModeEnum sessionMode) {
-        this.sessionMode = sessionMode;
-        return this;
-    }
-
-    /**
      * Get the sandboxType property: Possible Values are None, Csp (Csp sandbox purchase).
      *
      * @return the sandboxType value.
@@ -486,6 +499,46 @@ public final class Subscription {
      */
     public Subscription setSandboxType(SandboxTypeEnum sandboxType) {
         this.sandboxType = sandboxType;
+        return this;
+    }
+
+    /**
+     * Get the created property: The created property.
+     *
+     * @return the created value.
+     */
+    public OffsetDateTime getCreated() {
+        return this.created;
+    }
+
+    /**
+     * Set the created property: The created property.
+     *
+     * @param created the created value to set.
+     * @return the Subscription object itself.
+     */
+    public Subscription setCreated(OffsetDateTime created) {
+        this.created = created;
+        return this;
+    }
+
+    /**
+     * Get the sessionMode property: Dry Run indicates all transactions run as Test-Mode in the commerce stack.
+     *
+     * @return the sessionMode value.
+     */
+    public SessionModeEnum getSessionMode() {
+        return this.sessionMode;
+    }
+
+    /**
+     * Set the sessionMode property: Dry Run indicates all transactions run as Test-Mode in the commerce stack.
+     *
+     * @param sessionMode the sessionMode value to set.
+     * @return the Subscription object itself.
+     */
+    public Subscription setSessionMode(SessionModeEnum sessionMode) {
+        this.sessionMode = sessionMode;
         return this;
     }
 }

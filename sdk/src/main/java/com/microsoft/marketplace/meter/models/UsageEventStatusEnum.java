@@ -31,8 +31,14 @@ public enum UsageEventStatusEnum {
     /** Enum value ResourceNotAuthorized. */
     RESOURCE_NOT_AUTHORIZED("ResourceNotAuthorized"),
 
-    /** Enum value InvalidDimension|BadArgument. */
-    INVALID_DIMENSION_BAD_ARGUMENT("InvalidDimension|BadArgument");
+    /** Enum value InvalidDimension. */
+    INVALID_DIMENSION("InvalidDimension"),
+
+    /** Enum value InvalidQuantity. */
+    INVALID_QUANTITY("InvalidQuantity"),
+
+    /** Enum value BadArgument. */
+    BAD_ARGUMENT("BadArgument");
 
     /** The actual serialized value for a UsageEventStatusEnum instance. */
     private final String value;

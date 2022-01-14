@@ -56,7 +56,7 @@ public final class SubscriptionOperations {
     @ServiceInterface(name = "SaaSAPISubscriptionO")
     private interface SubscriptionOperationsService {
         @Get("/saas/subscriptions/{subscriptionId}/operations")
-        @ExpectedResponses({200, 400, 403, 404, 500})
+        @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<OperationList>> listOperations(
                 @HostParam("$host") String host,
@@ -66,7 +66,7 @@ public final class SubscriptionOperations {
                 @HeaderParam("x-ms-correlationid") UUID correlationId);
 
         @Get("/saas/subscriptions/{subscriptionId}/operations/{operationId}")
-        @ExpectedResponses({200, 400, 403, 404, 500})
+        @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Operation>> getOperationStatus(
                 @HostParam("$host") String host,
@@ -77,7 +77,7 @@ public final class SubscriptionOperations {
                 @HeaderParam("x-ms-correlationid") UUID correlationId);
 
         @Patch("/saas/subscriptions/{subscriptionId}/operations/{operationId}")
-        @ExpectedResponses({200, 400, 403, 404, 409, 500})
+        @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> updateOperationStatus(
                 @HostParam("$host") String host,
