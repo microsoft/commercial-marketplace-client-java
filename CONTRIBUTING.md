@@ -36,11 +36,11 @@ Merging Pull Requests (for project contributors with write access)
   - Contributor is using an e-mail address other than the primary GitHub address and wants that preserved in the history. Contributor must be willing to squash
     the commits manually before acceptance.
 
-
-
 ## Developer Guide
 
 ### Pre-requisites
+
+Local Development:
 
 - Install Java Development Kit 11
   - add `JAVA_HOME` to environment variables
@@ -51,6 +51,26 @@ Merging Pull Requests (for project contributors with write access)
 1.- Run this as Administrator on a command prompt:<br> 
 `REG ADD HKLM\SYSTEM\CurrentControlSet\Control\FileSystem /v LongPathsEnabled /t REG_DWORD /d 1`<br>*(might need to type `yes` to override key if it already exists)*<br><br>
 2.- Set up `git` by running:<br> `git config --system core.longpaths true`
+
+Visual Studio Code:
+
+If you would prefer to run the project in a container through Visual Studio code, you can follow the walkthrough [here](https://code.visualstudio.com/docs/remote/containers-tutorial) through the ["Install the extension"](https://code.visualstudio.com/docs/remote/containers-tutorial#_install-the-extension) step.
+
+Then to finish the creation of the Java container: 
+1. Click the green "Open a Remote Window" button in the bottom left hand corner of Visual Studio Code.
+1. Select "Add Development Container Configuration Files..."
+1. Select the "Java" container definition.
+1. Select "11-bullseye (default)" as the Java version.
+1. Select "None" for Node.js version.
+1. Select "Install Maven" and select "OK".
+1. Select as many of the additional features to install as desired, and select "OK".
+1. Click the green "Open a Remote Window" button again, and select "Reopen in Container". 
+
+Install extensions:
+
+1. Lombok Annotations Support for VS Code
+1. Test Runner for Java
+1. Debugger for Java
 
 ### Building and Testing
 
@@ -83,6 +103,22 @@ mvn -Dgpg.skip -DskipTests clean install
 ### Live testing
 
 Live tests assume a live resource exists. The Azure Marketplace team has this value set to their partner center account. You may point your local environment to your own Partner Center account as needed.
+
+### Debugging in Visual Studio Code
+
+1. For the debugger to recognize the variables when running, add your environment variables to Visual Studio Code's settings.json.
+
+```json
+"java.test.config":{
+    "env": {
+        "AAD_TENANT_ID": "",
+        "AAD_APP_CLIENT_ID": "",
+        "AAD_APP_CLIENT_SECRET": "",
+        "AAD_APP_CERT": "",
+        "AAD_APP_CERT_SECRET": ""
+    }
+}
+```
 
 ## Versions and versioning
 

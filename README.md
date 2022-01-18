@@ -18,21 +18,19 @@ contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additio
 
 This repository is for active development of the Azure Commercial Marketplace SaaS Client SDK for Java. For consumers of the SDK we recommend visiting our versioned [developer docs](README.md).
 
+### Prerequisites
+
+Java 11 or later is required to use this library. Preferentially use [Azul Java SDK](https://www.azul.com/downloads/zulu-community/?package=jdk).
+
+Setup the following:
+
+1. You must have access to the [Partner Center Commercial Marketplace page](https://partner.microsoft.com/dashboard/commercial-marketplace/). You can setup a Partner account by visiting the [partner page](https://partner.microsoft.com/) and selecting "Become a partner". Once you do that, enroll in the [Commercial Marketplace](https://docs.microsoft.com/azure/marketplace/partner-center-portal/create-account).  
+1. You must have at least one SaaS offer published to the Preview stage. Instructions [here](https://docs.microsoft.com/azure/marketplace/partner-center-portal/create-new-saas-offer) or follow the [hands-on labs](https://microsoft.github.io/Mastering-the-Marketplace/saas-accelerator/#hands-on-labs) that are part of the Mastering the Marketplace - Saas Accelerator Series.
+1. You must have at least one subscription to the SaaS offer.
+
 ## Getting started
 
 For samples of how to use the methods, look to the [test code](./sdk/src/test/java/com/azure/marketplace/tests/).
-
-You can run the tests from the command line by executing a build from the root of the repository: 
-```bash
-. ./variables.conf
-mvn test --file sdk/pom.xml
-```
-
-You will need to have the following setup first:
-
-1. You must have access to the [Partner Center Commercial Marketplace page](https://partner.microsoft.com/dashboard/commercial-marketplace/). You can setup a Partner account by visiting the [partner page](https://partner.microsoft.com/) and selecting "Become a partner". Once you do that, enroll in the [Commercial Marketplace](https://docs.microsoft.com/azure/marketplace/partner-center-portal/create-account).  
-1. You must have at least one SaaS offer published to the Preview stage. Instructions [here](https://docs.microsoft.com/azure/marketplace/partner-center-portal/create-new-saas-offer).
-1. You must have at least one subscription to the SaaS offer.
 
 The tests assume the presence of the following environment variables. These variables allow the tests to login on your behalf.
 
@@ -42,7 +40,7 @@ The tests assume the presence of the following environment variables. These vari
 - AAD_APP_CERT: A base64-encoded version of a certificate which also contains a private key. This certificate is used to authenticate the AAD_APP_CLIENT_ID. You can do the conversion in a bash shell with the command line with "base64 &lt;certificate.pfx&gt; -w 0". Websites also exist, such as [Base64.Guru](https://base64.guru/converter/encode/file).
 - AAD_APP_CERT_SECRET: Password for the certificate.
 
-You can make sure these are set by using the template [variables.conf.template](./variables.conf.template) and then copying that file to variables.conf. Once copied, fill in the proper values.
+You can make sure these are set by using the template [variables.conf.template](./variables.conf.template) and creating a copy of that file as variables.conf. Once copied, fill in the proper values.
 
 To create the certificate using OpenSSL, these lines work great:
 
@@ -51,9 +49,17 @@ openssl req -x509 -nodes -days 3650 -newkey rsa:4096 -keyout privateKey.key -out
 openssl pkcs12 -export -out certificate.pfx -inkey privateKey.key -in certificate.pem
 ```
 
-### Prerequisites
+Note: If you are running the command in Windows, run the second command as the following so the prompt for creating the certificate password appears:
 
-Java 11 or later is required to use this library. Preferentially use [Azul Java SDK](https://www.azul.com/downloads/zulu-community/?package=jdk)
+```bash
+winpty openssl pkcs12 -export -out certificate.pfx -inkey privateKey.key -in certificate.pem
+```
+
+You can run the tests from the command line by executing a build from the root of the repository: 
+```bash
+. ./variables.conf
+mvn test --file sdk/pom.xml
+```
 
 ### Client
 
