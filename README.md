@@ -1,3 +1,4 @@
+![Build and Test](https://github.com/microsoft/commercial-marketplace-client-java/actions/workflows/build-and-test.yml/badge.svg?branch=main&event=push)
 
 # Readme
 
@@ -110,10 +111,6 @@ Security issues and bugs should be reported privately, via email, to the Microso
 ### License
 
 Azure Marketplace SDK for Java is licensed under the [MIT](LICENSE.txt) license.
-
-### Current Status
-
-![example branch parameter](https://github.com/microsoft/commercial-marketplace-client-java/actions/workflows/build-and-test.yml/badge.svg?branch=main&event=push)
 
 <!-- Links -->
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/commercial-marketplace-saas-sdk-client-java%2FREADME.png)
