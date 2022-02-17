@@ -12,10 +12,10 @@ import com.microsoft.marketplace.MarketplaceClient;
 import com.microsoft.marketplace.saas.SaaSAPI;
 import com.microsoft.marketplace.saas.models.Subscription;
 import org.apache.commons.lang3.StringUtils;
-import org.junit.Assert;
-import org.junit.AssumptionViolatedException;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.platform.commons.PreconditionViolationException;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -42,11 +42,10 @@ import java.util.UUID;
 // $content = [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($(get-content $fileName)))
 //
 public class TestCertificateMarketplaceAPIs {
-    private SaaSAPI client;
+    private static SaaSAPI saasApiClient;
+    private static UUID subscriptionId;
 
-    private UUID subscriptionId;
-
-    private void initClient(){
+    private static void initClient(){
         String tenantId = System.getenv("AAD_TENANT_ID");
         String clientId = System.getenv("AAD_APP_CLIENT_ID");
         String clientCertificate = System.getenv("AAD_APP_CERT");
@@ -68,7 +67,7 @@ public class TestCertificateMarketplaceAPIs {
                 alias = aliases.nextElement();
             }
             else {
-                throw new IllegalStateException("AAD_TENANT_ID, AAD_APP_CLIENT_ID, AAD_APP_CERT_LOCATION, and AAD_APP_CERT_SECRET must be defined as environment variables.");
+                throw new IllegalStateException("AAD_TENANT_ID, AAD_APP_CLIENT_ID, AAD_APP_CERT, and AAD_APP_CERT_SECRET must be defined as environment variables.");
             }
 
             privateKey = (KeyStore.PrivateKeyEntry)ks.getEntry(alias, new KeyStore.PasswordProtection(certificatePassword.toCharArray()));
@@ -76,8 +75,12 @@ public class TestCertificateMarketplaceAPIs {
             e.printStackTrace();
         }
 
-        if (StringUtils.isEmpty(tenantId) || privateKey == null){
-            throw new IllegalStateException("AAD_TENANT_ID, AAD_APP_CLIENT_ID, AAD_APP_CERT_LOCATION, and AAD_APP_CERT_SECRET must be defined as environment variables.");
+        if (StringUtils.isEmpty(tenantId)){
+            throw new IllegalStateException("AAD_TENANT_ID must be defined as an environment variable.");
+        }
+
+        if (privateKey == null) {
+            throw new IllegalStateException("AAD_APP_CERT and AAD_APP_CERT_SECRET must be defined as environment variables.");
         }
 
         CertificateTokenProviderSettings settings = new CertificateTokenProviderSettings();
@@ -86,24 +89,25 @@ public class TestCertificateMarketplaceAPIs {
         settings.setCertificatePrivateKey(privateKey);
         CertificateTokenProvider credentials = new CertificateTokenProvider(settings);
 
-        this.client = MarketplaceClient.ApiClient(credentials);
+        saasApiClient = MarketplaceClient.SaasApiClient(credentials);
     }
-    @Before
-    public void setup(){
+
+    @BeforeAll
+    public static void setup(){
         initClient();
-        Subscription subscription = this.client.getFulfillmentOperations().listSubscriptionsAsync(null,
+        Subscription subscription = saasApiClient.getFulfillmentOperations().listSubscriptionsAsync(null,
                 UUID.randomUUID(), UUID.randomUUID()).blockFirst();
         if (null == subscription) {
-            throw new AssumptionViolatedException("No subscriptions are active for this login. Giving up.");
+            throw new PreconditionViolationException("No subscriptions are active for this login. Giving up.");
         }
 
-        this.subscriptionId = subscription.getId();
+        subscriptionId = subscription.getId();
     }
 
     @Test
     public void getSubscriptionTest() {
-        Subscription response = this.client.getFulfillmentOperations().getSubscriptionAsync(this.subscriptionId,
+        Subscription response = saasApiClient.getFulfillmentOperations().getSubscriptionAsync(subscriptionId,
                 UUID.randomUUID(), UUID.randomUUID()).block();
-        Assert.assertEquals(this.subscriptionId, response.getId());
+        Assertions.assertEquals(subscriptionId, response.getId());
     }
 }

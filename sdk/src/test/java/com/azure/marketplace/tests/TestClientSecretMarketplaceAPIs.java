@@ -9,22 +9,29 @@ package com.azure.marketplace.tests;
 import com.microsoft.marketplace.ClientSecretTokenProvider;
 import com.microsoft.marketplace.ClientSecretTokenProviderSettings;
 import com.microsoft.marketplace.MarketplaceClient;
+import com.microsoft.marketplace.meter.MeteringAPI;
 import com.microsoft.marketplace.saas.SaaSAPI;
+import com.microsoft.marketplace.saas.models.OperationList;
 import com.microsoft.marketplace.saas.models.Subscription;
 import com.microsoft.marketplace.saas.models.SubscriptionPlans;
-import org.apache.commons.lang3.StringUtils;
-import org.junit.Assert;
-import org.junit.AssumptionViolatedException;
-import org.junit.Before;
-import org.junit.Test;
 
+import org.apache.commons.lang3.StringUtils;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.platform.commons.PreconditionViolationException;
+
+import java.util.List;
 import java.util.UUID;
 
 public class TestClientSecretMarketplaceAPIs {
-    private SaaSAPI client;
-    private UUID subscriptionId;
 
-    void initClient(){
+    private static UUID subscriptionId;
+
+    private static SaaSAPI saasApiClient;
+    private static MeteringAPI meteringAPIClient;
+
+    static void initClient(){
         String tenantId = System.getenv("AAD_TENANT_ID");
         String clientId = System.getenv("AAD_APP_CLIENT_ID");
         String clientSecret = System.getenv("AAD_APP_CLIENT_SECRET");
@@ -46,41 +53,72 @@ public class TestClientSecretMarketplaceAPIs {
         settings.setClientId(UUID.fromString(clientId));
         settings.setClientSecret(clientSecret);
         ClientSecretTokenProvider credentials = new ClientSecretTokenProvider(settings);
-        this.client = MarketplaceClient.ApiClient(credentials);
+        saasApiClient = MarketplaceClient.SaasApiClient(credentials);
+        meteringAPIClient = MarketplaceClient.MeteringAPIClient(credentials);
     }
 
-    @Before
-    public void setup(){
+
+    @BeforeAll
+    public static void setup(){
         initClient();
-        Subscription subscription = this.client.getFulfillmentOperations().listSubscriptionsAsync(null,
+        Subscription subscription = saasApiClient.getFulfillmentOperations().listSubscriptionsAsync(null,
                 UUID.randomUUID(), UUID.randomUUID()).blockFirst();
-
         if (null == subscription) {
-            throw new AssumptionViolatedException("No subscriptions are active for this login. Giving up.");
+            throw new PreconditionViolationException("No subscriptions are active for this login. Giving up.");
         }
-
-        this.subscriptionId = subscription.getId();
+        subscriptionId = subscription.getId();
     }
 
     @Test
     public void getSubscriptionTest() {
-        Subscription response = this.client.getFulfillmentOperations().getSubscriptionAsync(this.subscriptionId,
+        Subscription response = saasApiClient.getFulfillmentOperations().getSubscriptionAsync(subscriptionId,
                 UUID.randomUUID(), UUID.randomUUID()).block();
-        Assert.assertEquals(this.subscriptionId, response.getId());
+        Assertions.assertEquals(subscriptionId, response.getId());
     }
 
     @Test
     public void listAvailablePlansTest() {
-        SubscriptionPlans response = this.client.getFulfillmentOperations().listAvailablePlansAsync(this.subscriptionId,
+        SubscriptionPlans response = saasApiClient.getFulfillmentOperations().listAvailablePlansAsync(subscriptionId,
                 UUID.randomUUID(), UUID.randomUUID()).block();
-        Assert.assertFalse("No plans returned.", response.getPlans().isEmpty());
+        Assertions.assertFalse(response.getPlans().isEmpty());
     }
 
     @Test
     public void listSubscriptionsTest() {
-        Subscription subscription = this.client.getFulfillmentOperations().listSubscriptionsAsync(null,
+        Subscription subscription = saasApiClient.getFulfillmentOperations().listSubscriptionsAsync(null,
                 UUID.randomUUID(), UUID.randomUUID()).blockFirst();
+        Assertions.assertNotNull(subscription);
+    }
 
-        Assert.assertNotNull("No subscriptions available for this account. Try another.", subscription);
+    @Test
+    public void listSubscriptionsPagedTest() {
+        String continuationToken = null;
+        List<Subscription> subscriptions = saasApiClient.getFulfillmentOperations().listSubscriptionsSinglePageAsync(continuationToken,
+                UUID.randomUUID(), UUID.randomUUID()).block().getValue();
+        Assertions.assertNotNull(subscriptions);
+    }
+
+    @Test
+    public void listPlansTest(){
+        List<Subscription> subscriptions = saasApiClient.getFulfillmentOperations().listSubscriptionsAsync(null,
+                UUID.randomUUID(), UUID.randomUUID()).buffer().blockFirst();
+
+        Assertions.assertNotNull(subscriptions);
+        Assertions.assertFalse(subscriptions.isEmpty());
+        
+        Subscription firstSubscription = subscriptions.get(0);
+
+        SubscriptionPlans plans = saasApiClient.getFulfillmentOperations().listAvailablePlansAsync(firstSubscription.getId(), UUID.randomUUID(), UUID.randomUUID()).block();
+
+        Assertions.assertNotNull(plans);
+        Assertions.assertFalse(plans.getPlans().isEmpty());
+    }
+
+    // SubscriptionOperations tests
+    @Test
+    public void listOperationsTest(){
+        OperationList operationList = saasApiClient.getSubscriptionOperations().listOperationsAsync(subscriptionId, 
+                UUID.randomUUID(), UUID.randomUUID()).block();
+        Assertions.assertNotNull(operationList.getOperations());
     }
 }
