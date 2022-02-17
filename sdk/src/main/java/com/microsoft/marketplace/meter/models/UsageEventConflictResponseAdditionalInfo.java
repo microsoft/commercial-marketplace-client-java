@@ -10,243 +10,33 @@ package com.microsoft.marketplace.meter.models;
 
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.time.OffsetDateTime;
-import java.util.UUID;
 
 /** The UsageEventConflictResponseAdditionalInfo model. */
 @Fluent
 public final class UsageEventConflictResponseAdditionalInfo {
     /*
-     * Unique identifier associated with the usage event
+     * The acceptedMessage property.
      */
-    @JsonProperty(value = "usageEventId")
-    private UUID usageEventId;
-
-    /*
-     * Accepted|NotProcessed|Expired
-     */
-    @JsonProperty(value = "status")
-    private UsageEventConflictResponseAdditionalInfoStatus status;
-
-    /*
-     * Time this message was created in UTC
-     */
-    @JsonProperty(value = "messageTime")
-    private OffsetDateTime messageTime;
-
-    /*
-     * Identifier of the resource against which usage is emitted
-     */
-    @JsonProperty(value = "resourceId")
-    private UUID resourceId;
-
-    /*
-     * Identifier of the managed app resource against which usage is emitted
-     */
-    @JsonProperty(value = "resourceUri")
-    private String resourceUri;
-
-    /*
-     * The quantity property.
-     */
-    @JsonProperty(value = "quantity")
-    private Long quantity;
-
-    /*
-     * Dimension identifier
-     */
-    @JsonProperty(value = "dimension")
-    private String dimension;
-
-    /*
-     * Time in UTC when the usage event occurred
-     */
-    @JsonProperty(value = "effectiveStartTime")
-    private OffsetDateTime effectiveStartTime;
-
-    /*
-     * Plan associated with the purchased offer
-     */
-    @JsonProperty(value = "planId")
-    private UUID planId;
+    @JsonProperty(value = "acceptedMessage")
+    private UsageEventOkResponse acceptedMessage;
 
     /**
-     * Get the usageEventId property: Unique identifier associated with the usage event.
+     * Get the acceptedMessage property: The acceptedMessage property.
      *
-     * @return the usageEventId value.
+     * @return the acceptedMessage value.
      */
-    public UUID getUsageEventId() {
-        return this.usageEventId;
+    public UsageEventOkResponse getAcceptedMessage() {
+        return this.acceptedMessage;
     }
 
     /**
-     * Set the usageEventId property: Unique identifier associated with the usage event.
+     * Set the acceptedMessage property: The acceptedMessage property.
      *
-     * @param usageEventId the usageEventId value to set.
+     * @param acceptedMessage the acceptedMessage value to set.
      * @return the UsageEventConflictResponseAdditionalInfo object itself.
      */
-    public UsageEventConflictResponseAdditionalInfo setUsageEventId(UUID usageEventId) {
-        this.usageEventId = usageEventId;
-        return this;
-    }
-
-    /**
-     * Get the status property: Accepted|NotProcessed|Expired.
-     *
-     * @return the status value.
-     */
-    public UsageEventConflictResponseAdditionalInfoStatus getStatus() {
-        return this.status;
-    }
-
-    /**
-     * Set the status property: Accepted|NotProcessed|Expired.
-     *
-     * @param status the status value to set.
-     * @return the UsageEventConflictResponseAdditionalInfo object itself.
-     */
-    public UsageEventConflictResponseAdditionalInfo setStatus(UsageEventConflictResponseAdditionalInfoStatus status) {
-        this.status = status;
-        return this;
-    }
-
-    /**
-     * Get the messageTime property: Time this message was created in UTC.
-     *
-     * @return the messageTime value.
-     */
-    public OffsetDateTime getMessageTime() {
-        return this.messageTime;
-    }
-
-    /**
-     * Set the messageTime property: Time this message was created in UTC.
-     *
-     * @param messageTime the messageTime value to set.
-     * @return the UsageEventConflictResponseAdditionalInfo object itself.
-     */
-    public UsageEventConflictResponseAdditionalInfo setMessageTime(OffsetDateTime messageTime) {
-        this.messageTime = messageTime;
-        return this;
-    }
-
-    /**
-     * Get the resourceId property: Identifier of the resource against which usage is emitted.
-     *
-     * @return the resourceId value.
-     */
-    public UUID getResourceId() {
-        return this.resourceId;
-    }
-
-    /**
-     * Set the resourceId property: Identifier of the resource against which usage is emitted.
-     *
-     * @param resourceId the resourceId value to set.
-     * @return the UsageEventConflictResponseAdditionalInfo object itself.
-     */
-    public UsageEventConflictResponseAdditionalInfo setResourceId(UUID resourceId) {
-        this.resourceId = resourceId;
-        return this;
-    }
-
-    /**
-     * Get the resourceUri property: Identifier of the managed app resource against which usage is emitted.
-     *
-     * @return the resourceUri value.
-     */
-    public String getResourceUri() {
-        return this.resourceUri;
-    }
-
-    /**
-     * Set the resourceUri property: Identifier of the managed app resource against which usage is emitted.
-     *
-     * @param resourceUri the resourceUri value to set.
-     * @return the UsageEventConflictResponseAdditionalInfo object itself.
-     */
-    public UsageEventConflictResponseAdditionalInfo setResourceUri(String resourceUri) {
-        this.resourceUri = resourceUri;
-        return this;
-    }
-
-    /**
-     * Get the quantity property: The quantity property.
-     *
-     * @return the quantity value.
-     */
-    public Long getQuantity() {
-        return this.quantity;
-    }
-
-    /**
-     * Set the quantity property: The quantity property.
-     *
-     * @param quantity the quantity value to set.
-     * @return the UsageEventConflictResponseAdditionalInfo object itself.
-     */
-    public UsageEventConflictResponseAdditionalInfo setQuantity(Long quantity) {
-        this.quantity = quantity;
-        return this;
-    }
-
-    /**
-     * Get the dimension property: Dimension identifier.
-     *
-     * @return the dimension value.
-     */
-    public String getDimension() {
-        return this.dimension;
-    }
-
-    /**
-     * Set the dimension property: Dimension identifier.
-     *
-     * @param dimension the dimension value to set.
-     * @return the UsageEventConflictResponseAdditionalInfo object itself.
-     */
-    public UsageEventConflictResponseAdditionalInfo setDimension(String dimension) {
-        this.dimension = dimension;
-        return this;
-    }
-
-    /**
-     * Get the effectiveStartTime property: Time in UTC when the usage event occurred.
-     *
-     * @return the effectiveStartTime value.
-     */
-    public OffsetDateTime getEffectiveStartTime() {
-        return this.effectiveStartTime;
-    }
-
-    /**
-     * Set the effectiveStartTime property: Time in UTC when the usage event occurred.
-     *
-     * @param effectiveStartTime the effectiveStartTime value to set.
-     * @return the UsageEventConflictResponseAdditionalInfo object itself.
-     */
-    public UsageEventConflictResponseAdditionalInfo setEffectiveStartTime(OffsetDateTime effectiveStartTime) {
-        this.effectiveStartTime = effectiveStartTime;
-        return this;
-    }
-
-    /**
-     * Get the planId property: Plan associated with the purchased offer.
-     *
-     * @return the planId value.
-     */
-    public UUID getPlanId() {
-        return this.planId;
-    }
-
-    /**
-     * Set the planId property: Plan associated with the purchased offer.
-     *
-     * @param planId the planId value to set.
-     * @return the UsageEventConflictResponseAdditionalInfo object itself.
-     */
-    public UsageEventConflictResponseAdditionalInfo setPlanId(UUID planId) {
-        this.planId = planId;
+    public UsageEventConflictResponseAdditionalInfo setAcceptedMessage(UsageEventOkResponse acceptedMessage) {
+        this.acceptedMessage = acceptedMessage;
         return this;
     }
 }

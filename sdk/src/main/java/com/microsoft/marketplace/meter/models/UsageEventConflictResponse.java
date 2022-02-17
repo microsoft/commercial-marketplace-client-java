@@ -15,36 +15,22 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Fluent
 public final class UsageEventConflictResponse {
     /*
-     * The code property.
-     */
-    @JsonProperty(value = "code")
-    private String code;
-
-    /*
      * The additionalInfo property.
      */
     @JsonProperty(value = "additionalInfo")
     private UsageEventConflictResponseAdditionalInfo additionalInfo;
 
-    /**
-     * Get the code property: The code property.
-     *
-     * @return the code value.
+    /*
+     * The message property.
      */
-    public String getCode() {
-        return this.code;
-    }
+    @JsonProperty(value = "message")
+    private String message;
 
-    /**
-     * Set the code property: The code property.
-     *
-     * @param code the code value to set.
-     * @return the UsageEventConflictResponse object itself.
+    /*
+     * The code property.
      */
-    public UsageEventConflictResponse setCode(String code) {
-        this.code = code;
-        return this;
-    }
+    @JsonProperty(value = "code")
+    private String code;
 
     /**
      * Get the additionalInfo property: The additionalInfo property.
@@ -63,6 +49,46 @@ public final class UsageEventConflictResponse {
      */
     public UsageEventConflictResponse setAdditionalInfo(UsageEventConflictResponseAdditionalInfo additionalInfo) {
         this.additionalInfo = additionalInfo;
+        return this;
+    }
+
+    /**
+     * Get the message property: The message property.
+     *
+     * @return the message value.
+     */
+    public String getMessage() {
+        return this.message;
+    }
+
+    /**
+     * Set the message property: The message property.
+     *
+     * @param message the message value to set.
+     * @return the UsageEventConflictResponse object itself.
+     */
+    public UsageEventConflictResponse setMessage(String message) {
+        this.message = message;
+        return this;
+    }
+
+    /**
+     * Get the code property: The code property.
+     *
+     * @return the code value.
+     */
+    public String getCode() {
+        return this.code;
+    }
+
+    /**
+     * Set the code property: The code property.
+     *
+     * @param code the code value to set.
+     * @return the UsageEventConflictResponse object itself.
+     */
+    public UsageEventConflictResponse setCode(String code) {
+        this.code = code;
         return this;
     }
 }

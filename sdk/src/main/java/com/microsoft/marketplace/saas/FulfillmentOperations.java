@@ -65,7 +65,7 @@ public final class FulfillmentOperations {
     @ServiceInterface(name = "SaaSAPIFulfillmentOp")
     private interface FulfillmentOperationsService {
         @Post("/saas/subscriptions/resolve")
-        @ExpectedResponses({200, 400, 403, 404, 500})
+        @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<ResolvedSubscription>> resolve(
                 @HostParam("$host") String host,
@@ -75,7 +75,7 @@ public final class FulfillmentOperations {
                 @HeaderParam("x-ms-marketplace-token") String xMsMarketplaceToken);
 
         @Get("/saas/subscriptions/")
-        @ExpectedResponses({200, 403, 500})
+        @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<SubscriptionsResponse>> listSubscriptions(
                 @HostParam("$host") String host,
@@ -85,7 +85,7 @@ public final class FulfillmentOperations {
                 @HeaderParam("x-ms-correlationid") UUID correlationId);
 
         @Get("/saas/subscriptions/{subscriptionId}")
-        @ExpectedResponses({200, 403, 404, 500})
+        @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Subscription>> getSubscription(
                 @HostParam("$host") String host,
@@ -95,7 +95,7 @@ public final class FulfillmentOperations {
                 @HeaderParam("x-ms-correlationid") UUID correlationId);
 
         @Patch("/saas/subscriptions/{subscriptionId}")
-        @ExpectedResponses({202, 400, 403, 404, 500})
+        @ExpectedResponses({202})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<FulfillmentOperationsUpdateSubscriptionResponse> updateSubscription(
                 @HostParam("$host") String host,
@@ -106,7 +106,7 @@ public final class FulfillmentOperations {
                 @BodyParam("application/json") SubscriberPlan body);
 
         @Delete("/saas/subscriptions/{subscriptionId}")
-        @ExpectedResponses({202, 400, 403, 404, 500})
+        @ExpectedResponses({202})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<FulfillmentOperationsDeleteSubscriptionResponse> deleteSubscription(
                 @HostParam("$host") String host,
@@ -116,7 +116,7 @@ public final class FulfillmentOperations {
                 @HeaderParam("x-ms-correlationid") UUID correlationId);
 
         @Get("/saas/subscriptions/{subscriptionId}/listAvailablePlans")
-        @ExpectedResponses({200, 403, 404, 500})
+        @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<SubscriptionPlans>> listAvailablePlans(
                 @HostParam("$host") String host,
@@ -126,7 +126,7 @@ public final class FulfillmentOperations {
                 @HeaderParam("x-ms-correlationid") UUID correlationId);
 
         @Post("/saas/subscriptions/{subscriptionId}/activate")
-        @ExpectedResponses({200, 400, 403, 404, 500})
+        @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> activateSubscription(
                 @HostParam("$host") String host,
@@ -137,7 +137,7 @@ public final class FulfillmentOperations {
                 @BodyParam("application/json") SubscriberPlan body);
 
         @Get("{nextLink}")
-        @ExpectedResponses({200, 403, 500})
+        @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<SubscriptionsResponse>> listSubscriptionsNext(
                 @PathParam(value = "nextLink", encoded = true) String nextLink);
