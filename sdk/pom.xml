@@ -6,7 +6,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.microsoft.azure</groupId>
   <artifactId>azure-marketplace</artifactId>
-  <version>1.0.0.${sha}.beta</version>
+  <version>1.2.0.${sha}</version>
 
   <name>Microsoft Azure client library for Marketplace</name>
   <description>This package contains the Microsoft Azure Marketplace client library.</description>
