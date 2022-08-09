@@ -17,7 +17,13 @@ public enum TermUnitEnum {
     P1M("P1M"),
 
     /** Enum value P1Y. */
-    P1Y("P1Y");
+    P1Y("P1Y"),
+
+    /** Enum value P2Y. */
+    P2Y("P2Y"),
+
+    /** Enum value P3Y. */
+    P3Y("P3Y");
 
     /** The actual serialized value for a TermUnitEnum instance. */
     private final String value;
