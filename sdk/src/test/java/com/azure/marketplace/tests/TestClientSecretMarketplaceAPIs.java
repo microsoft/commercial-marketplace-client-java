@@ -14,6 +14,7 @@ import com.microsoft.marketplace.saas.SaaSAPI;
 import com.microsoft.marketplace.saas.models.OperationList;
 import com.microsoft.marketplace.saas.models.Subscription;
 import com.microsoft.marketplace.saas.models.SubscriptionPlans;
+import com.microsoft.marketplace.saas.models.SubscriptionStatusEnum;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Assertions;
@@ -62,7 +63,7 @@ public class TestClientSecretMarketplaceAPIs {
     public static void setup(){
         initClient();
         Subscription subscription = saasApiClient.getFulfillmentOperations().listSubscriptionsAsync(null,
-                UUID.randomUUID(), UUID.randomUUID()).blockFirst();
+                UUID.randomUUID(), UUID.randomUUID()).filter(s -> s.getSaasSubscriptionStatus() == SubscriptionStatusEnum.SUBSCRIBED).blockFirst();
         if (null == subscription) {
             throw new PreconditionViolationException("No subscriptions are active for this login. Giving up.");
         }
@@ -101,7 +102,7 @@ public class TestClientSecretMarketplaceAPIs {
     @Test
     public void listPlansTest(){
         List<Subscription> subscriptions = saasApiClient.getFulfillmentOperations().listSubscriptionsAsync(null,
-                UUID.randomUUID(), UUID.randomUUID()).buffer().blockFirst();
+                UUID.randomUUID(), UUID.randomUUID()).filter(s -> s.getSaasSubscriptionStatus() == SubscriptionStatusEnum.SUBSCRIBED).buffer().blockFirst();
 
         Assertions.assertNotNull(subscriptions);
         Assertions.assertFalse(subscriptions.isEmpty());

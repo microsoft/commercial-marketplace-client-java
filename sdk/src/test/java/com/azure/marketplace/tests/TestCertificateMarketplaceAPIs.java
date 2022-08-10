@@ -11,6 +11,8 @@ import com.microsoft.marketplace.CertificateTokenProviderSettings;
 import com.microsoft.marketplace.MarketplaceClient;
 import com.microsoft.marketplace.saas.SaaSAPI;
 import com.microsoft.marketplace.saas.models.Subscription;
+import com.microsoft.marketplace.saas.models.SubscriptionStatusEnum;
+
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -96,7 +98,7 @@ public class TestCertificateMarketplaceAPIs {
     public static void setup(){
         initClient();
         Subscription subscription = saasApiClient.getFulfillmentOperations().listSubscriptionsAsync(null,
-                UUID.randomUUID(), UUID.randomUUID()).blockFirst();
+                UUID.randomUUID(), UUID.randomUUID()).filter(s -> s.getSaasSubscriptionStatus() == SubscriptionStatusEnum.SUBSCRIBED).blockFirst();
         if (null == subscription) {
             throw new PreconditionViolationException("No subscriptions are active for this login. Giving up.");
         }
