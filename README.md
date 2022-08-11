@@ -70,7 +70,6 @@ Microsoft release Java packages follow the [Azure SDK Design Guidelines for Java
 
 ## Need help?
 
-- For reference documentation visit the [Azure Marketplace SDK for Java documentation](./sdk/README.md).
 - For tutorials, samples, quick starts and other documentation, review the [test code](./sdk/src/test/java/com/microsoft/azure/marketplace/tests).
 - File an issue via [Github Issues](https://github.com/Azure/commercial-marketplace-saas-sdk-client-java/issues/new/choose).
 
