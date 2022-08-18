@@ -26,7 +26,7 @@ public enum OperationActionEnum {
     SUSPEND("Suspend"),
 
     /** Enum value Reinstate. */
-    REINSTATE("Reinstate");
+    REINSTATE("Reinstate"),
     
     /** Enum value Renew. */
     RENEW("Renew");
