@@ -16,6 +16,12 @@ import java.time.OffsetDateTime;
 @Fluent
 public final class SubscriptionTerm {
     /*
+     * The termUnit property.
+     */
+    @JsonProperty(value = "termUnit")
+    private TermUnitEnum termUnit;
+
+    /*
      * The startDate property.
      */
     @JsonProperty(value = "startDate")
@@ -26,6 +32,26 @@ public final class SubscriptionTerm {
      */
     @JsonProperty(value = "endDate")
     private OffsetDateTime endDate;
+
+    /**
+     * Get the termUnit property: The termUnit property.
+     *
+     * @return the termUnit value.
+     */
+    public TermUnitEnum getTermUnit() {
+        return this.termUnit;
+    }
+
+    /**
+     * Set the termUnit property: The termUnit property.
+     *
+     * @param termUnit the termUnit value to set.
+     * @return the SubscriptionTerm object itself.
+     */
+    public SubscriptionTerm setTermUnit(TermUnitEnum termUnit) {
+        this.termUnit = termUnit;
+        return this;
+    }
 
     /**
      * Get the startDate property: The startDate property.

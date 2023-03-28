@@ -21,7 +21,7 @@ RUN wget -O java.deb https://cdn.azul.com/zulu/bin/zulu11.41.23-ca-jdk11.0.8-lin
 	dpkg -i java.deb
 
 # NodeJS && Java
-RUN curl -sL https://deb.nodesource.com/setup_13.x | bash - && \
+RUN curl -sL https://deb.nodesource.com/setup_19.x | bash - && \
 	apt-get update && apt-get install -y nodejs && \
 	npm install npm@latest -g
 
