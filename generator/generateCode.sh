@@ -18,7 +18,7 @@ mkdir -p "../sdk/src/"
 current_dir=$(pwd)
 
 curl https://raw.githubusercontent.com/microsoft/commercial-marketplace-openapi/main/Microsoft.Marketplace.Metering/2018-08-31/meteringapi.v1.json > meteringapi.v1.json
-curl https://raw.githubusercontent.com/microsoft/commercial-marketplace-openapi/main/Microsoft.Marketplace.SaaS/2018-08-31/saasapi.v2.json > saasapi.v2.json
+curl https://raw.githubusercontent.com/microsoft/commercial-marketplace-openapi/0c7ce552cb6d5121b983f8351697965b6551f8cd/Microsoft.Marketplace.SaaS/2018-08-31/saasapi.v2.json > saasapi.v2.json
 
 docker run --rm --name autorest \
     -v $current_dir/temp/saas:/out \
