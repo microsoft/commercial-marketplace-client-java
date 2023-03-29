@@ -26,7 +26,10 @@ public enum OperationActionEnum {
     SUSPEND("Suspend"),
 
     /** Enum value Reinstate. */
-    REINSTATE("Reinstate");
+    REINSTATE("Reinstate"),
+
+    /** Enum value Renew. */
+    RENEW("Renew");
 
     /** The actual serialized value for a OperationActionEnum instance. */
     private final String value;
